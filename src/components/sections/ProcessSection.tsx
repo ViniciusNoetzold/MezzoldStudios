@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import { motion } from "motion/react";
 import { Search, PenTool, Code, Rocket, ShieldCheck, TrendingUp, Globe2, RefreshCw } from "lucide-react";
-import React, { useRef } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 const phases = [
   {
@@ -13,7 +14,9 @@ const phases = [
     iconColor: "text-blue-500",
     icon: Search,
     title: "ANÁLISE DE\nECOSSISTEMA",
-    desc: "Mapeamento profundo de arquitetura e identificação de vetores de crescimento para escala global."
+    desc: "Mapeamento profundo de arquitetura e identificação de vetores de crescimento para escala global.",
+    spotlightColor: "#060e1f",
+    canvasColors: [[59, 130, 246], [37, 99, 235]] as number[][],
   },
   {
     id: "02",
@@ -22,7 +25,9 @@ const phases = [
     iconColor: "text-purple-500",
     icon: PenTool,
     title: "INTERFACES\nCINEMATOGRÁFICAS",
-    desc: "Sistemas de design de alta fidelidade com motion UI imersivo e foco em experiência de elite."
+    desc: "Sistemas de design de alta fidelidade com motion UI imersivo e foco em experiência de elite.",
+    spotlightColor: "#0e0618",
+    canvasColors: [[139, 92, 246], [109, 40, 217]] as number[][],
   },
   {
     id: "03",
@@ -31,16 +36,20 @@ const phases = [
     iconColor: "text-emerald-500",
     icon: Code,
     title: "ENGENHARIA DE\nPRECISÃO",
-    desc: "Codificação de alta performance utilizando stacks modernas e arquitetura resiliente de baixo acoplamento."
+    desc: "Codificação de alta performance utilizando stacks modernas e arquitetura resiliente de baixo acoplamento.",
+    spotlightColor: "#03140c",
+    canvasColors: [[16, 185, 129], [5, 150, 105]] as number[][],
   },
   {
     id: "04",
-    numColor: "text-orange-900",
+    numColor: "text-orange-500",
     bgLight: "bg-orange-500/10",
     iconColor: "text-orange-500",
     icon: Rocket,
     title: "DEPLOY &\nOTIMIZAÇÃO",
-    desc: "Orquestração de lançamento com monitoramento em tempo real e iteração baseada em inteligência de dados."
+    desc: "Orquestração de lançamento com monitoramento em tempo real e iteração baseada em inteligência de dados.",
+    spotlightColor: "#180800",
+    canvasColors: [[249, 115, 22], [234, 88, 12]] as number[][],
   },
   {
     id: "05",
@@ -49,7 +58,9 @@ const phases = [
     iconColor: "text-red-500",
     icon: ShieldCheck,
     title: "SEGURANÇA &\nCOMPLIANCE",
-    desc: "Auditoria contínua de código, blindagem criptográfica e adequação total a normas internacionais."
+    desc: "Auditoria contínua de código, blindagem criptográfica e adequação total a normas internacionais.",
+    spotlightColor: "#180000",
+    canvasColors: [[239, 68, 68], [220, 38, 38]] as number[][],
   },
   {
     id: "06",
@@ -58,7 +69,9 @@ const phases = [
     iconColor: "text-cyan-500",
     icon: TrendingUp,
     title: "GROWTH\nINTELLIGENCE",
-    desc: "Integração de analytics avançados e modelos de aprendizado para impulsionamento da base de usuários."
+    desc: "Integração de analytics avançados e modelos de aprendizado para impulsionamento da base de usuários.",
+    spotlightColor: "#001518",
+    canvasColors: [[6, 182, 212], [8, 145, 178]] as number[][],
   },
   {
     id: "07",
@@ -67,7 +80,9 @@ const phases = [
     iconColor: "text-amber-500",
     icon: Globe2,
     title: "ESCALABILIDADE\nGLOBAL",
-    desc: "Arquitetura distribuída cloud-native Edge-ready, projetada para suportar picos extremos de tráfego."
+    desc: "Arquitetura distribuída cloud-native Edge-ready, projetada para suportar picos extremos de tráfego.",
+    spotlightColor: "#181000",
+    canvasColors: [[245, 158, 11], [217, 119, 6]] as number[][],
   },
   {
     id: "08",
@@ -76,98 +91,84 @@ const phases = [
     iconColor: "text-indigo-500",
     icon: RefreshCw,
     title: "EVOLUÇÃO\nCONTÍNUA",
-    desc: "Aprimoramento ininterrupto com CI/CD. Software que aprende e se adapta às mudanças do mercado."
-  }
+    desc: "Aprimoramento ininterrupto com CI/CD. Software que aprende e se adapta às mudanças do mercado.",
+    spotlightColor: "#080a1e",
+    canvasColors: [[99, 102, 241], [79, 70, 229]] as number[][],
+  },
 ];
 
 export function ProcessSection() {
-  const targetRef = useRef<HTMLElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  // Smooth out the scroll progress for a buttery feel
-  const springProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  // Move horizontally based on scroll.
-  // 81% pulls it enough to the left to see the final card gracefully.
-  const x = useTransform(springProgress, [0, 1], ["0%", "-81%"]);
-
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-[#0a0a0a]">
-      {/* Background Grid Pattern inside sticky to stay static relative to viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center pt-16">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40 z-0" />
-        
-        <div className="relative z-10 w-full mb-12 text-center md:text-left md:px-24">
-          <div className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6 flex items-center justify-center md:justify-start gap-4">
-             <div className="w-12 h-px bg-white/20"></div>
-             [ EXECUTION_PIPELINE ]
+    <section className="relative bg-[#0a0a0a] py-24 px-6 md:px-12 lg:px-24">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* Header */}
+        <motion.div
+          className="mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-white/40 mb-6 flex items-center gap-4">
+            <div className="w-12 h-px bg-white/20" />
+            [ EXECUTION_PIPELINE ]
           </div>
           <h2 className="font-sans font-black text-4xl md:text-6xl lg:text-7xl tracking-tighter text-white">
-             COMO CONSTRUÍMOS<br/>O FUTURO
+            COMO CONSTRUÍMOS<br />O FUTURO
           </h2>
-        </div>
-
-        {/* Horizontal Scroll Track */}
-        <div className="relative z-10 flex items-center">
-          <motion.div 
-            style={{ x }} 
-            className="flex gap-6 items-stretch px-6 md:px-24 w-max"
-          >
-            {phases.map((phase) => {
-              const Icon = phase.icon;
-              return (
-                <div key={phase.id} className="flex-none w-[80vw] sm:w-[45vw] md:w-[350px] lg:w-[420px] h-full flex flex-col bg-[#0f0f0f] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-white/10 transition-colors">
-                  <div className="flex justify-between items-start mb-12">
-                    <div className={cn("w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center border border-white/5", phase.bgLight)}>
-                       <Icon className={phase.iconColor} size={28} strokeWidth={1.5} />
-                    </div>
-                    <div className="font-mono text-[9px] text-white/20 tracking-[0.2em] uppercase mt-2">
-                       PHASE_{phase.id}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-8">
-                    <span className={cn("font-mono text-[10px] md:text-xs font-bold", phase.numColor)}>{phase.id}</span>
-                    <div className="h-[1px] bg-white/10 flex-grow"></div>
-                  </div>
-
-                  <h3 className="font-sans font-black text-2xl md:text-3xl text-white tracking-tight leading-[1.1] mb-6 whitespace-pre-line">
-                    {phase.title}
-                  </h3>
-                  
-                  <p className="text-white/50 text-sm md:text-base leading-relaxed mt-auto">
-                    {phase.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </motion.div>
-        </div>
-
-        {/* Floating Start Project Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="absolute bottom-12 right-12 z-20 hidden md:flex items-center gap-6 bg-[#141414]/80 backdrop-blur-md border border-white/10 rounded-full pl-3 pr-8 py-2.5 cursor-pointer hover:bg-white/10 transition-colors group"
-        >
-          <div className="flex -space-x-3 opacity-60">
-            <div className="w-8 h-8 rounded-full border-[1.5px] border-white/30 z-30 bg-[#141414]" />
-            <div className="w-8 h-8 rounded-full border-[1.5px] border-white/30 z-20 bg-[#141414]" />
-            <div className="w-8 h-8 rounded-full border-[1.5px] border-white/30 z-10 bg-[#141414]" />
-          </div>
-          <div className="flex items-center gap-2">
-             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">PRONTO PARA ESCALAR?</span>
-             <span className="font-sans font-bold text-[10px] text-white uppercase tracking-widest group-hover:underline underline-offset-4 pointer-events-auto">INICIAR PROJETO</span>
-          </div>
         </motion.div>
 
+        {/* Static Grid of CardSpotlight */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {phases.map((phase, index) => {
+            const Icon = phase.icon;
+            return (
+              <motion.div
+                key={phase.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+              >
+                <CardSpotlight
+                  className="h-full p-8 md:p-10 transition-colors hover:border-white/10"
+                  color={phase.spotlightColor}
+                  canvasColors={phase.canvasColors}
+                  radius={300}
+                >
+                  {/* Icon + Phase label */}
+                  <div className="flex justify-between items-start mb-12 relative z-10">
+                    <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center border border-white/5", phase.bgLight)}>
+                      <Icon className={phase.iconColor} size={26} strokeWidth={1.5} />
+                    </div>
+                    <div className="font-mono text-[9px] text-white/20 tracking-[0.2em] uppercase mt-2">
+                      PHASE_{phase.id}
+                    </div>
+                  </div>
+
+                  {/* Number divider */}
+                  <div className="flex items-center gap-4 mb-8 relative z-10">
+                    <span className={cn("font-mono text-[10px] md:text-xs font-bold", phase.numColor)}>{phase.id}</span>
+                    <div className="h-[1px] bg-white/10 flex-grow" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-sans font-black text-xl md:text-2xl text-white tracking-tight leading-[1.1] mb-6 whitespace-pre-line relative z-10">
+                    {phase.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-white/50 text-sm leading-relaxed mt-auto relative z-10">
+                    {phase.desc}
+                  </p>
+                </CardSpotlight>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

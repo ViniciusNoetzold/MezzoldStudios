@@ -1,27 +1,103 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const HalideTopoHero: React.FC = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const layersRef = useRef<HTMLDivElement[]>([]);
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  // Smooth interpolation values using refs
+  const currentRotX = useRef(55);
+  const currentRotZ = useRef(-25);
+  const targetRotX = useRef(55);
+  const targetRotZ = useRef(-25);
+  const currentLayerPos = useRef<{ x: number; y: number }[]>([
+    { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }
+  ]);
+  const targetLayerPos = useRef<{ x: number; y: number }[]>([
+    { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }
+  ]);
+  const glowPos = useRef({ x: 50, y: 50 });
+  const rafRef = useRef<number>(0);
+  const isHovering = useRef(false);
+
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+  const animate = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const speed = isHovering.current ? 0.08 : 0.03;
+
+    // Smooth rotation
+    currentRotX.current = lerp(currentRotX.current, targetRotX.current, speed);
+    currentRotZ.current = lerp(currentRotZ.current, targetRotZ.current, speed);
+
+    canvas.style.transform = `rotateX(${currentRotX.current}deg) rotateZ(${currentRotZ.current}deg)`;
+
+    // Smooth layer parallax
+    layersRef.current.forEach((layer, index) => {
+      if (!layer) return;
+      const depth = (index + 1) * 20;
+      const tx = targetLayerPos.current[index];
+      const cx = currentLayerPos.current[index];
+
+      cx.x = lerp(cx.x, tx.x, speed);
+      cx.y = lerp(cx.y, tx.y, speed);
+
+      layer.style.transform = `translateZ(${depth}px) translate(${cx.x}px, ${cx.y}px)`;
+    });
+
+    // Smooth glow follow
+    if (glowRef.current) {
+      glowRef.current.style.background = 
+        `radial-gradient(circle 400px at ${glowPos.current.x}% ${glowPos.current.y}%, rgba(255,0,51,0.18) 0%, rgba(255,80,0,0.08) 40%, transparent 70%)`;
+    }
+
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (window.innerWidth / 2 - e.pageX) / 25;
-      const y = (window.innerHeight / 2 - e.pageY) / 25;
+      isHovering.current = true;
 
-      canvas.style.transform = `rotateX(${55 + y / 2}deg) rotateZ(${-25 + x / 2}deg)`;
+      const xFactor = (window.innerWidth / 2 - e.pageX) / 20;
+      const yFactor = (window.innerHeight / 2 - e.pageY) / 20;
 
-      layersRef.current.forEach((layer, index) => {
-        if (!layer) return;
-        const depth = (index + 1) * 15;
-        const moveX = x * (index + 1) * 0.2;
-        const moveY = y * (index + 1) * 0.2;
-        layer.style.transform = `translateZ(${depth}px) translate(${moveX}px, ${moveY}px)`;
+      // Target rotation — more reactive
+      targetRotX.current = 55 + yFactor * 0.7;
+      targetRotZ.current = -25 + xFactor * 0.7;
+
+      // Target layer positions — stronger parallax per depth
+      layersRef.current.forEach((_, index) => {
+        targetLayerPos.current[index] = {
+          x: xFactor * (index + 1) * 0.55,
+          y: yFactor * (index + 1) * 0.55,
+        };
+      });
+
+      // Glow follows mouse relative to canvas
+      if (canvas) {
+        const rect = canvas.closest('[data-halide-wrapper]')?.getBoundingClientRect() 
+          ?? { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+        glowPos.current = {
+          x: ((e.clientX - rect.left) / (rect.width || 1)) * 100,
+          y: ((e.clientY - rect.top) / (rect.height || 1)) * 100,
+        };
+      }
+    };
+
+    const handleMouseLeave = () => {
+      isHovering.current = false;
+      // Gently drift back to resting pose
+      targetRotX.current = 55;
+      targetRotZ.current = -25;
+      layersRef.current.forEach((_, index) => {
+        targetLayerPos.current[index] = { x: 0, y: 0 };
       });
     };
 
@@ -30,21 +106,30 @@ const HalideTopoHero: React.FC = () => {
     canvas.style.transform = 'rotateX(90deg) rotateZ(0deg) scale(0.8)';
 
     const timeout = setTimeout(() => {
-      canvas.style.transition = 'all 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      canvas.style.transition = 'opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
       canvas.style.opacity = '1';
-      canvas.style.transform = 'rotateX(55deg) rotateZ(-25deg) scale(1)';
+      // Hand off to RAF loop after entrance
+      setTimeout(() => {
+        canvas.style.transition = 'none';
+      }, 2600);
     }, 300);
 
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       clearTimeout(timeout);
+      cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [animate]);
 
   return (
     <div
+      data-halide-wrapper
       style={{
         perspective: '2000px',
         width: '100%',
@@ -59,57 +144,72 @@ const HalideTopoHero: React.FC = () => {
         ref={canvasRef}
         style={{
           position: 'relative',
-          width: '900px', // Um pouco maior que o original, mas ainda formato de quadro
-          height: '550px',
+          width: '960px',
+          height: '580px',
           transformStyle: 'preserve-3d',
-          transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {/* Layer 1 – Imagem de Workspace Dev / Código */}
+        {/* Layer 1 – Base image, brighter */}
         <div
           ref={(el) => { if (el) layersRef.current[0] = el; }}
           style={{
             position: 'absolute',
             inset: 0,
-            border: '1px solid rgba(255,255,255,0.02)',
-            boxShadow: 'inset 0 0 100px 30px rgba(2,2,2,1), 0 20px 60px rgba(0,0,0,0.8)',
-            backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1400')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(1) contrast(1.1) brightness(0.2)',
+            filter: 'grayscale(0.6) contrast(1.2) brightness(0.45)',
             borderRadius: '24px',
+            boxShadow: 'inset 0 0 80px 20px rgba(2,2,2,0.9), 0 30px 80px rgba(0,0,0,0.9)',
+            border: '1px solid rgba(255,255,255,0.04)',
           }}
         />
-        {/* Layer 2 – Brilho e contraste digital */}
+
+        {/* Layer 2 – Brighter accent overlay */}
         <div
           ref={(el) => { if (el) layersRef.current[1] = el; }}
           style={{
             position: 'absolute',
             inset: 0,
-            border: 'none',
-            backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1400')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(0.3) contrast(1.3) brightness(0.5)',
-            opacity: 0.3,
+            filter: 'grayscale(0.1) contrast(1.4) brightness(0.7)',
+            opacity: 0.45,
             mixBlendMode: 'screen',
             borderRadius: '24px',
           }}
         />
-        {/* Layer 3 – Toque sutil vermelho/neon por cima */}
+
+        {/* Layer 3 – Dynamic glow that reacts to mouse */}
+        <div
+          ref={glowRef}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle 400px at 50% 50%, rgba(255,0,51,0.18) 0%, transparent 70%)',
+            borderRadius: '24px',
+            mixBlendMode: 'overlay',
+            pointerEvents: 'none',
+            transition: 'background 0.15s ease',
+          }}
+        />
+
+        {/* Layer 4 – Static red neon tint on top */}
         <div
           ref={(el) => { if (el) layersRef.current[2] = el; }}
           style={{
             position: 'absolute',
             inset: 0,
-            border: '1px solid rgba(255,0,51,0.05)',
-            background: 'radial-gradient(ellipse at top right, rgba(255,0,51,0.15), transparent 70%)',
-            boxShadow: 'inset 0 0 40px rgba(255,0,51,0.05)',
-            opacity: 0.8,
+            border: '1px solid rgba(255,0,51,0.08)',
+            background: 'radial-gradient(ellipse at top right, rgba(255,0,51,0.12), transparent 65%)',
+            boxShadow: 'inset 0 0 50px rgba(255,0,51,0.06)',
+            opacity: 0.9,
             mixBlendMode: 'overlay',
             borderRadius: '24px',
           }}
         />
+
         {/* Topographic contour lines */}
         <div
           style={{
@@ -119,8 +219,20 @@ const HalideTopoHero: React.FC = () => {
             top: '-50%',
             left: '-50%',
             backgroundImage:
-              'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(255,0,51,0.04) 41px, transparent 42px)',
-            transform: 'translateZ(120px)',
+              'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 38px, rgba(255,0,51,0.06) 39px, transparent 40px)',
+            transform: 'translateZ(140px)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Shine line sweep */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)',
+            borderRadius: '24px',
+            transform: 'translateZ(5px)',
             pointerEvents: 'none',
           }}
         />

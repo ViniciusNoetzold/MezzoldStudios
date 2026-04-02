@@ -5,11 +5,28 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { TunnelBackground } from '@/components/ui/tunnel-hero';
 
 export function ContactSection() {
 	return (
-		<section id="contact" className="py-24 md:py-32 relative px-6 flex w-full items-center justify-center">
-			<div className="container mx-auto max-w-6xl">
+		<section id="contact" className="py-24 md:py-32 relative px-6 flex w-full items-center justify-center overflow-hidden bg-black">
+			
+			{/* Tunnel WebGL background */}
+			<TunnelBackground />
+
+			{/* Blur + dim overlay to soften the animation */}
+			<div className="absolute inset-0 z-[1] backdrop-blur-[2px] bg-black/60" />
+
+			{/* Subtle vignette to fade edges */}
+			<div
+				className="absolute inset-0 z-[2] pointer-events-none"
+				style={{
+					background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)',
+				}}
+			/>
+
+			{/* Content */}
+			<div className="container mx-auto max-w-6xl relative z-[3]">
 				<ContactCard
 					title="Entre em contato"
 					description="Se você tem alguma dúvida sobre nossos serviços ou precisa de ajuda, preencha o formulário aqui. Faremos o possível para responder em até 1 dia útil."

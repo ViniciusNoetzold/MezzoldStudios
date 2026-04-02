@@ -1,6 +1,7 @@
 'use client';
 
 import { GlowCard } from '../ui/spotlight-card';
+import { GlowingEffect } from '../ui/glowing-effect';
 import { HalideTopoHero } from '../ui/halide-topo-hero';
 import { ArrowRight, Code2, Zap, Layers } from 'lucide-react';
 import Link from 'next/link';
@@ -43,14 +44,14 @@ export function HeroSection() {
       {/* ── Dark vignette overlay so text stays readable ── */}
       <div className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 20%, rgba(2,2,2,0.75) 80%)',
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(2,2,2,0.55) 85%)',
         }}
       />
 
       {/* ── Subtle red accent glow top-center ── */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] z-[1] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.12), transparent 70%)',
+          background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.08), transparent 70%)',
         }}
       />
 
@@ -127,29 +128,52 @@ export function HeroSection() {
         </div>
 
         {/* Floating Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
-          <GlowCard glowColor="blue" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
-            <Layers className="text-cyan mb-3" size={24} />
-            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Experiências Fluidas</h3>
-            <p className="text-white/60 font-sans text-xs leading-relaxed">
-              Interfaces ricas em parallax e transições suaves impulsionadas por motion design.
-            </p>
-          </GlowCard>
-          <GlowCard glowColor="green" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
-            <Code2 className="text-emerald mb-3" size={24} />
-            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Precisão Neon</h3>
-            <p className="text-white/60 font-sans text-xs leading-relaxed">
-              Acentos em azul elétrico e esmeralda com glassmorphism para profundidade futurista.
-            </p>
-          </GlowCard>
-          <GlowCard glowColor="red" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
-            <Zap className="text-electric-red mb-3" size={24} />
-            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Performance de Elite</h3>
-            <p className="text-white/60 font-sans text-xs leading-relaxed">
-              Otimizado para velocidade, escala e excelência técnica a longo prazo.
-            </p>
-          </GlowCard>
-        </div>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl p-0 m-0">
+          <li className="list-none">
+            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+                <div className="relative flex flex-col items-start text-left">
+                  <Layers className="text-cyan mb-3" size={24} />
+                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Experiências Fluidas</h3>
+                  <p className="text-white/60 font-sans text-xs leading-relaxed">
+                    Interfaces ricas em parallax e transições suaves impulsionadas por motion design.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li className="list-none">
+            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+                <div className="relative flex flex-col items-start text-left">
+                  <Code2 className="text-emerald mb-3" size={24} />
+                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Precisão Neon</h3>
+                  <p className="text-white/60 font-sans text-xs leading-relaxed">
+                    Acentos em azul elétrico e esmeralda com glassmorphism para profundidade futurista.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li className="list-none">
+            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+                <div className="relative flex flex-col items-start text-left">
+                  <Zap className="text-electric-red mb-3" size={24} />
+                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Performance de Elite</h3>
+                  <p className="text-white/60 font-sans text-xs leading-relaxed">
+                    Otimizado para velocidade, escala e excelência técnica a longo prazo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
 
       {/* ── Scroll hint line ── */}
