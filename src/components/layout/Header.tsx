@@ -1,21 +1,100 @@
+'use client';
+import React from 'react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { GlassButton } from '../ui/glass-button';
+import { MenuToggleIcon } from '../ui/menu-toggle-icon';
+import { useScroll } from '../ui/use-scroll';
 
 export function Header() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b-white/5 bg-[#020202]/80 backdrop-blur-xl">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="font-sans font-black text-xl tracking-tighter text-white">
-          MEZZOLD<span className="text-electric-red">.</span>
-        </Link>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-mono tracking-widest uppercase">
-          <Link href="/#services" className="hover:text-emerald transition-colors">Serviços</Link>
-          <Link href="/cases" className="hover:text-cyan transition-colors">Portfólio</Link>
-          <Link href="/blog" className="hover:text-white/80 transition-colors">Blog</Link>
-        </nav>
-        <Link href="/#contact" className="bg-white text-black font-sans font-bold px-6 py-2.5 rounded-full hover:bg-electric-red hover:text-white transition-all text-sm inline-block">
-          Contato
-        </Link>
-      </div>
-    </header>
-  );
+	const [open, setOpen] = React.useState(false);
+	const scrolled = useScroll(10);
+
+	const links = [
+		{ label: 'Serviços', href: '/#services' },
+		{ label: 'Portfólio', href: '/cases' },
+		{ label: 'Blog', href: '/blog' },
+		{ label: 'Contato', href: '/#contact' },
+	];
+
+	React.useEffect(() => {
+		if (open) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+		return () => { document.body.style.overflow = ''; };
+	}, [open]);
+
+	return (
+		<header
+			className={cn(
+				'fixed left-0 right-0 z-50 mx-auto w-full transition-all duration-500 ease-out flex flex-col items-center justify-center',
+				{
+					// Não scrollado: no topo, tela cheia, background sutil (ou transparente)
+					'top-0 max-w-full rounded-none border-b border-transparent bg-transparent': !scrolled && !open,
+					// Scrollado: desgruda do topo, forma de pílula no desktop
+					'top-0 md:top-6 max-w-full md:max-w-4xl md:rounded-full border-b md:border border-transparent md:border-glass-border glass-panel shadow-lg': scrolled && !open,
+					// Menu aberto
+					'top-0 max-w-full glass-panel border-b border-glass-border rounded-none': open,
+				}
+			)}
+		>
+			<nav
+				className={cn(
+					'flex h-20 md:h-16 w-full items-center justify-between px-6 transition-all duration-500 ease-out',
+					{
+						// padding maior quando desgrutado pra dar respiro
+						'md:px-8': scrolled,
+						'md:px-10': !scrolled,
+					}
+				)}
+			>
+				<Link href="/" className="font-sans font-black text-xl tracking-tighter text-white" onClick={() => setOpen(false)}>
+					MEZZOLD<span className="text-electric-red">.</span>
+				</Link>
+				
+				<div className="hidden items-center gap-8 md:flex text-sm font-mono tracking-widest uppercase">
+					{links.map((link, i) => (
+						<Link key={i} className="hover:text-white transition-colors text-white/70" href={link.href}>
+							{link.label}
+						</Link>
+					))}
+				</div>
+				
+				<button 
+					onClick={() => setOpen(!open)} 
+					className="md:hidden flex items-center justify-center text-white p-2 rounded-full hover:bg-white/5 transition-colors"
+				>
+					<MenuToggleIcon open={open} className="size-6" duration={300} />
+				</button>
+			</nav>
+
+			<div
+				className={cn(
+					'fixed top-20 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-t border-glass-border bg-[#020202]/95 backdrop-blur-xl md:hidden transition-all duration-300',
+					open ? 'opacity-100 translate-y-0 h-screen pointer-events-auto' : 'opacity-0 -translate-y-8 h-0 pointer-events-none',
+				)}
+			>
+				<div
+					className={cn(
+						'flex h-full w-full flex-col p-6 font-mono tracking-widest uppercase text-lg',
+					)}
+				>
+					<div className="grid gap-y-6 mt-8">
+						{links.map((link) => (
+							<Link
+								key={link.label}
+								className="text-white hover:text-electric-red transition-colors w-full border-b border-white/5 pb-4"
+								href={link.href}
+								onClick={() => setOpen(false)}
+							>
+								{link.label}
+							</Link>
+						))}
+					</div>
+				</div>
+			</div>
+		</header>
+	);
 }
