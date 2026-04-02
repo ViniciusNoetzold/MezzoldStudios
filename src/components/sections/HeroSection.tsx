@@ -71,19 +71,14 @@ export function HeroSection() {
       {/* ── Main Content ── */}
       <div className="container mx-auto px-6 relative z-[4] flex flex-col items-center text-center">
 
-        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-electric-red shadow-[0_0_8px_rgba(255,0,51,0.8)] animate-pulse" />
-          <span className="font-mono tracking-widest text-[10px] md:text-xs uppercase text-white/80">
-            Mezzold Studio · Software House Premium
-          </span>
-        </div>
 
-        <h1 className="font-sans font-black text-7xl sm:text-8xl md:text-[11rem] tracking-tighter text-white mb-6 leading-[0.85]"
+
+        <h1 className="font-sans font-black text-6xl sm:text-7xl md:text-[8.5rem] tracking-tighter text-white mb-6 leading-[0.85]"
           style={{ mixBlendMode: 'difference' }}>
           MEZZOLD
         </h1>
 
-        <div className="font-mono text-xs md:text-sm tracking-widest uppercase mb-8 flex items-center text-white/70 flex-wrap justify-center gap-1">
+        <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase mb-6 flex items-center text-white/70 flex-wrap justify-center gap-1">
           <span>Criamos </span>
           <span className="flex items-center text-white border-r-2 border-electric-red pr-1 animate-[pulse_1s_step-end_infinite]">
             [
@@ -103,7 +98,7 @@ export function HeroSection() {
           </span>
         </div>
 
-        <div className="max-w-xl text-white/50 text-sm md:text-lg mb-12 font-mono leading-relaxed">
+        <div className="max-w-lg text-white/50 text-xs md:text-base mb-10 font-mono leading-relaxed">
           Plataformas{' '}
           <HighlightWord active={activeHighlight === 0}>ultra-rápidas</HighlightWord>
           , com interfaces que parecem{' '}
@@ -115,42 +110,42 @@ export function HeroSection() {
           .
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-20 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center gap-3 mb-16 w-full sm:w-auto">
           <Link
             href="#contact"
-            className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-8 text-[11px] font-extrabold uppercase tracking-[0.25em] text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+            className="group relative flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-7 text-[10px] font-extrabold uppercase tracking-[0.25em] text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
           >
             <span>Iniciar Projeto</span>
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
           </Link>
           <Link
             href="/cases"
-            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 text-[11px] font-bold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+            className="group flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40"
           >
             Ver Portfólio
           </Link>
         </div>
 
         {/* Floating Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          <GlowCard glowColor="blue" customSize className="flex flex-col items-start text-left w-full h-full">
-            <Layers className="text-cyan mb-4" size={28} />
-            <h3 className="font-sans font-bold text-base md:text-lg mb-3 tracking-widest uppercase text-white">Experiências Fluidas</h3>
-            <p className="text-white/60 font-sans text-sm leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+          <GlowCard glowColor="blue" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
+            <Layers className="text-cyan mb-3" size={24} />
+            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Experiências Fluidas</h3>
+            <p className="text-white/60 font-sans text-xs leading-relaxed">
               Interfaces ricas em parallax e transições suaves impulsionadas por motion design.
             </p>
           </GlowCard>
-          <GlowCard glowColor="green" customSize className="flex flex-col items-start text-left w-full h-full">
-            <Code2 className="text-emerald mb-4" size={28} />
-            <h3 className="font-sans font-bold text-base md:text-lg mb-3 tracking-widest uppercase text-white">Precisão Neon</h3>
-            <p className="text-white/60 font-sans text-sm leading-relaxed">
+          <GlowCard glowColor="green" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
+            <Code2 className="text-emerald mb-3" size={24} />
+            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Precisão Neon</h3>
+            <p className="text-white/60 font-sans text-xs leading-relaxed">
               Acentos em azul elétrico e esmeralda com glassmorphism para profundidade futurista.
             </p>
           </GlowCard>
-          <GlowCard glowColor="red" customSize className="flex flex-col items-start text-left w-full h-full">
-            <Zap className="text-electric-red mb-4" size={28} />
-            <h3 className="font-sans font-bold text-base md:text-lg mb-3 tracking-widest uppercase text-white">Performance de Elite</h3>
-            <p className="text-white/60 font-sans text-sm leading-relaxed">
+          <GlowCard glowColor="red" customSize className="flex flex-col items-start text-left w-full h-full p-5 md:p-6">
+            <Zap className="text-electric-red mb-3" size={24} />
+            <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Performance de Elite</h3>
+            <p className="text-white/60 font-sans text-xs leading-relaxed">
               Otimizado para velocidade, escala e excelência técnica a longo prazo.
             </p>
           </GlowCard>
