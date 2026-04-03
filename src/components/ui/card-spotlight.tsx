@@ -40,9 +40,9 @@ export const CardSpotlight = ({
       onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
-      {/* Spotlight layer — z-0, below all content */}
+      {/* Spotlight layer — z-0, always below content */}
       <motion.div
-        className="pointer-events-none absolute z-[1] -inset-px rounded-3xl opacity-0 transition duration-300 group-hover/spotlight:opacity-100"
+        className="pointer-events-none absolute z-[0] -inset-px rounded-3xl opacity-0 transition duration-300 group-hover/spotlight:opacity-100"
         style={{
           backgroundColor: color,
           maskImage: useMotionTemplate`
@@ -64,8 +64,8 @@ export const CardSpotlight = ({
         )}
       </motion.div>
 
-      {/* Content layer — z-[2], above spotlight */}
-      <div className="relative z-[2] h-full flex flex-col">
+      {/* Content layer — isolated compositing layer, always above WebGL canvas */}
+      <div className="relative z-[2] h-full flex flex-col isolate [will-change:transform] [transform:translateZ(0)]">
         {children}
       </div>
     </div>

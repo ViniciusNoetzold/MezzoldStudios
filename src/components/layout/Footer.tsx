@@ -22,7 +22,7 @@ export function Footer() {
         <div>
           <h3 className="font-mono tracking-widest text-xs mb-6 uppercase text-white/40">Recursos</h3>
           <ul className="space-y-4 text-sm">
-            <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+            <li><Link href="/blog" className="hover:text-white transition-colors">Serviços</Link></li>
             <li><Link href="/docs" className="hover:text-white transition-colors">Documentação</Link></li>
             <li><Link href="/stack" className="hover:text-white transition-colors">Stack Tech</Link></li>
           </ul>

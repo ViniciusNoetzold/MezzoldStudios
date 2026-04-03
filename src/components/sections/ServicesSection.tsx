@@ -25,55 +25,55 @@ interface ServiceCardData {
 
 const servicesData: ServiceCardData[] = [
   {
-    id: "micro-saas",
+    id: "websites",
     tag: "01",
-    unit: "PRODUTO_ÁGIL",
+    unit: "PRESENÇA_DIGITAL",
     front: {
-      title: "Criação de Sistema (SaaS)",
-      description: "Construímos o seu sistema ou aplicativo do zero para o mercado em tempo recorde. Focamos na facilidade de uso e entrega rápida para atrair seus primeiros clientes com agilidade.",
+      title: "Desenvolvimento de Sites",
+      description: "Criamos sites institucionais, landing pages e portfólios digitais que convertem visitantes em clientes. Design exclusivo, performance otimizada e código limpo — da concepção ao deploy.",
     },
     back: {
       attributes: [
-        { label: "ARQUITETURA", value: "Leve e Moderna" },
-        { label: "VELOCIDADE", value: "Carrega Rápido" },
-        { label: "MANUTENÇÃO", value: "Fácil de Escalar" },
-        { label: "OBJETIVO", value: "Atrair Clientes", valueColor: "text-cyan-400" },
+        { label: "TIPO", value: "Sites & Landings" },
+        { label: "PERFORMANCE", value: "Core Web Vitals A+" },
+        { label: "SEO", value: "Otimizado", valueColor: "text-cyan-400" },
+        { label: "ENTREGA", value: "Rápida e Eficiente" },
       ],
-      buttonText: "Iniciar Produto",
+      buttonText: "Criar Meu Site",
     },
   },
   {
-    id: "enterprise",
+    id: "micro-saas",
     tag: "02",
-    unit: "SISTEMA_CORE",
+    unit: "PRODUTO_DIGITAL",
     front: {
-      title: "Plataformas Corporativas",
-      description: "Desenvolvemos sistemas robustos feitos sob medida para suportar o crescimento da sua empresa. Infraestrutura de ponta para que sua operação seja muito mais segura e nunca fique fora do ar.",
+      title: "Micro SaaS",
+      description: "Desenvolvemos produtos de software focados, do zero ao mercado. Autenticação, billing, multi-tenancy e painel admin — tudo que você precisa para atrair seus primeiros usuários e escalar.",
     },
     back: {
       attributes: [
-        { label: "ESTRUTURA", value: "Alta Capacidade" },
-        { label: "USOS TÍPICOS", value: "Grandes Volumes" },
-        { label: "SEGURANÇA", value: "Proteção Padrão" },
-        { label: "VANTAGEM", value: "Sistema Estável 24/7", valueColor: "text-blue-400" },
+        { label: "MODELO", value: "Subscription-based" },
+        { label: "AUTH", value: "Login Seguro" },
+        { label: "BILLING", value: "Integrado", valueColor: "text-blue-400" },
+        { label: "ARQUITETURA", value: "Escalável" },
       ],
-      buttonText: "Escalar Operação",
+      buttonText: "Lançar Produto",
     },
   },
   {
-    id: "automation",
+    id: "dashboards",
     tag: "03",
-    unit: "FLUXO_INTELIGENTE",
+    unit: "DADOS_INTELIGENTES",
     front: {
-      title: "Automações & Robôs",
-      description: "Chega de tarefas manuais repetitivas. Conectamos robôs inteligentes aos seus fluxos de trabalho trabalhando à noite e de dia, reduzindo custos desnecessários em escala industrial.",
+      title: "Dashboards e Automação",
+      description: "Transformamos dados brutos em painéis intuitivos de alta performance e eliminamos tarefas manuais com robôs inteligentes que operam 24/7, reduzindo seus custos operacionais.",
     },
     back: {
       attributes: [
-        { label: "TECNOLOGIA", value: "Robôs 100% Livres" },
-        { label: "CAPACIDADE", value: "24/7 Sem Pausas" },
-        { label: "SISTEMAS", value: "Conectamos APIs" },
-        { label: "RESULTADO", value: "Redução de Custos", valueColor: "text-emerald-400" },
+        { label: "DADOS", value: "Tempo Real" },
+        { label: "AUTOMAÇÃO", value: "24/7 Sem Pausas" },
+        { label: "INTEGRAÇÕES", value: "APIs & Webhooks" },
+        { label: "IMPACTO", value: "Redução de Custos", valueColor: "text-emerald-400" },
       ],
       buttonText: "Automatizar Fluxo",
     },
@@ -147,8 +147,10 @@ function ServiceBack({ data }: { data: ServiceCardData }) {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-16 md:py-24 relative px-6">
-      <div className="container mx-auto">
+    <section id="services" className="py-16 md:py-24 relative px-6 overflow-hidden">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+      <div className="container mx-auto relative z-10">
         <div className="mb-12 md:mb-16">
           <h2 className="font-mono tracking-widest text-[10px] md:text-xs uppercase text-white/40 mb-4">[ NOSSAS SOLUÇÕES ]</h2>
           <h3 className="font-sans font-black text-4xl md:text-6xl tracking-tighter uppercase">As Especialidades<br/>Do Nosso Estúdio</h3>

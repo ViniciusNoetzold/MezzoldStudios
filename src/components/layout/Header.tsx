@@ -11,9 +11,9 @@ export function Header() {
 	const scrolled = useScroll(10);
 
 	const links = [
-		{ label: 'Serviços', href: '/#services' },
+		{ label: 'Soluções', href: '/#services' },
+		{ label: 'Serviços', href: '/blog' },
 		{ label: 'Portfólio', href: '/cases' },
-		{ label: 'Blog', href: '/blog' },
 		{ label: 'Contato', href: '/#contact' },
 	];
 
