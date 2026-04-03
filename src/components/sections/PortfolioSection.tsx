@@ -16,7 +16,7 @@ const features = [
     icon: Activity,
     shortTitle: 'MONITORAMENTO',
     description:
-      'Dashboards estratégicos focados na visualização de dados complexos, transformando métricas brutas em interfaces de comando intuitivas e de alta performance. Arquitetamos pipelines de dados em tempo real com latência sub-milissegundo, utilizando WebSockets, SSE e renderização parcial no servidor para manter o estado sempre sincronizado.',
+      'Dashboards estratégicos que transformam dados complexos em centros de comando de alta performance. Arquitetura em tempo real com latência sub-milissegundo para garantir sincronia absoluta.',
     tags: ['React.js', 'High-Precision UI', 'Data Streaming'],
     accent: 'emerald',
   },
@@ -26,7 +26,7 @@ const features = [
     icon: Workflow,
     shortTitle: 'AUTOMAÇÃO',
     description:
-      'Engenharia de processos para eliminar tarefas repetitivas. Integração de APIs e microsserviços que orquestram o seu negócio enquanto você foca no que importa. Pipelines event-driven com Node.js, Spring Boot e filas de mensagens para garantir zero perda de dados e rastreabilidade total de cada operação.',
+      'Engenharia de processos para escalar sua operação. Orquestramos integrações, APIs e microsserviços em pipelines event-driven, garantindo zero perda de dados e rastreabilidade total.',
     tags: ['Spring Boot', 'Node.js', 'Enterprise Automation'],
     accent: 'cyan',
   },
@@ -36,7 +36,7 @@ const features = [
     icon: Sparkles,
     shortTitle: 'UI/UX',
     description:
-      'Design focado em "Digitalism" e "Aero Glass". Criamos experiências visuais que não apenas funcionam, mas definem a identidade tecnológica da sua marca. Motion design cinematográfico com Framer Motion, shaders GLSL para fundos imersivos e sistemas de design customizados — sem templates, apenas originalidade radical.',
+      'Digitalism e Aero Glass unidos em experiências visuais que definem o futuro tecnológico da sua marca. Motion cinematográfico, shaders imersivos e pura originalidade.',
     tags: ['Motion Design', 'Framer Motion', 'Digitalism UI'],
     accent: 'violet',
   },
@@ -46,7 +46,7 @@ const features = [
     icon: Blocks,
     shortTitle: 'MICRO-SAAS',
     description:
-      'Da concepção ao lançamento. Arquitetura escalável para soluções de software específicas, focadas em resolver problemas pontuais com máxima eficiência. Stack moderna completa — autenticação, billing com Stripe, multi-tenancy e painel de administração — entregue em sprints ágeis e prontos para escala.',
+      'Da ideia ao tracionamento. Arquitetura escalável entregue em sprints ágeis para resolver problemas com máxima eficiência. Stack premium completa, pronta para dominar seu nicho.',
     tags: ['Full-stack', 'Supabase', 'Scalable Architecture'],
     accent: 'orange',
   },
@@ -56,7 +56,7 @@ const features = [
     icon: Cpu,
     shortTitle: 'IOT',
     description:
-      'Conectando o mundo físico ao digital. Desenvolvimento de firmware e interfaces para controle de dispositivos inteligentes e monitoramento industrial remoto. Protocolos MQTT, OTA updates, dashboards de telemetria e alertas em tempo real — da placa embarcada até o painel web.',
+      'A ponte definitiva entre o físico e o digital. Firmware de alta precisão, telemetria em tempo real e controle remoto absoluto—da placa embarcada à interface web.',
     tags: ['ESP32 / M5Stack', 'MQTT', 'IoT Ecosystems'],
     accent: 'sky',
   },
@@ -66,7 +66,7 @@ const features = [
     icon: Zap,
     shortTitle: 'PERFORMANCE',
     description:
-      'Diagnóstico e melhoria de performance em aplicações legadas. Redução de latência e otimização de banco de dados para sistemas que não podem parar. Profiling, query tuning, cache strategies e migração gradual — entregamos ganhos mensuráveis sem reescrever do zero o que já funciona.',
+      'Performance extrema para sistemas que não podem parar. Redução de latência, profiling avançado e otimização bruta, entregando ganhos radicais sem recriar a roda.',
     tags: ['Java / Spring', 'Database Tuning', 'Low Latency'],
     accent: 'red',
   },
