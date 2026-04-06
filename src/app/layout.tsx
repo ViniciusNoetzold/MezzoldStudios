@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mezzold Studio | Software House Premium",
   description: "Construímos plataformas ultra-rápidas e com design inovador que parecem vivas—feitas para marcas SaaS e digital-first ambiciosas.",
+  icons: {
+    icon: '/logo.png?v=2',
+    apple: '/logo.png?v=2',
+  },
 };
 
 export default function RootLayout({

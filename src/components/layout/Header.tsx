@@ -12,7 +12,7 @@ export function Header() {
 
 	const links = [
 		{ label: 'Soluções', href: '/#services' },
-		{ label: 'Serviços', href: '/blog' },
+		{ label: 'Blog', href: '/blog' },
 		{ label: 'Portfólio', href: '/cases' },
 		{ label: 'Contato', href: '/#contact' },
 	];
@@ -62,9 +62,12 @@ export function Header() {
 					))}
 				</div>
 				
-				<button 
-					onClick={() => setOpen(!open)} 
-					className="md:hidden flex items-center justify-center text-white p-2 rounded-full hover:bg-white/5 transition-colors"
+				{/* min 44px touch target per iOS HIG / Material 3 */}
+				<button
+					onClick={() => setOpen(!open)}
+					aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+					aria-expanded={open}
+					className="md:hidden flex items-center justify-center text-white h-11 w-11 rounded-full hover:bg-white/5 active:bg-white/10 transition-colors"
 				>
 					<MenuToggleIcon open={open} className="size-6" duration={300} />
 				</button>
@@ -85,7 +88,7 @@ export function Header() {
 						{links.map((link) => (
 							<Link
 								key={link.label}
-								className="text-white hover:text-electric-red transition-colors w-full border-b border-white/5 pb-4"
+								className="text-white hover:text-electric-red active:text-electric-red transition-colors w-full border-b border-white/5 py-3 flex items-center min-h-[44px]"
 								href={link.href}
 								onClick={() => setOpen(false)}
 							>

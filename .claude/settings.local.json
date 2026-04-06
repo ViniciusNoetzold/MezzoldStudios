@@ -5,7 +5,13 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(grep -v \"^$\")",
+      "Bash(xargs -I{} sh -c 'echo \"=== {} ===\"; cat \"{}\"')",
+      "Bash(mkdir -p C:/Users/noetz/.claude/skills)",
+      "Bash(cp -r C:/Users/noetz/Desktop/MezzoldV3Last/awesome-claude-skills/theme-factory C:/Users/noetz/.claude/skills/)",
+      "Bash(xargs wc:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

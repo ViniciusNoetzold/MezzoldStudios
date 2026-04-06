@@ -62,17 +62,19 @@ const HalideTopoHero: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Respect reduced-motion preference — keep static pose, skip RAF
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const handleMouseMove = (e: MouseEvent) => {
+      if (prefersReduced) return;
       isHovering.current = true;
 
       const xFactor = (window.innerWidth / 2 - e.pageX) / 20;
       const yFactor = (window.innerHeight / 2 - e.pageY) / 20;
 
-      // Target rotation — more reactive
       targetRotX.current = 55 + yFactor * 0.7;
       targetRotZ.current = -25 + xFactor * 0.7;
 
-      // Target layer positions — stronger parallax per depth
       layersRef.current.forEach((_, index) => {
         targetLayerPos.current[index] = {
           x: xFactor * (index + 1) * 0.55,
@@ -80,9 +82,8 @@ const HalideTopoHero: React.FC = () => {
         };
       });
 
-      // Glow follows mouse relative to canvas
       if (canvas) {
-        const rect = canvas.closest('[data-halide-wrapper]')?.getBoundingClientRect() 
+        const rect = canvas.closest('[data-halide-wrapper]')?.getBoundingClientRect()
           ?? { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
         glowPos.current = {
           x: ((e.clientX - rect.left) / (rect.width || 1)) * 100,
@@ -93,7 +94,6 @@ const HalideTopoHero: React.FC = () => {
 
     const handleMouseLeave = () => {
       isHovering.current = false;
-      // Gently drift back to resting pose
       targetRotX.current = 55;
       targetRotZ.current = -25;
       layersRef.current.forEach((_, index) => {
@@ -108,20 +108,33 @@ const HalideTopoHero: React.FC = () => {
     const timeout = setTimeout(() => {
       canvas.style.transition = 'opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
       canvas.style.opacity = '1';
-      // Hand off to RAF loop after entrance
-      setTimeout(() => {
-        canvas.style.transition = 'none';
-      }, 2600);
+      setTimeout(() => { canvas.style.transition = 'none'; }, 2600);
     }, 300);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
+    // Stop the RAF loop when the hero is fully scrolled out of view
+    const wrapper = canvas.closest('[data-halide-wrapper]') ?? canvas.parentElement;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!rafRef.current) rafRef.current = requestAnimationFrame(animate);
+        } else {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+    if (wrapper) io.observe(wrapper);
 
-    rafRef.current = requestAnimationFrame(animate);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+
+    if (!prefersReduced) rafRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      io.disconnect();
       clearTimeout(timeout);
       cancelAnimationFrame(rafRef.current);
     };
@@ -144,9 +157,10 @@ const HalideTopoHero: React.FC = () => {
         ref={canvasRef}
         style={{
           position: 'relative',
-          width: '960px',
-          height: '580px',
+          width: 'min(960px, 100vw)',
+          height: 'min(580px, 56vw)',
           transformStyle: 'preserve-3d',
+          willChange: 'transform',
         }}
       >
         {/* Layer 1 – Base image, brighter */}

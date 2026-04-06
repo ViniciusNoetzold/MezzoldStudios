@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useAccent } from "../layout/AccentProvider";
 
 export const HoverEffect = ({
   items,
@@ -13,11 +16,34 @@ export const HoverEffect = ({
     link?: string;
     icon: any;
     tags: string[];
-    accentData: { border: string; glow: string; text: string; bg: string };
+    accentData: { border: string; glow: string; text: string; bg: string; glowRgb: string; borderActive: string; shadowActive: string; };
   }[];
   className?: string;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { setAccent } = useAccent();
+
+  const handleTap = (idx: number) => {
+    // On touch devices, tap toggles the accent — hover handles desktop
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+      setHoveredIndex((prev) => {
+        const next = prev === idx ? null : idx;
+        if (next !== null) {
+          const a = items[next].accentData;
+          setAccent(a.text.replace('text-', 'bg-'), a.glowRgb);
+        }
+        return next;
+      });
+    }
+  };
+
+  const handleHover = (idx: number | null) => {
+    setHoveredIndex(idx);
+    if (idx !== null) {
+      const a = items[idx].accentData;
+      setAccent(a.text.replace('text-', 'bg-'), a.glowRgb);
+    }
+  };
 
   return (
     <div
@@ -35,8 +61,9 @@ export const HoverEffect = ({
           <div
             key={item.id}
             className="relative group block p-2 h-full w-full"
-            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseEnter={() => handleHover(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
+            onTouchStart={() => handleTap(idx)}
           >
             <AnimatePresence>
               {isHovered && (

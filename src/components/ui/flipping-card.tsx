@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +18,15 @@ export function FlippingCard({
   height = 300,
   width = 350,
 }: FlippingCardProps) {
+  const [tapped, setTapped] = React.useState(false);
+
+  const handleClick = () => {
+    // Only use state-based flip on touch devices — pointer devices use CSS hover
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+      setTapped((f) => !f);
+    }
+  };
+
   return (
     <div
       className="group/flipping-card [perspective:1000px] w-full"
@@ -25,10 +36,19 @@ export function FlippingCard({
           "--width": typeof width === "number" ? `${width}px` : width,
         } as React.CSSProperties
       }
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      aria-label="Toque para ver os detalhes"
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleClick(); }}
     >
       <div
         className={cn(
-          "relative rounded-xl border border-white/10 bg-transparent shadow-2xl transition-all duration-700 [transform-style:preserve-3d] group-hover/flipping-card:[transform:rotateY(180deg)]",
+          "relative rounded-xl border border-white/10 bg-transparent shadow-2xl transition-all duration-700 [transform-style:preserve-3d]",
+          // Desktop: CSS hover flip
+          "group-hover/flipping-card:[transform:rotateY(180deg)]",
+          // Mobile: state-based flip
+          tapped && "[transform:rotateY(180deg)]",
           "h-[var(--height)] w-[var(--width)]",
           className
         )}

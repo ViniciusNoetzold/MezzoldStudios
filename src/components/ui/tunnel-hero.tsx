@@ -141,6 +141,10 @@ export function TunnelBackground() {
     const container = canvas.parentElement;
     if (!container) return;
 
+    // Respect reduced-motion preference — skip WebGL entirely
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
     const ctx = createThreeForCanvas(canvas, container.clientWidth, container.clientHeight);
     ctxRef.current = ctx;
 
@@ -158,7 +162,16 @@ export function TunnelBackground() {
     });
     ro.observe(container);
 
-    const handleVisibility = () => { pausedRef.current = !!document.hidden; };
+    // Pause when section is scrolled out of view — biggest perf win
+    const io = new IntersectionObserver(
+      ([entry]) => { pausedRef.current = !entry.isIntersecting || !!document.hidden; },
+      { threshold: 0 }
+    );
+    io.observe(container);
+
+    const handleVisibility = () => {
+      pausedRef.current = !!document.hidden;
+    };
     document.addEventListener("visibilitychange", handleVisibility);
     handleVisibility();
 
@@ -166,6 +179,7 @@ export function TunnelBackground() {
 
     return () => {
       ro.disconnect();
+      io.disconnect();
       if (animRef.current) cancelAnimationFrame(animRef.current);
       document.removeEventListener("visibilitychange", handleVisibility);
       if (ctxRef.current) { disposeThree(ctxRef.current); ctxRef.current = null; }

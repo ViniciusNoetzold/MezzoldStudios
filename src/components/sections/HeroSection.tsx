@@ -1,6 +1,5 @@
 'use client';
 
-import { GlowCard } from '../ui/spotlight-card';
 import { GlowingEffect } from '../ui/glowing-effect';
 import { HalideTopoHero } from '../ui/halide-topo-hero';
 import { ArrowRight, Code2, Zap, Layers } from 'lucide-react';
@@ -11,10 +10,10 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 const HighlightWord = ({ children, active }: { children: React.ReactNode; active: boolean }) => (
-  <PointerHighlight 
+  <PointerHighlight
     active={active}
-    containerClassName="inline-block" 
-    pointerClassName="text-electric-red drop-shadow-[0_0_8px_rgba(255,0,51,0.8)]" 
+    containerClassName="inline-block"
+    pointerClassName="text-electric-red drop-shadow-[0_0_8px_rgba(255,0,51,0.8)]"
     rectangleClassName="border-electric-red/50 bg-electric-red/10"
   >
     <span className={cn("transition-colors duration-500 font-bold", active ? "text-white" : "text-white/50")}>
@@ -34,25 +33,40 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-mezzold-bg">
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-mezzold-bg touch-pan-y">
 
-      {/* ── 3D Halide Canvas – absolute background ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* ── Desktop: 3D animated Halide canvas ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block">
         <HalideTopoHero />
       </div>
 
-      {/* ── Dark vignette overlay so text stays readable ── */}
-      <div className="absolute inset-0 z-[1] pointer-events-none"
+      {/* ── Mobile: flat dark code image — no 3D, no RAF, no GPU overhead ── */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none md:hidden"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(2,2,2,0.55) 85%)',
+          backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 20%',
+          filter: 'grayscale(0.8) brightness(0.25)',
         }}
       />
 
-      {/* ── Subtle red accent glow top-center ── */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] z-[1] pointer-events-none"
+      {/* ── Dark vignette — stronger on mobile for readability ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.08), transparent 70%)',
+          background: 'radial-gradient(ellipse at center, transparent 20%, rgba(2,2,2,0.65) 80%)',
         }}
+      />
+      {/* Extra bottom fade on mobile so cards below the fold transition cleanly */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 z-[1] pointer-events-none md:hidden"
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(2,2,2,0.95))' }}
+      />
+
+      {/* ── Subtle red accent glow top-center ── */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] md:w-[60vw] h-[35vh] z-[1] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.1), transparent 70%)' }}
       />
 
       {/* ── Grain texture overlay ── */}
@@ -67,19 +81,24 @@ export function HeroSection() {
         style={{ filter: 'url(#hero-grain)' }}
       />
 
-      {/* ── HUD corner labels (Removed per request) ── */}
-
       {/* ── Main Content ── */}
-      <div className="container mx-auto px-6 relative z-[4] flex flex-col items-center text-center">
+      <div className="container mx-auto px-5 md:px-6 relative z-[4] flex flex-col items-center text-center w-full">
 
+        {/* Eyebrow */}
+        <div className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-electric-red/80 mb-4 md:mb-5">
+          [ MEZZOLD STUDIO ]
+        </div>
 
-
-        <h1 className="font-sans font-black text-6xl sm:text-7xl md:text-[8.5rem] tracking-tighter text-white mb-6 leading-[0.85]"
-          style={{ mixBlendMode: 'difference' }}>
+        {/* Headline */}
+        <h1
+          className="font-sans font-black text-[3.25rem] sm:text-6xl md:text-[8.5rem] tracking-tighter text-white mb-3 md:mb-6 leading-[0.88]"
+          style={{ mixBlendMode: 'difference' }}
+        >
           MEZZOLD
         </h1>
 
-        <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase mb-6 flex items-center text-white/70 flex-wrap justify-center gap-1">
+        {/* Rotating tagline */}
+        <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase mb-4 md:mb-6 flex items-center text-white/70 flex-wrap justify-center gap-1">
           <span>Criamos </span>
           <span className="flex items-center text-white border-r-2 border-electric-red pr-1 animate-[pulse_1s_step-end_infinite]">
             [
@@ -99,7 +118,8 @@ export function HeroSection() {
           </span>
         </div>
 
-        <div className="max-w-lg text-white/50 text-xs md:text-base mb-10 font-mono leading-relaxed">
+        {/* Description */}
+        <div className="max-w-xs md:max-w-lg text-white/50 text-[11px] md:text-base mb-7 md:mb-10 font-mono leading-relaxed">
           Plataformas{' '}
           <HighlightWord active={activeHighlight === 0}>ultra-rápidas</HighlightWord>
           , com interfaces que parecem{' '}
@@ -111,31 +131,32 @@ export function HeroSection() {
           .
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-3 mb-16 w-full sm:w-auto">
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 mb-10 md:mb-16 w-full max-w-xs sm:max-w-none sm:w-auto">
           <Link
             href="#contact"
-            className="group relative flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-7 text-[10px] font-extrabold uppercase tracking-[0.25em] text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+            className="group relative flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-7 text-[10px] font-extrabold uppercase tracking-[0.25em] text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-[0.97] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
           >
             <span>Iniciar Projeto</span>
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
           </Link>
           <Link
             href="/cases"
-            className="group flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+            className="group flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-7 text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40 active:bg-white/10"
           >
             Ver Portfólio
           </Link>
         </div>
 
-        {/* Floating Cards */}
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl p-0 m-0">
+        {/* Feature cards — desktop only; on mobile these would push content off-screen */}
+        <ul className="hidden md:grid grid-cols-3 gap-4 w-full max-w-4xl p-0 m-0">
           <li className="list-none">
-            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+            <div className="relative h-full rounded-3xl border border-white/10 p-3">
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
-              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-6">
                 <div className="relative flex flex-col items-start text-left">
                   <Layers className="text-cyan mb-3" size={24} />
-                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Experiências Fluidas</h3>
+                  <h3 className="font-sans font-bold text-base mb-2 tracking-widest uppercase text-white">Experiências Fluidas</h3>
                   <p className="text-white/60 font-sans text-xs leading-relaxed">
                     Interfaces ricas em parallax e transições suaves impulsionadas por motion design.
                   </p>
@@ -143,14 +164,13 @@ export function HeroSection() {
               </div>
             </div>
           </li>
-          
           <li className="list-none">
-            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+            <div className="relative h-full rounded-3xl border border-white/10 p-3">
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
-              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-6">
                 <div className="relative flex flex-col items-start text-left">
                   <Code2 className="text-emerald mb-3" size={24} />
-                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Precisão Neon</h3>
+                  <h3 className="font-sans font-bold text-base mb-2 tracking-widest uppercase text-white">Precisão Neon</h3>
                   <p className="text-white/60 font-sans text-xs leading-relaxed">
                     Acentos em azul elétrico e esmeralda com glassmorphism para profundidade futurista.
                   </p>
@@ -158,14 +178,13 @@ export function HeroSection() {
               </div>
             </div>
           </li>
-          
           <li className="list-none">
-            <div className="relative h-full rounded-2xl border border-white/10 p-2 md:rounded-3xl md:p-3">
+            <div className="relative h-full rounded-3xl border border-white/10 p-3">
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
-              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-5 md:p-6">
+              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-black/40 p-6">
                 <div className="relative flex flex-col items-start text-left">
                   <Zap className="text-electric-red mb-3" size={24} />
-                  <h3 className="font-sans font-bold text-sm md:text-base mb-2 tracking-widest uppercase text-white">Performance de Elite</h3>
+                  <h3 className="font-sans font-bold text-base mb-2 tracking-widest uppercase text-white">Performance de Elite</h3>
                   <p className="text-white/60 font-sans text-xs leading-relaxed">
                     Otimizado para velocidade, escala e excelência técnica a longo prazo.
                   </p>
@@ -174,14 +193,23 @@ export function HeroSection() {
             </div>
           </li>
         </ul>
+
+        {/* Mobile: compact feature badges in place of the cards */}
+        <div className="flex md:hidden items-center gap-4 text-white/40 font-mono text-[9px] tracking-widest uppercase">
+          <span className="flex items-center gap-1.5"><Layers size={11} className="text-cyan" /> Design</span>
+          <span className="w-px h-3 bg-white/20" />
+          <span className="flex items-center gap-1.5"><Code2 size={11} className="text-emerald" /> Código</span>
+          <span className="w-px h-3 bg-white/20" />
+          <span className="flex items-center gap-1.5"><Zap size={11} className="text-electric-red" /> Performance</span>
+        </div>
       </div>
 
       {/* ── Scroll hint line ── */}
       <div
-        className="absolute bottom-8 left-1/2 z-[4]"
+        className="absolute bottom-6 md:bottom-8 left-1/2 z-[4] -translate-x-1/2"
         style={{
           width: '1px',
-          height: '60px',
+          height: '50px',
           background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)',
           animation: 'heroScroll 2s infinite ease-in-out',
         }}
@@ -189,10 +217,10 @@ export function HeroSection() {
 
       <style>{`
         @keyframes heroScroll {
-          0%, 100% { transform: scaleY(0); transform-origin: top; opacity: 0; }
-          40%       { transform: scaleY(1); transform-origin: top; opacity: 1; }
-          60%       { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-          99%       { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+          0%, 100% { transform: translateX(-50%) scaleY(0); transform-origin: top; opacity: 0; }
+          40%       { transform: translateX(-50%) scaleY(1); transform-origin: top; opacity: 1; }
+          60%       { transform: translateX(-50%) scaleY(1); transform-origin: bottom; opacity: 1; }
+          99%       { transform: translateX(-50%) scaleY(0); transform-origin: bottom; opacity: 0; }
         }
       `}</style>
     </section>
