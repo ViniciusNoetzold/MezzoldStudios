@@ -15,8 +15,6 @@ export function Footer() {
           <ul className="space-y-4 text-sm">
             <li><Link href="/cases" className="hover:text-white transition-colors">Portfólio</Link></li>
             <li><Link href="/#services" className="hover:text-white transition-colors">Serviços</Link></li>
-            <li><span className="text-white/30 cursor-not-allowed">Processo</span></li>
-            <li><span className="text-white/30 cursor-not-allowed">Carreiras</span></li>
           </ul>
         </div>
         <div>

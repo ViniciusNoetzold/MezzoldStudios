@@ -6,15 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import dynamic from 'next/dynamic';
 import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-
-// THREE.js (~150KB gzip) — only loaded on md+ where the effect is actually visible
-const TunnelBackground = dynamic(
-  () => import('@/components/ui/tunnel-hero').then((m) => ({ default: m.TunnelBackground })),
-  { ssr: false }
-);
 
 const inputClass =
   'bg-white/[0.04] border border-white/10 text-white text-base md:text-sm rounded-lg px-3 ' +
@@ -32,14 +25,9 @@ export function ContactSection() {
       id="contact"
       className="relative px-4 md:px-6 pt-8 pb-16 md:py-32 flex w-full items-center justify-center overflow-hidden bg-[#030303]"
     >
-      {/* ── Desktop: WebGL tunnel (hidden on mobile — GPU expensive, invisible under blur anyway) ── */}
-      <div className="hidden md:block absolute inset-0">
-        <TunnelBackground />
-      </div>
-
       {/* ── Mobile: CSS gradient background ── */}
       <div
-        className="md:hidden absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background: `
             radial-gradient(ellipse 60% 40% at 100% 100%, rgba(6,182,212,0.06) 0%, transparent 60%),
@@ -55,9 +43,6 @@ export function ContactSection() {
           WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
         }}
       />
-
-      {/* Desktop overlay: blur + dim */}
-      <div className="hidden md:block absolute inset-0 z-[1] backdrop-blur-[2px] bg-black/60" />
 
       {/* Vignette */}
       <div

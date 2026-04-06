@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className="dark"
       style={{ colorScheme: "dark" }}
     >

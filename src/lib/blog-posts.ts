@@ -25,64 +25,64 @@ export const posts: BlogPost[] = [
     categoryColor: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/5',
     date: '15 Março 2026',
     readTime: '4 min',
-    title: 'Por Que o Seu Site Demora para Carregar — e Quanto Isso Está Te Custando',
+    title: 'Seu Site Está Perdendo Clientes Agora Mesmo — e Você Provavelmente Não Sabe',
     excerpt:
-      'Um site lento não é só frustrante: é dinheiro indo embora. Entenda, de forma simples, o que faz um site ser rápido ou lento — e por que isso importa muito mais do que parece.',
-    tags: ['Performance', 'Web', 'Experiência do Usuário'],
+      'Cada segundo a mais no carregamento custa entre 7% e 20% das suas conversões. Não é achismo — é dado do Google. Se o seu site demora mais de 3 segundos, você já perdeu metade dos visitantes antes de eles verem qualquer coisa.',
+    tags: ['Performance', 'Web', 'Conversão'],
     accentColor: 'border-cyan-500/20',
     content: [
       {
         type: 'paragraph',
-        text: 'Imagine entrar numa loja e esperar seis segundos na porta antes de alguém te deixar entrar. Você provavelmente viraria e iria embora. É exatamente isso que acontece quando um site demora para carregar. Estudos do Google mostram que mais da metade dos visitantes abandonam uma página se ela não abre em menos de três segundos. Velocidade não é um detalhe técnico — é a diferença entre ter ou perder um cliente.',
+        text: 'Você já parou para pensar quantas pessoas abriram o seu site hoje e fecharam antes de ver qualquer coisa? Não porque o produto era ruim, não porque o preço era alto — simplesmente porque a página demorou três, quatro, cinco segundos para carregar. O Google mapeou esse comportamento com precisão: 53% dos usuários mobile abandonam um site que demora mais de 3 segundos. Em desktop, a tolerância é um pouco maior — mas a paciência ainda é curta. Velocidade não é um detalhe técnico. É a primeira impressão do seu negócio.',
       },
       {
         type: 'heading',
-        text: 'O boletim escolar do seu site',
+        text: 'A nota que o Google dá pro seu site — e por que ela importa',
       },
       {
         type: 'paragraph',
-        text: 'O Google tem uma ferramenta chamada Lighthouse que funciona exatamente como um boletim escolar para sites. Ela avalia velocidade, acessibilidade, boas práticas e presença no buscador — e dá uma nota de 0 a 100 em cada categoria. Sites com notas altas aparecem melhor nas pesquisas e oferecem uma experiência muito mais agradável para quem visita. Todos os projetos que entregamos saem com nota máxima. Não porque é bonito no papel, mas porque isso impacta diretamente os resultados de quem nos contrata.',
+        text: 'O Google tem uma ferramenta chamada Lighthouse que funciona como um diagnóstico completo do seu site. Ela avalia velocidade, acessibilidade, boas práticas e presença orgânica — e entrega uma nota de 0 a 100 em cada categoria. Mas o mais importante: essa nota influencia diretamente onde você aparece nas buscas. Um site com nota baixa compete em desvantagem com concorrentes mais rápidos, mesmo que o seu produto seja superior. Todos os projetos que entregamos atingem nota 95+ no Lighthouse. Não como métrica de vaidade — como garantia de que o site vai trabalhar por você, não contra você.',
       },
       {
         type: 'callout',
-        text: 'Uma melhora de apenas 1 segundo no tempo de carregamento pode aumentar as conversões em até 27%, segundo dados da Deloitte. Para um negócio faturando R$ 50 mil por mês, isso representa mais de R$ 13 mil extras por ano — sem mudar absolutamente nada no produto.',
+        text: 'Dado da Deloitte Digital: melhorar 0,1 segundo no tempo de carregamento aumenta as conversões em 8% no varejo e 10% no B2B. Para um negócio faturando R$ 100 mil por mês, um site 1 segundo mais rápido pode representar R$ 80 mil a mais por ano — sem mudar produto, preço ou marketing.',
       },
       {
         type: 'heading',
-        text: 'A pizza pronta vs. os ingredientes crus',
+        text: 'Por que a maioria dos sites é lenta — e o que fazemos diferente',
       },
       {
         type: 'paragraph',
-        text: 'Quando você pede uma pizza, o restaurante prepara tudo na cozinha e entrega pronta. Seria absurdo te mandar os ingredientes crus para montar em casa. Mas é exatamente isso que sites lentos fazem — enviam um monte de código bruto para o seu celular ou computador processar. A tecnologia que usamos prepara tudo no servidor e entrega o resultado final, pronto para exibir. O visitante recebe a pizza pronta, não os ingredientes. O carregamento cai drasticamente e a experiência fica muito mais fluida.',
+        text: 'Sites lentos geralmente têm o mesmo problema: foram construídos para parecer bonitos na tela do designer, não para carregar rápido no celular de um cliente. Imagens não otimizadas, código desnecessário sendo carregado antes do que o usuário vai ver, fontes externas que bloqueiam a renderização — cada um desses problemas adiciona milissegundos que se acumulam. A tecnologia que usamos resolve isso de forma estrutural: o servidor já entrega o conteúdo pré-processado, como uma pizza pronta em vez de ingredientes crus. O visitante vê a página quase instantaneamente, independente da velocidade da conexão.',
       },
       {
         type: 'heading',
-        text: 'Imagens: o maior vilão invisível',
+        text: 'Imagens: o maior vilão que ninguém vê',
       },
       {
         type: 'paragraph',
-        text: 'Sabe quando uma foto demora para aparecer e a página fica "pulando" enquanto carrega? Isso acontece porque a imagem não foi otimizada — e prejudica tanto quem visita quanto o ranqueamento no Google. A solução envolve algumas práticas simples que, juntas, fazem uma diferença enorme:',
+        text: 'Na maioria dos sites, as imagens respondem por 60% a 80% do peso total da página. Uma foto de produto tirada com iPhone e enviada direto ao site pode ter 4 MB — quando otimizada corretamente, a mesma imagem pesa menos de 200 KB com qualidade visual idêntica. Além do tamanho, há outra questão crítica: quando a imagem carrega depois do texto, a página "pula" — o que o Google chama de Cumulative Layout Shift, um dos fatores mais penalizados no ranking de busca. Nosso processo elimina isso na raiz.',
       },
       {
         type: 'list',
         items: [
-          'Converter imagens para formatos modernos que pesam até 60% menos sem perder qualidade visível',
-          'Definir o espaço que a imagem vai ocupar antes de ela carregar, para a página não pular',
-          'Carregar primeiro a imagem mais importante da tela — o restante vem depois',
-          'Usar carregamento progressivo: a imagem aparece suavemente, sem salto brusco',
+          'Conversão automática para WebP/AVIF — até 70% menor sem perda de qualidade visível',
+          'Dimensões reservadas antes do carregamento — zero "pulos" de layout durante a navegação',
+          'Carregamento prioritário da imagem principal — o que o usuário vê primeiro aparece primeiro',
+          'Lazy loading inteligente — o resto carrega só quando o usuário rola até lá',
         ],
       },
       {
         type: 'heading',
-        text: 'O servidor mais perto de você',
+        text: 'O servidor mais próximo do seu cliente',
       },
       {
         type: 'paragraph',
-        text: 'Quando você acessa um site hospedado num servidor em São Paulo e está em Manaus, os dados precisam percorrer essa distância — e isso adiciona tempo de espera. Existe uma solução chamada Edge Network: em vez de um único servidor central, há dezenas espalhados pelo mundo. O acesso de cada visitante é direcionado automaticamente para o mais próximo. O resultado é um site que parece instantâneo, não importa onde a pessoa esteja.',
+        text: 'Dados precisam percorrer distância física até chegar ao dispositivo do usuário. Um site hospedado em São Paulo que recebe visitas de Porto Alegre, Manaus e Nova York entrega experiências muito diferentes para cada um desses visitantes — a menos que use uma Edge Network. Em vez de um único servidor central, existem dezenas de pontos de presença espalhados pelo mundo. O acesso de cada visitante é roteado automaticamente para o ponto mais próximo. O resultado prático: um site que carrega em menos de 200 milissegundos para qualquer pessoa, em qualquer lugar.',
       },
       {
         type: 'callout',
-        text: 'Velocidade, design bonito e bom ranqueamento no Google não são coisas opostas. No Mezzold, performance faz parte do projeto desde o primeiro dia — não é um ajuste que vem no final.',
+        text: 'Performance não é uma feature opcional — é a fundação. Um site com design extraordinário que demora 5 segundos para carregar vai perder para um site mediano que abre em 1 segundo. Nos projetos que construímos, performance é parte do escopo desde o dia zero, não um ajuste de última hora.',
       },
     ],
   },
@@ -93,65 +93,64 @@ export const posts: BlogPost[] = [
     categoryColor: 'text-blue-400 border-blue-500/30 bg-blue-500/5',
     date: '03 Março 2026',
     readTime: '6 min',
-    title: 'Como Criar um Produto Digital que Gera Receita Todo Mês — Mesmo Quando Você Não Está Trabalhando',
+    title: 'Como Transformar uma Ideia em Receita Mensal Recorrente em Menos de 6 Semanas',
     excerpt:
-      'Você cria o produto uma vez e recebe por ele todos os meses. Esse é o modelo por trás de ferramentas como Notion, Spotify e Canva. Aqui explicamos como funciona e como transformamos uma ideia em produto real em menos de seis semanas.',
-    tags: ['Produto Digital', 'SaaS', 'Empreendedorismo'],
+      'Você não precisa de uma equipe de 20 pessoas nem de anos de desenvolvimento para lançar um produto digital lucrativo. Com a abordagem certa, dois desenvolvedores constroem e lançam um Micro SaaS completo em menos de seis semanas — e o caixa começa a entrar no mês seguinte.',
+    tags: ['Produto Digital', 'SaaS', 'Receita Recorrente'],
     accentColor: 'border-blue-500/20',
     content: [
       {
         type: 'paragraph',
-        text: 'Existe um modelo de negócio que mudou completamente a forma como software é criado e vendido. Ele tem um nome técnico — SaaS, de "Software as a Service" — mas o conceito é simples: você cria um programa uma vez e as pessoas pagam mensalmente para continuar usando. Notion, Spotify, Canva, Adobe, Microsoft Office — todos funcionam assim. A grande vantagem é a previsibilidade: ao contrário de um projeto que paga uma vez, esse modelo gera receita todo mês, mesmo nos dias em que você não trabalha.',
+        text: 'Existe um modelo de negócio que virou a lógica do mercado de software de cabeça para baixo. Em vez de vender uma vez e torcer para o cliente voltar, você constrói o produto uma vez — e recebe por ele todos os meses, enquanto dorme, viaja ou trabalha em outra coisa. É o modelo por trás do Notion, do Spotify, do Canva. E o que poucos percebem: você não precisa construir o próximo Spotify. Um produto resolvendo um problema específico para 300 clientes pagando R$ 97 por mês já é quase R$ 30 mil de receita previsível todo mês. Com 500 clientes, R$ 48 mil.',
       },
       {
         type: 'heading',
-        text: 'Você não precisa atender milhões de pessoas',
+        text: 'O erro que mata 90% dos produtos antes do lançamento',
       },
       {
         type: 'paragraph',
-        text: 'Um erro muito comum é achar que um produto digital precisa ser enorme para valer a pena. Não precisa. Um produto focado que resolve muito bem um problema específico para 200 clientes pagando R$ 97 por mês já representa quase R$ 20 mil de receita mensal previsível. Com 500 clientes, são R$ 48 mil. O segredo não está no tamanho do mercado, mas na clareza do problema que você resolve.',
+        text: 'O cemitério de produtos digitais está cheio de ideias brilhantes que morreram antes de chegar ao mercado. O padrão é sempre o mesmo: o fundador passa meses desenvolvendo, polindo funcionalidades, preparando o sistema perfeito — e quando finalmente lança, descobre que ninguém estava disposto a pagar pelo que ele construiu. A causa não é falta de talento técnico. É falta de validação antes de escrever a primeira linha de código. A pergunta mais importante não é "consigo construir isso?" — é "alguém me pagaria por isso agora?"',
       },
       {
         type: 'callout',
-        text: 'O maior erro de quem quer criar um produto digital é passar meses desenvolvendo antes de conversar com qualquer cliente em potencial. Valide a ideia primeiro — descubra se alguém pagaria por ela antes de construir. O código vem depois.',
+        text: 'Regra de ouro da validação: antes de construir, consiga pelo menos 10 pessoas dispostas a pagar antes de o produto existir. Se você não consegue convencer 10 pessoas com uma conversa honesta sobre o problema que resolve, construir o produto não vai mudar isso.',
       },
       {
         type: 'heading',
-        text: 'De ideia a produto em seis semanas',
+        text: 'De ideia validada a produto no ar em seis semanas',
       },
       {
         type: 'paragraph',
-        text: 'Antigamente, criar um produto digital exigia uma equipe grande de engenheiros, servidores próprios e meses de trabalho. Hoje, com as ferramentas certas, dois desenvolvedores conseguem construir e lançar um produto completo em semanas. O que usamos resolve cada parte do problema de forma simples:',
+        text: 'Com as ferramentas certas e a metodologia adequada, o ciclo de desenvolvimento é muito mais curto do que parece. O que levava seis meses e uma equipe de dez pessoas agora leva seis semanas com dois desenvolvedores experientes. A razão é simples: infraestrutura que antes precisava ser construída do zero — autenticação, banco de dados, emails, armazenamento de arquivos, cobranças — hoje é configurada em horas, não em semanas. Isso libera o time para focar no que realmente diferencia o produto: a lógica de negócio e a experiência do usuário.',
       },
       {
         type: 'list',
         items: [
-          'A parte visual e as regras de negócio ficam no mesmo lugar, sem precisar de sistemas separados',
-          'Banco de dados, login de usuários e armazenamento de arquivos prontos para usar, sem configurar servidores',
-          'Todo o sistema de pagamentos e cobranças mensais automáticas com integração simples',
-          'Publicação automática a cada atualização, sem precisar de um time de infraestrutura',
-          'Emails de confirmação, cobrança e boas-vindas enviados automaticamente, com visual profissional',
+          'Semana 1–2: Wireframes, validação técnica e setup de infraestrutura',
+          'Semana 3–4: Desenvolvimento das funcionalidades core e sistema de pagamentos',
+          'Semana 5: Testes com usuários beta, ajustes de UX e refinamento',
+          'Semana 6: Deploy em produção, onboarding e estratégia de lançamento',
         ],
       },
       {
         type: 'heading',
-        text: 'O dinheiro cai na conta automaticamente',
+        text: 'O dinheiro que cai na conta sem você fazer nada',
       },
       {
         type: 'paragraph',
-        text: 'A parte de pagamentos é onde muita gente trava. Felizmente, as ferramentas atuais resolvem isso de forma quase completa. O sistema cuida das cobranças mensais automáticas, das falhas de cartão com novas tentativas, das notas fiscais e até de um portal onde o próprio cliente gerencia a assinatura — upgrade, downgrade, cancelamento — sem precisar acionar nenhum suporte. Você configura uma vez e o processo funciona sozinho.',
+        text: 'A parte mais poderosa do modelo de assinatura é o que acontece depois do lançamento. O sistema de cobranças funciona sozinho: cobra mensalmente, tenta novamente em caso de falha no cartão, emite recibos automaticamente, e ainda oferece um portal onde o próprio cliente gerencia sua assinatura sem precisar acionar o suporte. Você acorda na manhã e o dashboard já mostra quantas pessoas pagaram. Não há nota fiscal para emitir manualmente, não há boleto para acompanhar, não há inadimplência para perseguir. O produto trabalha enquanto você dorme.',
       },
       {
         type: 'heading',
-        text: 'Os primeiros clientes não aparecem sozinhos',
+        text: 'Os primeiros 100 clientes não aparecem por acaso',
       },
       {
         type: 'paragraph',
-        text: 'Produto pronto não significa clientes na porta. Os primeiros usuários de produtos que acompanhamos vieram sempre de três lugares: uma publicação honesta no Product Hunt no dia do lançamento, uma explicação clara nas redes sociais focada no problema resolvido — não no produto em si — e presença nas comunidades onde o público-alvo já conversa. A tecnologia resolve o produto. A comunicação conecta esse produto às pessoas certas.',
+        text: 'Produto pronto não é produto vendido. Os primeiros clientes dos projetos que acompanhamos vieram sempre de três canais combinados: uma publicação honesta e específica no Product Hunt no dia do lançamento, uma campanha de conteúdo nas redes focada no problema que o produto resolve — não no produto em si — e presença ativa nas comunidades onde o público-alvo já está. Não existe atalho mágico. Mas existe um padrão que funciona quando executado com consistência.',
       },
       {
         type: 'callout',
-        text: 'Receita recorrente muda a lógica do negócio: em vez de correr atrás de novos clientes o tempo todo, você foca em entregar valor para quem já paga — e o faturamento cresce de forma previsível, mês após mês.',
+        text: 'A diferença entre um freelancer e um fundador de SaaS não é técnica — é mental. Freelancer troca tempo por dinheiro. Fundador de SaaS constrói um ativo que gera renda independente do seu tempo. Os dois trabalhos têm o mesmo ponto de partida: uma habilidade. O que muda é a decisão de transformar essa habilidade em produto.',
       },
     ],
   },
@@ -162,68 +161,64 @@ export const posts: BlogPost[] = [
     categoryColor: 'text-violet-400 border-violet-500/30 bg-violet-500/5',
     date: '18 Fevereiro 2026',
     readTime: '5 min',
-    title: 'Por Que Alguns Sites Parecem Vivos — e Como Esse Efeito é Criado',
+    title: 'Por Que Alguns Sites Parecem Vivos — e o que Separa Design Comum de Design Extraordinário',
     excerpt:
-      'Sabe aquela sensação de que um site tem personalidade, que responde ao seu toque de forma natural? Isso não é sorte. É uma decisão de design muito precisa — e neste artigo explicamos como funciona.',
-    tags: ['Design', 'Animação', 'Experiência do Usuário'],
+      'Existe uma razão pela qual certos produtos digitais parecem premium mesmo antes de você ler uma palavra ou ver o preço. Não é o logo, não é a paleta de cores — é o movimento. E quando feito da forma certa, ele se torna a ferramenta mais poderosa de percepção de valor que existe.',
+    tags: ['Design', 'Motion', 'Experiência do Usuário'],
     accentColor: 'border-violet-500/20',
     content: [
       {
         type: 'paragraph',
-        text: 'Pense nos aplicativos e sites que você mais gosta de usar. Provavelmente eles têm algo em comum: respondem ao seu toque de forma suave, os elementos aparecem com elegância, nada parece brusco ou robótico. Isso não é coincidência — é o resultado de decisões muito conscientes sobre como e quando as coisas se movem. Essa disciplina tem um nome: Motion Design.',
+        text: 'Abra o site da Apple. Agora abra o site de um concorrente qualquer. Os dois têm produtos de qualidade, boas fotos e textos bem escritos. Mas um deles parece vivo — os elementos respondem ao scroll com elegância, os botões têm peso e textura no clique, as transições entre telas são fluidas como páginas de um livro bem encadernado. O outro parece montado. Essa diferença não é acidente nem magia. É a aplicação deliberada de uma disciplina chamada Motion Design — e ela impacta diretamente quanto o usuário confia no produto antes de tomar qualquer decisão.',
       },
       {
         type: 'heading',
-        text: 'A diferença entre mecânico e natural',
+        text: 'O que o movimento comunica que palavras não conseguem',
       },
       {
         type: 'paragraph',
-        text: 'Pense na diferença entre um elevador de carga e uma porta de carro de luxo. Os dois abrem e fecham, mas um parece rígido e o outro parece fluido. A maioria dos sites usa o equivalente ao elevador de carga: animações que se movem na mesma velocidade do começo ao fim, como um objeto deslizando num trilho. O que fazemos é baseado em física real — o elemento acelera no início e desacelera naturalmente no final, como objetos do mundo real se comportam. O resultado é uma interface que parece viva, não programada.',
-      },
-      {
-        type: 'heading',
-        text: 'O ritmo que ninguém percebe conscientemente',
-      },
-      {
-        type: 'paragraph',
-        text: 'Quando vários elementos precisam aparecer juntos — uma lista de cards ou uma grade de produtos — fazer tudo aparecer ao mesmo tempo parece abrupto, quase agressivo. A solução é fazer cada elemento aparecer com um pequeno atraso em relação ao anterior, criando uma sensação de cascata elegante. O segredo está na sutileza: uma diferença de 60 a 80 milissegundos entre cada item já é suficiente. Mais do que isso começa a parecer lento. Menos do que isso e o efeito some. É uma questão de ritmo.',
+        text: 'Animações não existem para impressionar. Existem para comunicar. Quando um botão pressiona levemente ao ser clicado, ele confirma ao usuário que o sistema recebeu o comando — eliminando a ansiedade de "será que funcionou?". Quando uma lista de itens aparece em cascata ao invés de todos de uma vez, o cérebro processa cada elemento separadamente, aumentando a retenção. Quando um elemento de erro balança suavemente em vez de simplesmente aparecer vermelho, a frustração diminui porque a resposta parece humana. Cada uma dessas micro-decisões de movimento é uma conversa silenciosa entre o produto e o usuário.',
       },
       {
         type: 'callout',
-        text: 'A melhor animação é aquela que você sente, mas não consegue descrever exatamente o que aconteceu. Se o usuário para para assistir à animação, ela está lenta demais.',
+        text: 'Pesquisa do Nielsen Norman Group: interfaces com animações bem planejadas têm taxa de conclusão de tarefas 20% maior do que interfaces estáticas equivalentes. O usuário não percebe a animação conscientemente — ele só percebe que o produto parece mais fácil de usar.',
       },
       {
         type: 'heading',
-        text: 'Os detalhes que ninguém nota, mas todo mundo sente',
+        text: 'A física que separa animação amadora de animação profissional',
       },
       {
         type: 'paragraph',
-        text: 'Micro-interações são as pequenas respostas visuais do site ao que você faz: o botão que pressiona levemente quando clicado, o ícone que muda ao concluir uma ação, o campo de texto que sinaliza sutilmente quando há um erro. Individualmente, cada uma parece irrelevante. Juntas, elas constroem a sensação de que o produto foi feito com cuidado — e isso cria confiança. As pessoas confiam mais em produtos que parecem polidos, mesmo sem saber exatamente por quê.',
+        text: 'Pense na diferença entre um elevador de carga e uma porta de carro alemão. Os dois abrem e fecham, mas um parece mecânico e o outro parece preciso. A diferença está na curva de aceleração. Animações amadoras se movem em velocidade constante — como um objeto deslizando num trilho. Animações profissionais seguem a física do mundo real: o elemento acelera no início e desacelera suavemente no final, como objetos com massa e inércia. Esse princípio, chamado de easing, é o que separa um site que parece feito por um designer de um site que parece feito por um programador que aprendeu CSS ontem.',
+      },
+      {
+        type: 'heading',
+        text: 'O ritmo que o usuário sente mas não consegue nomear',
+      },
+      {
+        type: 'paragraph',
+        text: 'Quando múltiplos elementos precisam aparecer juntos — uma grade de cards, uma lista de features, uma seção de depoimentos — fazer tudo aparecer simultaneamente cria uma sensação de explosão visual. A solução é o stagger: cada elemento aparece com um intervalo de 60 a 80 milissegundos em relação ao anterior, criando uma cascata elegante. Abaixo desse intervalo, o efeito some. Acima, começa a parecer lento e chamativo — o pior dos dois mundos. Essa calibragem precisa é o que faz o usuário sentir que o produto foi feito com atenção, mesmo sem saber exatamente por quê.',
       },
       {
         type: 'list',
         items: [
-          'Botões com escala sutil no clique — confirma que o sistema recebeu o comando',
-          'Cards que se elevam e iluminam no hover — indica claramente que o elemento é clicável',
-          'Transições suaves entre páginas — eliminam a sensação de salto brusco entre telas',
-          'Ícones que animam ao confirmar ações — copiar, salvar, enviar com feedback visual imediato',
+          'Scroll-triggered animations — elementos que ganham vida conforme o usuário navega, não todos de uma vez',
+          'Spring physics — animações baseadas em física real que parecem ter peso e resistência',
+          'Gesture feedback — respostas táteis imediatas a cada interação do usuário',
+          'State transitions — mudanças de estado (loading, success, error) que guiam sem interromper',
         ],
       },
       {
         type: 'heading',
-        text: 'Quando o design vai além do que o olho nu percebe',
+        text: 'Quando o design vai além do que o olho consegue ver',
       },
       {
         type: 'paragraph',
-        text: 'Alguns efeitos visuais que usamos — gradientes animados em tempo real, partículas em movimento, distorções suaves de fundo — não são possíveis com técnicas comuns de design para web. Usamos uma tecnologia que roda diretamente na placa de vídeo do computador, calculando a cor de cada pixel da tela em tempo real. O resultado são efeitos cinematográficos que rodam com fluidez absoluta e sem impactar a velocidade do resto do site.',
+        text: 'Alguns efeitos visuais que usamos nos nossos projetos — gradientes que reagem ao mouse em tempo real, partículas que respondem ao scroll, distorções de profundidade que seguem o cursor — não são possíveis com CSS ou JavaScript convencional. Rodam diretamente na placa de vídeo do computador, calculando a cor de cada pixel em tempo real a 60 quadros por segundo. O resultado são efeitos que parecem cinematográficos, que rodam com fluidez absoluta e que deixam uma impressão que dura muito além da primeira visita.',
       },
       {
-        type: 'heading',
-        text: 'Design bonito que funciona para todo mundo',
-      },
-      {
-        type: 'paragraph',
-        text: 'Algumas pessoas têm condições de saúde que tornam animações intensas desconfortáveis ou até perigosas — como epilepsia ou sensibilidade a movimentos. Por isso, todos os nossos projetos detectam automaticamente quando o usuário configurou o dispositivo para reduzir movimentos e adaptam a experiência de acordo. Design premium não ignora quem tem necessidades específicas. Pelo contrário: considera essas pessoas desde o início.',
+        type: 'callout',
+        text: 'A regra de ouro do Motion Design: a melhor animação é aquela que o usuário sente, mas não consegue descrever. Se ele para para assistir à animação, ela está lenta demais. Se ele não percebe que há animação, ela está perfeita. O movimento existe para servir a experiência — nunca para ser a experiência.',
       },
     ],
   },
@@ -234,35 +229,35 @@ export const posts: BlogPost[] = [
     categoryColor: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/5',
     date: '10 Fevereiro 2026',
     readTime: '6 min',
-    title: 'Chega de Planilha: Como Ver os Números do Seu Negócio em Tempo Real Muda Tudo',
+    title: 'Chega de Relatório Manual: Como Ver os Dados do Seu Negócio em Tempo Real Muda Decisões',
     excerpt:
-      'Imagine ver o faturamento do dia atualizar na tela no exato momento em que a venda acontece. Sem pedir relatório para ninguém. Sem esperar o fim do mês. É isso que construímos — e aqui explicamos como.',
-    tags: ['Automação', 'Dashboard', 'Gestão'],
+      'Um gestor tomando decisões com dados de uma semana atrás é como um piloto voando olhando pelo retrovisor. Dashboards em tempo real eliminam o lag entre o que acontece no seu negócio e o que você sabe — e isso muda a qualidade de cada decisão que você toma.',
+    tags: ['Automação', 'Dashboard', 'Business Intelligence'],
     accentColor: 'border-emerald-500/20',
     content: [
       {
         type: 'paragraph',
-        text: 'Toda empresa gera dados o tempo todo: vendas, pedidos, atendimentos, estoque, campanhas. O problema é que, na maioria dos negócios, essas informações ficam espalhadas em planilhas, sistemas diferentes e emails — e alguém precisa juntar tudo manualmente para ter uma visão do que está acontecendo. Esse processo é lento, caro e cheio de erros. E existe uma forma muito melhor de fazer isso.',
+        text: 'Qual foi o seu faturamento ontem? Não o da semana passada — de ontem. Quantos novos clientes entraram hoje? Qual campanha está trazendo os leads que mais convertem? Se para responder qualquer dessas perguntas você precisa abrir uma planilha, ligar para alguém ou esperar até sexta-feira, você está gerindo um negócio no escuro. E no escuro, você não evita obstáculos — você tropeça neles depois que já causaram dano.',
       },
       {
         type: 'heading',
-        text: 'O que é um dashboard em tempo real',
+        text: 'O custo invisível do relatório manual',
       },
       {
         type: 'paragraph',
-        text: 'Um dashboard é uma tela única que mostra os números mais importantes do negócio, atualizada automaticamente, sem que ninguém precise fazer nada. "Em tempo real" significa exatamente isso: quando uma venda acontece, o número aparece na tela em questão de segundos. Não no próximo relatório semanal. Não depois de alguém atualizar a planilha. Agora. É a diferença entre dirigir olhando pelo retrovisor e enxergar a estrada à sua frente.',
+        text: 'Toda empresa tem alguém — às vezes mais de um — que passa horas toda semana coletando dados de sistemas diferentes, copiando para planilhas, calculando totais, montando apresentações. É um trabalho que parece produtivo mas não é: é um processo de transcrição manual que cria delay, introduz erros humanos e consome o tempo mais caro da empresa — o tempo de pessoas inteligentes que deveriam estar tomando decisões, não alimentando planilhas. Um cliente de logística que atendemos gastava 12 horas semanais nesse processo. Depois da automação: 4 minutos.',
       },
       {
         type: 'callout',
-        text: 'Um cliente do setor de logística reduziu 12 horas semanais de trabalho manual para um processo automatizado que roda em 4 minutos. A equipe parou de criar planilhas e começou a tomar decisões — que é o trabalho que realmente importa.',
+        text: '12 horas semanais × 50 semanas = 600 horas por ano. Se a pessoa que faz esse trabalho custa R$ 8.000 por mês, são R$ 28.800 gastos anualmente num processo que pode ser eliminado. Esse é o ROI básico da automação — antes de considerar as decisões melhores que os dados em tempo real permitem.',
       },
       {
         type: 'heading',
-        text: 'Como os dados chegam até a tela sem ninguém enviar',
+        text: 'Como os dados chegam à tela sem ninguém enviar',
       },
       {
         type: 'paragraph',
-        text: 'Pense numa agência de correios muito eficiente. Quando algo importante acontece — uma venda é concluída, um pedido muda de status, um atendimento é aberto — uma mensagem é automaticamente enviada para todos os sistemas que precisam saber disso. O dashboard é um desses destinatários: ao receber a mensagem, ele atualiza os números imediatamente. Nenhuma pessoa precisou intervir. Nenhum dado se perdeu no caminho.',
+        text: 'O mecanismo por trás dos dashboards em tempo real funciona como um sistema de mensageria ultra-eficiente. Quando algo acontece no seu negócio — uma venda é aprovada, um pedido muda de status, um ticket de suporte é aberto — uma notificação é disparada automaticamente para todos os sistemas que precisam saber disso. O dashboard é um desses destinatários: assim que recebe o sinal, atualiza o número na tela. Nenhuma pessoa precisou intervir. Nenhum dado ficou preso num sistema isolado esperando alguém ir buscá-lo.',
       },
       {
         type: 'heading',
@@ -270,36 +265,36 @@ export const posts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'A maioria das empresas já usa várias ferramentas: um sistema de vendas, uma plataforma de pagamentos, um CRM, talvez alguma ferramenta de atendimento. Dashboards modernos se conectam a todas essas fontes ao mesmo tempo e consolidam tudo em um só lugar. Não é preciso abandonar o que já funciona — apenas fazer com que as peças conversem entre si.',
+        text: 'Um dos maiores medos de quem pensa em automação é a disrupção: vai precisar trocar todos os sistemas, treinar a equipe do zero, passar meses em implementação. A realidade é diferente. Os dashboards que construímos se conectam às ferramentas que você já usa — seja qual for o seu sistema de vendas, ERP, CRM, plataforma de pagamentos ou ferramenta de atendimento. Os dados fluem entre os sistemas existentes e se consolidam num painel único. Você não troca o que funciona. Faz as peças conversarem.',
       },
       {
         type: 'list',
         items: [
-          'Vendas de qualquer plataforma de pagamento aparecem automaticamente no painel',
-          'O funil de vendas do CRM atualiza em tempo real, sem ninguém precisar registrar manualmente',
-          'Relatórios chegam por email toda segunda-feira de manhã, sem ninguém precisar gerar',
-          'Alertas automáticos avisam quando uma métrica importante cai abaixo do esperado',
+          'Consolidação de vendas de qualquer plataforma em tempo real — sem exportar, sem copiar',
+          'Funil de vendas atualizado automaticamente conforme negociações avançam no CRM',
+          'Relatórios semanais entregues por email toda segunda às 7h — sem ninguém gerar manualmente',
+          'Alertas automáticos quando uma métrica cai abaixo do threshold definido',
         ],
       },
       {
         type: 'heading',
-        text: 'E quando algo der errado?',
+        text: 'E quando o sistema cair?',
       },
       {
         type: 'paragraph',
-        text: 'Integrações dependem de sistemas externos — e sistemas externos às vezes ficam fora do ar por alguns minutos. Um sistema bem construído não perde nenhum dado nesse cenário. Se o destino não responde, a mensagem aguarda numa fila e tenta novamente com intervalos crescentes. Para o usuário final, é completamente transparente. Para o negócio, significa zero perda de informação, mesmo em momentos de instabilidade.',
+        text: 'Qualquer integração que depende de sistemas externos vai, em algum momento, encontrar instabilidade. Um servidor fora do ar por alguns minutos, uma API com timeout, uma atualização que muda o comportamento esperado. Um sistema bem construído não perde dados nesses cenários. Toda mensagem que não consegue ser entregue fica numa fila persistente e é processada com backoff exponencial — tentativas com intervalos crescentes — até ter sucesso. Para o usuário final, é completamente invisível. Para o negócio, significa zero perda de dados em qualquer cenário.',
       },
       {
         type: 'heading',
-        text: 'O que muda de verdade quando você tem isso',
+        text: 'O que muda de verdade quando a informação é instantânea',
       },
       {
         type: 'paragraph',
-        text: 'Quando automatizamos o processo de um cliente de logística, três coisas aconteceram ao mesmo tempo: as 12 horas semanais de trabalho manual viraram 4 minutos de processamento automático; os erros de digitação que geravam retrabalho desapareceram; e a gestão passou a tomar decisões com base nos dados do dia, não da semana anterior. O custo operacional caiu. A qualidade das decisões subiu. Esse é o impacto real da automação — não é sobre tecnologia, é sobre liberar pessoas para fazerem o que realmente faz diferença.',
+        text: 'Quando o cliente de logística que mencionamos implementou o dashboard em tempo real, três coisas aconteceram simultaneamente: as 12 horas semanais de trabalho manual viraram 4 minutos de processamento automático; os erros de transcrição que geravam retrabalho e conflitos de dados desapareceram; e a diretoria passou a tomar decisões com base no que estava acontecendo naquele dia, não na semana anterior. A velocidade de resposta a problemas aumentou radicalmente. Uma queda nas vendas de segunda-feira era identificada e investigada na segunda-feira — não na reunião de sexta.',
       },
       {
         type: 'callout',
-        text: 'Nenhum gestor deveria passar horas copiando dados entre sistemas. Esse tempo tem um valor enorme — e deveria ser usado em estratégia, relacionamento e crescimento.',
+        text: 'Dado em tempo real não é luxo de empresa grande. É o mínimo que qualquer negócio sério precisa para competir. A diferença entre quem cresce e quem fica estagnado raramente é falta de esforço — é frequentemente falta de informação rápida o suficiente para agir quando ainda faz diferença.',
       },
     ],
   },

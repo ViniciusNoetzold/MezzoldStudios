@@ -154,9 +154,14 @@ function ServiceBack({ data }: { data: ServiceCardData }) {
 function MobileServiceCard({ data, isOpen, onToggle }: { data: ServiceCardData, isOpen: boolean, onToggle: () => void }) {
   const Icon = data.icon;
   return (
-    <div 
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={isOpen}
+      aria-controls={`service-details-${data.id}`}
       className={cn("flex flex-col rounded-2xl border transition-colors duration-300 overflow-hidden relative cursor-pointer", isOpen ? "border-white/20 bg-[#0c0c0c]" : "border-white/[0.08] bg-[#0c0c0c]/60 hover:bg-[#0c0c0c]")}
       onClick={onToggle}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
     >
       <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/[0.02] blur-[80px] rounded-full pointer-events-none" />
 
@@ -179,7 +184,8 @@ function MobileServiceCard({ data, isOpen, onToggle }: { data: ServiceCardData, 
       </div>
 
       {/* Expanded: editorial 2×2 grid + CTA */}
-      <div 
+      <div
+        id={`service-details-${data.id}`}
         className={cn(
           "relative z-10 overflow-hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"

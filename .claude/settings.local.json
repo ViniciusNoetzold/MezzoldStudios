@@ -11,7 +11,32 @@
       "Bash(mkdir -p C:/Users/noetz/.claude/skills)",
       "Bash(cp -r C:/Users/noetz/Desktop/MezzoldV3Last/awesome-claude-skills/theme-factory C:/Users/noetz/.claude/skills/)",
       "Bash(xargs wc:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(cp -r /tmp/skills-pack-clone/api-design-principles ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/better-auth-best-practices ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/brainstorming ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/building-native-ui ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/database-schema-design ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/expo-deployment ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/expo-tailwind-setup ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/find-skills ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/github-actions-docs ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/mcp-builder ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/python-performance ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/react-native-skills ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/requesting-code-review ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/security-best-practices ~/.claude/skills/)",
+      "Bash(cp -r /tmp/skills-pack-clone/shadcn ~/.claude/skills/)",
+      "Bash(git -C c:/Users/noetz/Desktop/MezzoldV3Last ls-files .agents/)",
+      "Bash(git -C c:/Users/noetz/Desktop/MezzoldV3Last rm -r .agents/)",
+      "Bash(rm -rf /tmp/skills-pack-clone)",
+      "Bash(git clone:*)",
+      "Bash(cp -r /tmp/skills-pack-clone/*/  ~/.claude/skills/)",
+      "WebFetch(domain:skillsmp.com)",
+      "WebFetch(domain:skills.sh)",
+      "Bash(xargs grep:*)",
+      "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md c:/Users/noetz/Desktop/MezzoldV3Last/.claude/skills/security-best-practices/SKILL.md)",
+      "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md __TRACKED_VAR__/security-best-practices/SKILL.md)"
     ]
   }
 }

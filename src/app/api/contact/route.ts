@@ -3,10 +3,69 @@ import { NextResponse } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(request: Request) {
-  try {
-    const { name, email, phone, message } = await request.json();
+// Simple in-memory rate limiter: max 3 requests per IP per 10 minutes.
+// NOTE: On Vercel serverless each cold start gets a fresh Map, so this is
+// best-effort defense. For hard enforcement, swap for Upstash Redis.
+const rateMap = new Map<string, { count: number; reset: number }>();
+const RATE_LIMIT = 3;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const MAX_BODY_BYTES = 16_384; // 16 KB hard cap
 
+// Purge expired entries to prevent unbounded memory growth
+function purgeExpired() {
+  const now = Date.now();
+  for (const [key, entry] of rateMap) {
+    if (now >= entry.reset) rateMap.delete(key);
+  }
+}
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+export async function POST(request: Request) {
+  // Body size guard — reject oversized payloads before parsing
+  const contentLength = Number(request.headers.get('content-length') ?? 0);
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: 'Payload muito grande.' }, { status: 413 });
+  }
+
+  // Rate limiting (best-effort; purge stale entries first)
+  purgeExpired();
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+
+  if (entry) {
+    if (now < entry.reset) {
+      if (entry.count >= RATE_LIMIT) {
+        return NextResponse.json(
+          { error: 'Muitas tentativas. Tente novamente em alguns minutos.' },
+          { status: 429 }
+        );
+      }
+      entry.count++;
+    } else {
+      rateMap.set(ip, { count: 1, reset: now + RATE_WINDOW_MS });
+    }
+  } else {
+    rateMap.set(ip, { count: 1, reset: now + RATE_WINDOW_MS });
+  }
+
+  try {
+    const body = await request.json();
+    const { name, email, phone, message } = body;
+
+    // Presence validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Nome, email e mensagem são obrigatórios.' },
@@ -14,11 +73,32 @@ export async function POST(request: Request) {
       );
     }
 
+    // Type validation
+    if (typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string') {
+      return NextResponse.json({ error: 'Dados inválidos.' }, { status: 400 });
+    }
+
+    // Length limits
+    if (name.length > 100 || email.length > 254 || message.length > 5000 || (phone && phone.length > 20)) {
+      return NextResponse.json({ error: 'Dados excedem o tamanho permitido.' }, { status: 400 });
+    }
+
+    // Email format validation
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ error: 'Email inválido.' }, { status: 400 });
+    }
+
+    // Escape all user input before interpolating into HTML
+    const safeName = escapeHtml(name.trim());
+    const safeEmail = escapeHtml(email.trim());
+    const safePhone = phone ? escapeHtml(String(phone).trim()) : null;
+    const safeMessage = escapeHtml(message.trim()).replace(/\n/g, '<br/>');
+
     const { error } = await resend.emails.send({
       from: 'Mezzold Studio <onboarding@resend.dev>',
       to: ['mezzoldstudio@gmail.com'],
-      replyTo: email,
-      subject: `Nova proposta de ${name} — Mezzold Studio`,
+      replyTo: safeEmail,
+      subject: `Nova proposta de ${safeName} — Mezzold Studio`,
       html: `
         <div style="font-family: monospace; background: #0a0a0a; color: #fff; padding: 32px; border-radius: 8px; max-width: 600px;">
           <div style="border-bottom: 1px solid #222; padding-bottom: 16px; margin-bottom: 24px;">
@@ -29,20 +109,20 @@ export async function POST(request: Request) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 10px 0; color: #555; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; width: 100px;">NOME</td>
-              <td style="padding: 10px 0; color: #fff; font-size: 14px;">${name}</td>
+              <td style="padding: 10px 0; color: #fff; font-size: 14px;">${safeName}</td>
             </tr>
             <tr style="border-top: 1px solid #1a1a1a;">
               <td style="padding: 10px 0; color: #555; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">EMAIL</td>
-              <td style="padding: 10px 0; color: #fff; font-size: 14px;"><a href="mailto:${email}" style="color: #fff;">${email}</a></td>
+              <td style="padding: 10px 0; color: #fff; font-size: 14px;"><a href="mailto:${safeEmail}" style="color: #fff;">${safeEmail}</a></td>
             </tr>
-            ${phone ? `
+            ${safePhone ? `
             <tr style="border-top: 1px solid #1a1a1a;">
               <td style="padding: 10px 0; color: #555; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">TELEFONE</td>
-              <td style="padding: 10px 0; color: #fff; font-size: 14px;">${phone}</td>
+              <td style="padding: 10px 0; color: #fff; font-size: 14px;">${safePhone}</td>
             </tr>` : ''}
             <tr style="border-top: 1px solid #1a1a1a;">
               <td style="padding: 10px 0; color: #555; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; vertical-align: top;">MENSAGEM</td>
-              <td style="padding: 10px 0; color: #fff; font-size: 14px; line-height: 1.6;">${message.replace(/\n/g, '<br/>')}</td>
+              <td style="padding: 10px 0; color: #fff; font-size: 14px; line-height: 1.6;">${safeMessage}</td>
             </tr>
           </table>
 

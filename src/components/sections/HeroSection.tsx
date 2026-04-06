@@ -24,19 +24,23 @@ const HighlightWord = ({ children, active }: { children: React.ReactNode; active
 
 export function HeroSection() {
   const [activeHighlight, setActiveHighlight] = React.useState(0);
+  const reducedMotion = typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
 
   React.useEffect(() => {
+    if (reducedMotion) return;
     const interval = setInterval(() => {
       setActiveHighlight((prev) => (prev + 1) % 4);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [reducedMotion]);
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-mezzold-bg touch-pan-y">
+    <section className="relative min-h-[85svh] md:min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-mezzold-bg touch-pan-y">
 
-      {/* ── Desktop: 3D animated Halide canvas ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block">
+      {/* ── Desktop: 3D animated Halide canvas — clipped to upper 65% so it doesn't bleed into the feature cards ── */}
+      <div className="absolute inset-0 bottom-[35%] z-0 pointer-events-none hidden md:block overflow-hidden">
         <HalideTopoHero />
       </div>
 
@@ -58,9 +62,10 @@ export function HeroSection() {
           background: 'radial-gradient(ellipse at center, transparent 20%, rgba(2,2,2,0.65) 80%)',
         }}
       />
-      {/* Extra bottom fade on mobile so cards below the fold transition cleanly */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 z-[1] pointer-events-none md:hidden"
-        style={{ background: 'linear-gradient(to bottom, transparent, rgba(2,2,2,0.95))' }}
+      {/* Bottom fade — mobile and desktop — seals the hero bottom cleanly */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 md:h-64 z-[1] pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(2,2,2,0.98))' }}
       />
 
       {/* ── Subtle red accent glow top-center ── */}

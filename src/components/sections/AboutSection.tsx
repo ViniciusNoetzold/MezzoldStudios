@@ -6,7 +6,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28 lg:py-36 relative px-4 sm:px-6 overflow-hidden">
+    <section className="pt-10 pb-16 md:py-28 lg:py-36 relative px-4 sm:px-6 overflow-hidden">
       {/* Same grid as the rest of the site */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
