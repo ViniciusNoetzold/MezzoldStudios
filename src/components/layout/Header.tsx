@@ -42,7 +42,7 @@ export function Header() {
 		>
 			<nav
 				className={cn(
-					'flex h-20 md:h-16 w-full items-center justify-between px-6 transition-all duration-500 ease-out',
+					'flex h-14 md:h-16 w-full items-center justify-between px-6 transition-all duration-500 ease-out',
 					{
 						// padding maior quando desgrutado pra dar respiro
 						'md:px-8': scrolled,
@@ -75,7 +75,7 @@ export function Header() {
 
 			<div
 				className={cn(
-					'fixed top-20 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-t border-glass-border bg-[#020202]/95 backdrop-blur-xl md:hidden transition-all duration-300',
+					'fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-t border-glass-border bg-[#020202]/95 backdrop-blur-xl md:hidden transition-all duration-300',
 					open ? 'opacity-100 translate-y-0 h-screen pointer-events-auto' : 'opacity-0 -translate-y-8 h-0 pointer-events-none',
 				)}
 			>

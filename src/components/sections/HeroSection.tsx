@@ -204,25 +204,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Scroll hint line ── */}
-      <div
-        className="absolute bottom-6 md:bottom-8 left-1/2 z-[4] -translate-x-1/2"
-        style={{
-          width: '1px',
-          height: '50px',
-          background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)',
-          animation: 'heroScroll 2s infinite ease-in-out',
-        }}
-      />
-
-      <style>{`
-        @keyframes heroScroll {
-          0%, 100% { transform: translateX(-50%) scaleY(0); transform-origin: top; opacity: 0; }
-          40%       { transform: translateX(-50%) scaleY(1); transform-origin: top; opacity: 1; }
-          60%       { transform: translateX(-50%) scaleY(1); transform-origin: bottom; opacity: 1; }
-          99%       { transform: translateX(-50%) scaleY(0); transform-origin: bottom; opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }

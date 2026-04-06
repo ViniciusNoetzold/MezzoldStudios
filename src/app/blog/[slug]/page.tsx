@@ -3,14 +3,13 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Clock, Calendar } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { CodeBlock } from '@/components/ui/code-block';
 import { posts, getPostBySlug, type Section } from '@/lib/blog-posts';
 
-/* ── Static params for all posts ── */
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-/* ── Per-post metadata ── */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -21,55 +20,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-/* ── Content renderer ── */
-function renderSection(section: Section, i: number) {
+function renderSection(section: Section, i: number, headingIndex: number) {
   switch (section.type) {
+
     case 'heading':
       return (
-        <h2
-          key={i}
-          className="font-sans font-black text-xl md:text-2xl tracking-tight text-white mt-10 mb-4 leading-snug"
-        >
-          {section.text}
+        <h2 key={i} className="group flex items-start gap-4 mt-12 mb-5">
+          <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-electric-red mt-[6px] md:mt-[7px] select-none">
+            {String(headingIndex).padStart(2, '0')}
+          </span>
+          <span className="font-sans font-black text-xl md:text-2xl tracking-tight text-white leading-snug">
+            {section.text}
+          </span>
         </h2>
       );
 
     case 'paragraph':
       return (
-        <p
-          key={i}
-          className="text-white/65 font-sans text-sm md:text-base leading-relaxed mb-5"
-        >
+        <p key={i} className="text-white/60 font-sans text-[15px] md:text-base leading-[1.85] mb-6 tracking-[0.01em]">
           {section.text}
         </p>
       );
 
     case 'code':
-      return (
-        <div key={i} className="my-6 rounded-xl overflow-hidden border border-white/8">
-          {/* Terminal chrome */}
-          <div className="flex items-center gap-1.5 px-4 py-2.5 bg-white/[0.04] border-b border-white/8">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
-            {section.lang && (
-              <span className="ml-2 font-mono text-[9px] tracking-widest uppercase text-white/30">
-                {section.lang}
-              </span>
-            )}
-          </div>
-          <pre className="overflow-x-auto p-5 bg-[#0a0a0a] text-white/75 font-mono text-[12px] md:text-[13px] leading-relaxed">
-            <code>{section.text}</code>
-          </pre>
-        </div>
-      );
+      return <CodeBlock key={i} code={section.text ?? ''} lang={section.lang} />;
 
     case 'list':
       return (
-        <ul key={i} className="my-5 space-y-3 pl-0">
+        <ul key={i} className="my-6 space-y-3 pl-0">
           {section.items?.map((item, j) => (
-            <li key={j} className="flex gap-3 text-white/65 text-sm md:text-base leading-relaxed">
-              <span className="mt-[5px] shrink-0 w-1.5 h-1.5 rounded-full bg-electric-red" />
+            <li key={j} className="flex gap-4 text-white/60 text-[15px] md:text-base leading-[1.75]">
+              <span className="shrink-0 font-mono text-electric-red text-[10px] mt-[5px] select-none">▸</span>
               {item}
             </li>
           ))}
@@ -78,12 +59,16 @@ function renderSection(section: Section, i: number) {
 
     case 'callout':
       return (
-        <div
-          key={i}
-          className="my-6 px-5 py-4 rounded-xl border border-white/10 bg-white/[0.03] relative overflow-hidden"
-        >
-          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-electric-red rounded-l-xl" />
-          <p className="text-white/80 text-sm md:text-base leading-relaxed font-sans italic pl-2">
+        <div key={i} className="my-8 relative overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.025]">
+          {/* Left accent */}
+          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-electric-red" />
+          {/* Top label */}
+          <div className="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-white/[0.06]">
+            <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-electric-red font-bold">
+              NOTA
+            </span>
+          </div>
+          <p className="px-5 py-4 text-white/70 text-[14px] md:text-[15px] leading-[1.8] font-sans">
             {section.text}
           </p>
         </div>
@@ -94,7 +79,6 @@ function renderSection(section: Section, i: number) {
   }
 }
 
-/* ── Page ── */
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -102,6 +86,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const currentIndex = posts.findIndex((p) => p.slug === slug);
   const nextPost = posts[currentIndex + 1] ?? posts[0];
+
+  // Pre-count headings for numbered labels
+  let headingCount = 0;
 
   return (
     <>
@@ -112,53 +99,63 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {/* Back */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-white/40 hover:text-white transition-colors mb-10 group"
+            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-white/30 hover:text-white/70 transition-colors duration-200 mb-12 group"
           >
-            <ArrowLeft size={12} className="transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft size={11} className="transition-transform group-hover:-translate-x-0.5" />
             Blog
           </Link>
 
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex flex-wrap items-center gap-3 mb-5">
-              <span className={`font-mono text-[9px] tracking-[0.3em] uppercase px-2.5 py-1 rounded border ${post.categoryColor} font-bold`}>
+          {/* Article header */}
+          <header className="mb-10">
+
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6">
+              <span className={`font-mono text-[9px] tracking-[0.3em] uppercase px-2.5 py-1 rounded-md border ${post.categoryColor} font-bold`}>
                 {post.category}
               </span>
-              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/30 tracking-widest uppercase">
-                <Calendar size={10} /> {post.date}
+              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/25 tracking-[0.15em] uppercase">
+                <Calendar size={9} /> {post.date}
               </span>
-              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/30 tracking-widest uppercase">
-                <Clock size={10} /> {post.readTime}
+              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/25 tracking-[0.15em] uppercase">
+                <Clock size={9} /> {post.readTime} leitura
               </span>
             </div>
 
-            <h1 className="font-sans font-black text-3xl md:text-4xl tracking-tight text-white leading-snug mb-4">
+            {/* Title */}
+            <h1 className="font-sans font-black text-3xl md:text-[2.6rem] tracking-tight text-white leading-[1.15] mb-6">
               {post.title}
             </h1>
 
-            <p className="text-white/50 text-sm md:text-base leading-relaxed border-l-2 border-electric-red pl-4">
+            {/* Excerpt */}
+            <p className="text-white/45 text-[15px] md:text-base leading-[1.8] border-l-[2px] border-electric-red pl-5">
               {post.excerpt}
             </p>
-          </div>
+
+          </header>
 
           {/* Divider */}
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px flex-1 bg-white/8" />
-            <span className="font-mono text-[9px] tracking-widest uppercase text-white/20">MEZZOLD STUDIO</span>
-            <div className="h-px flex-1 bg-white/8" />
+          <div className="flex items-center gap-4 mb-12">
+            <div className="h-px flex-1 bg-white/[0.07]" />
+            <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-white/15">
+              MEZZOLD STUDIO
+            </span>
+            <div className="h-px flex-1 bg-white/[0.07]" />
           </div>
 
           {/* Article body */}
           <article>
-            {post.content.map((section, i) => renderSection(section, i))}
+            {post.content.map((section, i) => {
+              if (section.type === 'heading') headingCount++;
+              return renderSection(section, i, headingCount);
+            })}
           </article>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-white/8">
+          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-white/[0.07]">
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 rounded border border-white/10 text-white/40 bg-white/[0.03]"
+                className="font-mono text-[9px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-lg border border-white/[0.08] text-white/35 bg-white/[0.03]"
               >
                 {tag}
               </span>
@@ -166,20 +163,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Next post */}
-          <div className="mt-12 pt-8 border-t border-white/8">
-            <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-3">
+          <div className="mt-12 pt-8 border-t border-white/[0.07]">
+            <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 mb-4">
               Próximo artigo
             </p>
             <Link
               href={`/blog/${nextPost.slug}`}
-              className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-200 active:scale-[0.99]"
+              className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.16] transition-all duration-200"
             >
-              <span className="font-sans font-bold text-sm md:text-base text-white leading-snug">
+              <span className="font-sans font-bold text-sm md:text-[15px] text-white/80 group-hover:text-white leading-snug transition-colors duration-200">
                 {nextPost.title}
               </span>
               <ArrowRight
-                size={16}
-                className="shrink-0 mt-0.5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                size={15}
+                className="shrink-0 mt-0.5 text-white/25 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-white/70"
               />
             </Link>
           </div>
