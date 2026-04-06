@@ -34,6 +34,7 @@ export function FlippingCard({
         {
           "--height": typeof height === "number" ? `${height}px` : height,
           "--width": typeof width === "number" ? `${width}px` : width,
+          minHeight: "var(--height)",
         } as React.CSSProperties
       }
       onClick={handleClick}

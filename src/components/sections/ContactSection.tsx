@@ -215,8 +215,10 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
-        <Label className="text-white/70 text-xs font-mono tracking-widest uppercase">Nome</Label>
+        <Label htmlFor="contact-name" className="text-white/70 text-xs font-mono tracking-widest uppercase">Nome</Label>
         <input
+          id="contact-name"
+          name="name"
           type="text"
           autoComplete="name"
           value={name}
@@ -228,8 +230,10 @@ function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-white/70 text-xs font-mono tracking-widest uppercase">Email</Label>
+        <Label htmlFor="contact-email" className="text-white/70 text-xs font-mono tracking-widest uppercase">Email</Label>
         <input
+          id="contact-email"
+          name="email"
           type="email"
           autoComplete="email"
           value={email}
@@ -241,8 +245,10 @@ function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-white/70 text-xs font-mono tracking-widest uppercase">Telefone</Label>
+        <Label htmlFor="contact-phone" className="text-white/70 text-xs font-mono tracking-widest uppercase">Telefone</Label>
         <input
+          id="contact-phone"
+          name="phone"
           type="tel"
           autoComplete="tel"
           value={phone}
@@ -253,8 +259,10 @@ function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-white/70 text-xs font-mono tracking-widest uppercase">Mensagem</Label>
+        <Label htmlFor="contact-message" className="text-white/70 text-xs font-mono tracking-widest uppercase">Mensagem</Label>
         <textarea
+          id="contact-message"
+          name="message"
           rows={4}
           value={message}
           onChange={(e) => setMessage(e.target.value)}

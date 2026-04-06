@@ -25,7 +25,7 @@ export function AboutSection() {
 
           {/* Left: Headline */}
           <div className="md:w-1/2 mb-8 md:mb-0">
-            <h2 className="font-sans font-black tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05]">
+            <h2 className="font-sans font-black tracking-tighter text-[clamp(1.75rem,4.5vw,3.75rem)] text-white leading-[1.05]">
               Acadêmicos<br />
               transformando<br />
               <span className="text-white/35">código em impacto.</span>

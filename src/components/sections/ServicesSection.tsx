@@ -188,7 +188,7 @@ function MobileServiceCard({ data, isOpen, onToggle }: { data: ServiceCardData, 
         id={`service-details-${data.id}`}
         className={cn(
           "relative z-10 overflow-hidden transition-all duration-300 ease-in-out",
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <div className="p-6 pt-5 flex flex-col gap-6">
@@ -230,7 +230,7 @@ export function ServicesSection() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
       <div className="container mx-auto relative z-10">
         <div className="mb-10 md:mb-16">
-          <h3 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter uppercase leading-tight">As Especialidades<br/>Do Nosso Estúdio</h3>
+          <h3 className="font-sans font-black text-[clamp(1.75rem,4.5vw,3.75rem)] tracking-tighter uppercase leading-tight">As Especialidades<br/>Do Nosso Estúdio</h3>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
@@ -240,7 +240,7 @@ export function ServicesSection() {
               <div className="hidden sm:block">
                 <FlippingCard
                   width="100%"
-                  height={440}
+                  height="clamp(420px, 38vw, 520px)"
                   frontContent={<ServiceFront data={card} />}
                   backContent={<ServiceBack data={card} />}
                 />
