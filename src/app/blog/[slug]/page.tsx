@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Clock, Calendar } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CodeBlock } from '@/components/ui/code-block';
@@ -115,9 +115,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </span>
               <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/25 tracking-[0.15em] uppercase">
                 <Calendar size={9} /> {post.date}
-              </span>
-              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/25 tracking-[0.15em] uppercase">
-                <Clock size={9} /> {post.readTime} leitura
               </span>
             </div>
 

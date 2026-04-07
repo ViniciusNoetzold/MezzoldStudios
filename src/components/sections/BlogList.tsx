@@ -37,7 +37,7 @@ export function BlogList() {
             </h2>
 
             {/* Excerpt */}
-            <p className="text-white/45 text-sm md:text-base leading-[1.8] max-w-xl">
+            <p className="text-white/60 text-sm md:text-base leading-[1.8] max-w-xl">
               {featured.excerpt}
             </p>
 
@@ -55,7 +55,7 @@ export function BlogList() {
 
           {/* Index number */}
           <div className="shrink-0 self-start md:self-end select-none">
-            <span className="font-mono font-black text-[6rem] md:text-[9rem] leading-none text-white/[0.035] group-hover:text-electric-red/10 transition-colors duration-500">
+            <span className="font-mono font-black text-[6rem] md:text-[9rem] leading-none text-white/[0.07] group-hover:text-electric-red/[0.18] transition-colors duration-500">
               01
             </span>
           </div>
@@ -63,7 +63,7 @@ export function BlogList() {
       </Link>
 
       {/* ── Divider ── */}
-      <div className="h-px bg-white/[0.08]" />
+      <div className="h-px bg-white/[0.13]" />
 
       {/* ── Grid of remaining posts ── */}
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -72,10 +72,10 @@ export function BlogList() {
             key={post.slug}
             href={`/blog/${post.slug}`}
             className={[
-              'group relative flex flex-col py-9 md:py-11 border-b border-white/[0.08]',
+              'group relative flex flex-col py-9 md:py-11 border-b border-white/[0.13]',
               'hover:bg-white/[0.015] transition-colors duration-300',
               // Right border on left-column cells
-              i % 2 === 0 ? 'md:border-r md:border-white/[0.08] md:pr-10' : 'md:pl-10',
+              i % 2 === 0 ? 'md:border-r md:border-white/[0.13] md:pr-10' : 'md:pl-10',
             ].join(' ')}
           >
             {/* Top row: meta + index */}
@@ -89,7 +89,7 @@ export function BlogList() {
                   {post.readTime} leitura
                 </span>
               </div>
-              <span className="font-mono font-black text-[2.25rem] leading-none text-white/[0.05] group-hover:text-electric-red/12 transition-colors duration-500 select-none shrink-0">
+              <span className="font-mono font-black text-[2.25rem] leading-none text-white/[0.09] group-hover:text-electric-red/[0.22] transition-colors duration-500 select-none shrink-0">
                 {String(i + 2).padStart(2, '0')}
               </span>
             </div>
@@ -100,7 +100,7 @@ export function BlogList() {
             </h3>
 
             {/* Excerpt */}
-            <p className="text-white/35 text-sm leading-[1.75] line-clamp-2 mb-6 flex-1">
+            <p className="text-white/55 text-sm leading-[1.75] line-clamp-2 mb-6 flex-1">
               {post.excerpt}
             </p>
 

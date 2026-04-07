@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="pt-24 pb-8 relative z-10 bg-[#020202]">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+    <footer className="pt-10 pb-6 relative z-10 bg-[#020202]">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
         <div className="col-span-1 md:col-span-2">
           <h2 className="font-sans font-black text-2xl tracking-tighter mb-4">MEZZOLD STUDIO</h2>
           <p className="text-white/60 max-w-sm mb-6 text-sm">
