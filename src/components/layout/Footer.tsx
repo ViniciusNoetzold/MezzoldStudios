@@ -10,17 +10,12 @@ export function Footer() {
             Engenharia de soluções digitais de alta performance. Construímos plataformas inovadoras para marcas SaaS e digital-first.
           </p>
         </div>
-        <div>
-          <h3 className="font-mono tracking-widest text-xs mb-6 uppercase text-white/40">Estúdio</h3>
-          <ul className="space-y-4 text-sm">
+        <div className="col-span-1 md:col-span-2">
+          <h3 className="font-mono tracking-widest text-xs mb-6 uppercase text-white/40">Links</h3>
+          <ul className="grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
             <li><Link href="/cases" className="hover:text-white transition-colors">Portfólio</Link></li>
-            <li><Link href="/#services" className="hover:text-white transition-colors">Serviços</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-mono tracking-widest text-xs mb-6 uppercase text-white/40">Recursos</h3>
-          <ul className="space-y-4 text-sm">
             <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+            <li><Link href="/#contact" className="hover:text-white transition-colors">Contato</Link></li>
             <li><Link href="/docs" className="hover:text-white transition-colors">Documentação</Link></li>
             <li><Link href="/stack" className="hover:text-white transition-colors">Stack Tech</Link></li>
           </ul>

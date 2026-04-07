@@ -1,4 +1,16 @@
+import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
+
+export const metadata: Metadata = {
+  title: 'Mezzold Studio | Software House Premium',
+  description: 'Mezzold Studio constrói sites, Micro SaaS e dashboards ultra-rápidos com design inovador. Somos uma software house focada em marcas SaaS e empresas digital-first ambiciosas.',
+  alternates: { canonical: 'https://mezzoldstudio.com.br' },
+  openGraph: {
+    url: 'https://mezzoldstudio.com.br',
+    title: 'Mezzold Studio | Software House Premium',
+    description: 'Mezzold Studio constrói sites, Micro SaaS e dashboards ultra-rápidos com design inovador para marcas digitais ambiciosas.',
+  },
+};
 import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { AboutSection } from '@/components/sections/AboutSection';

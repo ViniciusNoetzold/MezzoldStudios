@@ -36,7 +36,8 @@
       "WebFetch(domain:skills.sh)",
       "Bash(xargs grep:*)",
       "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md c:/Users/noetz/Desktop/MezzoldV3Last/.claude/skills/security-best-practices/SKILL.md)",
-      "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md __TRACKED_VAR__/security-best-practices/SKILL.md)"
+      "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md __TRACKED_VAR__/security-best-practices/SKILL.md)",
+      "Bash(npm i:*)"
     ]
   }
 }

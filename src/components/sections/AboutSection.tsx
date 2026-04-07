@@ -35,7 +35,7 @@ export function AboutSection() {
           {/* Right: Body + Stats */}
           <div className="md:w-1/2 flex flex-col gap-8 md:gap-10">
             <p className="text-white/55 text-sm sm:text-base md:text-lg leading-relaxed">
-              Somos um time de acadêmicos de Ciência da Computação e entusiastas de tecnologia, dedicados a transformar conhecimento técnico em soluções digitais de alto impacto. Nossa missão é unir{' '}
+              O <span className="text-white font-semibold">Mezzold Studio</span> é formado por acadêmicos de Ciência da Computação e entusiastas de tecnologia, dedicados a transformar conhecimento técnico em soluções digitais de alto impacto. Nossa missão é unir{' '}
               <span className="text-white font-semibold">inovação</span>
               {' '}e{' '}
               <span className="text-white font-semibold">excelência técnica</span>
