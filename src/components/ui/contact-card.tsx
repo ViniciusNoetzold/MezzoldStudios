@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { LucideIcon, PlusIcon } from 'lucide-react';
 import { useAccent } from '../layout/AccentProvider';
@@ -7,6 +8,7 @@ type ContactInfoProps = React.ComponentProps<'div'> & {
 	icon: LucideIcon;
 	label: string;
 	value: string;
+	copyable?: boolean;
 };
 
 type ContactCardProps = React.ComponentProps<'div'> & {
@@ -99,37 +101,77 @@ export function ContactCard({
 }
 
 /** Compact row chip used on mobile */
-function MobileContactChip({ icon: Icon, label, value, className, ...props }: ContactInfoProps) {
+function MobileContactChip({ icon: Icon, label, value, copyable, className, ...props }: ContactInfoProps) {
+	const [copied, setCopied] = useState(false);
+
+	function handleCopy() {
+		if (!copyable) return;
+		navigator.clipboard.writeText(value).then(() => {
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2000);
+		});
+	}
+
 	return (
 		<div
 			className={cn(
 				'flex items-center gap-3 px-3 py-2.5 rounded-lg border border-white/8 bg-white/[0.03]',
+				copyable && 'cursor-pointer select-none active:scale-[0.98] transition-transform duration-100',
 				className,
 			)}
+			onClick={handleCopy}
 			{...props}
 		>
 			<div className="shrink-0 rounded-md bg-white/5 p-2 text-white/60">
 				<Icon className="h-4 w-4" />
 			</div>
-			<div className="min-w-0">
+			<div className="min-w-0 flex-1">
 				<p className="text-[10px] font-mono tracking-widest uppercase text-white/40">{label}</p>
 				<p className="text-white text-xs font-medium truncate">{value}</p>
 			</div>
+			{copyable && (
+				<span className="shrink-0 font-mono text-[9px] tracking-widest uppercase text-white/30 transition-colors duration-200">
+					{copied ? 'Copiado!' : 'Copiar'}
+				</span>
+			)}
 		</div>
 	);
 }
 
 /** Full card used on desktop */
-function ContactInfo({ icon: Icon, label, value, className, ...props }: ContactInfoProps) {
+function ContactInfo({ icon: Icon, label, value, copyable, className, ...props }: ContactInfoProps) {
+	const [copied, setCopied] = useState(false);
+
+	function handleCopy() {
+		if (!copyable) return;
+		navigator.clipboard.writeText(value).then(() => {
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2000);
+		});
+	}
+
 	return (
-		<div className={cn('flex items-center gap-3 py-3', className)} {...props}>
+		<div
+			className={cn(
+				'flex items-center gap-3 py-3',
+				copyable && 'cursor-pointer select-none group/copy',
+				className,
+			)}
+			onClick={handleCopy}
+			{...props}
+		>
 			<div className="bg-white/5 border border-white/10 rounded-lg p-3 text-white shrink-0">
 				<Icon className="h-5 w-5" />
 			</div>
-			<div className="min-w-0">
+			<div className="min-w-0 flex-1">
 				<p className="font-medium text-white">{label}</p>
 				<p className="text-white/60 text-xs truncate">{value}</p>
 			</div>
+			{copyable && (
+				<span className="shrink-0 font-mono text-[9px] tracking-widest uppercase text-white/25 group-hover/copy:text-white/50 transition-colors duration-200">
+					{copied ? 'Copiado!' : 'Copiar'}
+				</span>
+			)}
 		</div>
 	);
 }

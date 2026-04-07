@@ -81,7 +81,8 @@ export function ContactSection() {
             {
               icon: PhoneIcon,
               label: 'Telefone',
-              value: 'ainda não disponivel',
+              value: '+55 (54) 99713-1399',
+              copyable: true,
             },
             {
               icon: MapPinIcon,
