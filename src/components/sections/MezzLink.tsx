@@ -146,8 +146,11 @@ function Stat({ label, value, sub, icon: Icon }: {
     <motion.div
       whileHover={{ y: -1 }}
       transition={{ duration: 0.15 }}
-      className="relative border border-white/[0.07] rounded-xl p-4 overflow-hidden group hover:border-blue-500/25 transition-colors duration-300"
-      style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.008) 100%)' }}
+      className="relative border border-blue-400/[0.15] rounded-xl p-4 overflow-hidden group hover:border-blue-400/[0.35] hover:shadow-[0_4px_24px_rgba(0,0,0,0.5),0_0_16px_rgba(96,165,250,0.12)] shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300"
+      style={{
+        background: 'rgba(255, 255, 255, 0.04)',
+        backdropFilter: 'blur(16px) saturate(180%)',
+      }}
     >
       {/* Corner accent */}
       <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-blue-500/25 rounded-tl-xl pointer-events-none" />
@@ -232,8 +235,11 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.97 }}
         transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-        className="w-full max-w-md rounded-xl overflow-hidden border border-blue-500/20 shadow-[0_0_60px_rgba(59,130,246,0.10)]"
-        style={{ background: 'linear-gradient(145deg, #090e18, #060a12)' }}
+        className="w-full max-w-md rounded-xl overflow-hidden border border-blue-400/[0.15] shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06),0_0_60px_rgba(59,130,246,0.10)]"
+        style={{
+          background: 'rgba(255, 255, 255, 0.04)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+        }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -406,9 +412,10 @@ export function MezzLink() {
 
   return (
     <div
-      className="w-full font-mono select-none rounded-2xl border border-blue-500/[0.10] p-5 md:p-6"
+      className="w-full font-mono select-none rounded-2xl border border-white/[0.07] p-5 md:p-6"
       style={{
-        background: 'radial-gradient(ellipse at 15% 0%, rgba(59,130,246,0.06) 0%, #060810 55%)',
+        background: 'rgba(10, 10, 10, 0.75)',
+        backdropFilter: 'blur(24px) saturate(160%)',
         boxShadow: '0 0 60px rgba(59,130,246,0.04), inset 0 1px 0 rgba(255,255,255,0.04)',
       }}
     >
@@ -456,13 +463,14 @@ export function MezzLink() {
             onKeyDown={e => e.key === 'Enter' && valid && addLink()}
             placeholder="cole sua URL longa aqui..."
             className={[
-              'w-full h-11 pl-4 pr-10 rounded-xl border bg-white/[0.03] text-white/85 text-sm placeholder:text-white/18 outline-none transition-all duration-200',
+              'w-full h-11 pl-4 pr-10 rounded-xl border bg-white/[0.04] text-white/85 text-sm placeholder:text-white/18 outline-none transition-all duration-200',
               input.length > 0 && valid
                 ? 'border-blue-500/50 shadow-[0_0_16px_rgba(59,130,246,0.12)]'
                 : input.length > 0
                 ? 'border-electric-red/30'
-                : 'border-white/[0.08] focus:border-blue-500/30 focus:shadow-[0_0_12px_rgba(59,130,246,0.07)]',
+                : 'border-white/[0.10] focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.15)]',
             ].join(' ')}
+            style={{ backdropFilter: 'blur(8px)' }}
           />
           {input.length > 0 && (
             <div className={`absolute right-3.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full transition-colors duration-200 ${valid ? 'bg-blue-400' : 'bg-electric-red/60'}`} />
@@ -487,7 +495,7 @@ export function MezzLink() {
         <div className="border border-white/[0.07] rounded-xl overflow-hidden">
           {/* Table header */}
           <div className="hidden md:grid grid-cols-[120px_1fr_72px_60px_52px_80px] gap-3 px-4 py-2.5 border-b border-white/[0.06]"
-            style={{ background: 'rgba(255,255,255,0.018)' }}>
+            style={{ background: 'rgba(96, 165, 250, 0.06)' }}>
             {['SLUG', 'URL ORIGINAL', 'CLIQUES', 'TREND', 'DATA', ''].map(h => (
               <span key={h} className="font-mono text-[7px] tracking-[0.28em] uppercase text-white/20 last:text-right">{h}</span>
             ))}
@@ -503,8 +511,8 @@ export function MezzLink() {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.18 }}
                 className={[
-                  'group border-b border-white/[0.04] last:border-0 px-4 py-3 hover:bg-blue-500/[0.04] transition-colors duration-150',
-                  rowIdx % 2 !== 0 ? 'bg-white/[0.012]' : '',
+                  'group border-b border-white/[0.04] last:border-0 border-l-2 border-l-transparent px-4 py-3 hover:bg-blue-500/[0.08] hover:border-l-blue-500 transition-all duration-150',
+                  rowIdx % 2 !== 0 ? 'bg-white/[0.02]' : '',
                 ].join(' ')}
               >
                 {/* Mobile */}

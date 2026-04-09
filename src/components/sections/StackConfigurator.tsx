@@ -216,16 +216,18 @@ function OptionCard({ opt, selected, onSelect, blue = false }: {
   return (
     <motion.button
       whileTap={{ scale: 0.97 }}
+      whileHover={!selected ? {
+        backgroundColor: 'rgba(96, 165, 250, 0.07)',
+        borderColor: 'rgba(96, 165, 250, 0.30)',
+        boxShadow: '0 0 20px rgba(59, 130, 246, 0.12)',
+      } : {}}
       onClick={onSelect}
-      className={[
-        'relative flex items-start gap-3 p-3.5 rounded-xl border text-left w-full transition-all duration-200',
-        selected
-          ? 'bg-blue-400/[0.07]'
-          : 'bg-white/[0.018] hover:bg-white/[0.03]',
-      ].join(' ')}
+      className="relative flex items-start gap-3 p-3.5 rounded-xl border text-left w-full"
       style={{
-        borderColor: selected ? accent + '88' : 'rgba(255,255,255,0.07)',
-        boxShadow: selected ? `0 0 18px ${accent}18` : 'none',
+        backgroundColor: selected ? 'rgba(96, 165, 250, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(12px)',
+        borderColor: selected ? 'rgba(96, 165, 250, 0.60)' : 'rgba(255,255,255,0.08)',
+        boxShadow: selected ? '0 0 24px rgba(59,130,246,0.20), inset 0 1px 0 rgba(255,255,255,0.08)' : 'none',
       }}
     >
       {/* Corner */}
@@ -279,7 +281,10 @@ function Sidebar({ sel, step }: { sel: Selections; step: number }) {
   ];
 
   return (
-    <div className="hidden md:flex flex-col w-48 shrink-0 border-l border-white/[0.06] bg-[#020406]">
+    <div
+      className="hidden md:flex flex-col w-48 shrink-0 border-l border-white/[0.07]"
+      style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(16px)' }}
+    >
       {/* Terminal header */}
       <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.05]">
         <div className="w-1.5 h-1.5 rounded-full bg-red-500/55" />
@@ -305,7 +310,8 @@ function Sidebar({ sel, step }: { sel: Selections; step: number }) {
                       key={id}
                       initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -6 }}
                       transition={{ duration: 0.18 }}
-                      className="flex items-center gap-1.5 mb-1"
+                      className="flex items-center gap-1.5 mb-1 px-1.5 py-0.5 rounded"
+                      style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.30)' }}
                     >
                       <span className="font-mono text-[6.5px] font-bold px-1 py-0.5 rounded"
                         style={{ color: td?.color ?? '#fff', background: td?.bg ?? 'rgba(255,255,255,0.07)' }}>
@@ -378,10 +384,17 @@ export function StackConfigurator() {
   ].filter(Boolean) as string[];
 
   return (
-    <div className="w-full flex flex-col border border-white/[0.08] rounded-xl overflow-hidden" style={{ background: '#040608' }}>
+    <div
+      className="w-full flex flex-col border border-white/[0.07] rounded-xl overflow-hidden"
+      style={{
+        background: 'rgba(10, 10, 10, 0.80)',
+        backdropFilter: 'blur(24px) saturate(160%)',
+      }}
+    >
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/[0.06]" style={{ background: 'rgba(96,165,250,0.025)' }}>
+      <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/[0.07]"
+        style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div>
           <span className="font-mono font-bold text-[10px] tracking-[0.3em] uppercase text-white/70">STACK CONFIGURATOR</span>
           <p className="font-mono text-[7px] tracking-[0.2em] text-white/20 uppercase mt-0.5">Mezzold Studio · Tech Advisor</p>
@@ -401,9 +414,10 @@ export function StackConfigurator() {
           {step < 5 && (
             <div className="flex items-center gap-1 mb-5">
               {[0,1,2,3,4].map(i => (
-                <div key={i} className="flex-1 h-0.5 rounded-full overflow-hidden bg-white/[0.06]">
+                <div key={i} className="flex-1 h-0.5 rounded-full overflow-hidden bg-white/[0.08]">
                   <motion.div
-                    className="h-full rounded-full bg-blue-400"
+                    className="h-full rounded-full"
+                    style={{ background: 'linear-gradient(90deg, #3b82f6, #10b981)', boxShadow: '0 0 8px rgba(59,130,246,0.5)' }}
                     initial={{ width: 0 }}
                     animate={{ width: i <= step ? '100%' : '0%' }}
                     transition={{ duration: 0.35, delay: i === step ? 0.1 : 0 }}
@@ -478,8 +492,12 @@ export function StackConfigurator() {
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.35, delay: 0.05 }}
-                    className={`relative border rounded-xl p-5 mb-4 overflow-hidden ${tier.border} ${tier.shadow}`}
-                    style={{ background: `linear-gradient(135deg, ${score.tier === 'Enterprise' ? 'rgba(255,77,110,0.04)' : score.tier === 'Pro' ? 'rgba(96,165,250,0.04)' : 'rgba(52,211,153,0.04)'}, rgba(0,0,0,0))` }}
+                    className={`relative border rounded-xl p-5 mb-4 overflow-hidden ${tier.border}`}
+                    style={{
+                      background: score.tier === 'Enterprise' ? 'rgba(255,77,110,0.06)' : score.tier === 'Pro' ? 'rgba(96,165,250,0.06)' : 'rgba(16,185,129,0.06)',
+                      backdropFilter: 'blur(20px)',
+                      boxShadow: score.tier === 'Enterprise' ? '0 0 40px rgba(255,77,110,0.10)' : score.tier === 'Pro' ? '0 0 40px rgba(59,130,246,0.10)' : '0 0 40px rgba(16,185,129,0.10)',
+                    }}
                   >
                     {/* Corner */}
                     <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 rounded-tl-xl pointer-events-none" style={{ borderColor: tier.color + '80' }} />

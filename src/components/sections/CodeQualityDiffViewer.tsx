@@ -215,12 +215,21 @@ function CodePanel({ lines, side, revealKey }: {
     <div
       className="flex-1 flex flex-col rounded-xl overflow-hidden border min-w-0"
       style={{
-        borderColor: accentColor + '30',
-        background: isBefore ? 'rgba(239,68,68,0.025)' : 'rgba(74,222,128,0.025)',
+        borderColor: isBefore ? 'rgba(239,68,68,0.20)' : 'rgba(16,185,129,0.20)',
+        background: isBefore ? 'rgba(239,68,68,0.05)' : 'rgba(16,185,129,0.05)',
+        backdropFilter: 'blur(16px) saturate(140%)',
+        boxShadow: isBefore
+          ? 'inset 0 1px 0 rgba(239,68,68,0.08), 0 4px 24px rgba(0,0,0,0.5)'
+          : 'inset 0 1px 0 rgba(16,185,129,0.08), 0 4px 24px rgba(0,0,0,0.5)',
       }}
     >
       {/* Panel header */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b" style={{ borderColor: accentColor + '20', background: accentColor + '08' }}>
+      <div className="flex items-center gap-2 px-3 py-2 border-b"
+        style={{
+          borderColor: isBefore ? 'rgba(239,68,68,0.15)' : 'rgba(16,185,129,0.15)',
+          background:   isBefore ? 'rgba(239,68,68,0.08)' : 'rgba(16,185,129,0.08)',
+        }}
+      >
         <span className="font-mono font-bold text-[8px] tracking-[0.38em]" style={{ color: accentColor }}>{labelText}</span>
         <div className="w-px h-3 bg-white/10" />
         <span className="font-mono text-[7px] tracking-[0.15em] text-white/25">user.py</span>
@@ -306,10 +315,20 @@ export function CodeQualityDiffViewer() {
   }
 
   return (
-    <div className="w-full flex flex-col rounded-xl overflow-hidden border border-white/[0.07]" style={{ background: '#040608', fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}>
+    <div
+      className="w-full flex flex-col rounded-xl overflow-hidden border border-white/[0.07]"
+      style={{
+        background: 'rgba(8, 8, 8, 0.82)',
+        backdropFilter: 'blur(24px) saturate(150%)',
+        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+      }}
+    >
 
       {/* ── Tab bar ── */}
-      <div className="flex items-center gap-0 border-b border-white/[0.07] overflow-x-auto" style={{ background: 'rgba(0,0,0,0.4)' }}>
+      <div
+        className="flex items-center gap-0 border-b border-white/[0.08] overflow-x-auto"
+        style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}
+      >
         {SCENARIOS.map((s, i) => (
           <button
             key={s.id}
@@ -317,8 +336,8 @@ export function CodeQualityDiffViewer() {
             className={[
               'flex items-center gap-1.5 px-4 py-2.5 font-mono text-[8px] tracking-[0.18em] uppercase whitespace-nowrap border-b-2 transition-all duration-150',
               i === activeIdx
-                ? 'border-blue-400 text-blue-400 bg-blue-400/[0.06]'
-                : 'border-transparent text-white/28 hover:text-white/52 hover:bg-white/[0.025]',
+                ? 'border-blue-400 text-blue-400 bg-blue-400/[0.12]'
+                : 'border-transparent text-white/28 hover:text-white/52 hover:bg-white/[0.05]',
             ].join(' ')}
           >
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${i === activeIdx ? 'bg-blue-400' : 'bg-white/15'}`} />
@@ -377,7 +396,7 @@ export function CodeQualityDiffViewer() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.9, type: 'spring', stiffness: 300, damping: 20 }}
                   className="font-mono font-bold text-[7px] tracking-[0.2em] uppercase px-2.5 py-1.5 rounded-lg border text-center"
-                  style={{ color: '#4ade80', background: 'rgba(74,222,128,0.1)', borderColor: 'rgba(74,222,128,0.3)', boxShadow: '0 0 16px rgba(74,222,128,0.15)', minWidth: 72 }}
+                  style={{ color: '#4ade80', background: 'rgba(16,185,129,0.10)', backdropFilter: 'blur(12px)', borderColor: 'rgba(16,185,129,0.35)', boxShadow: '0 0 20px rgba(16,185,129,0.25)', minWidth: 72 }}
                 >
                   {sc.badge}
                 </motion.div>
@@ -405,21 +424,30 @@ export function CodeQualityDiffViewer() {
         >
           <span
             className="font-mono font-bold text-[8px] tracking-[0.25em] uppercase px-3 py-1.5 rounded-lg border"
-            style={{ color: '#4ade80', background: 'rgba(74,222,128,0.1)', borderColor: 'rgba(74,222,128,0.3)' }}
+            style={{ color: '#4ade80', background: 'rgba(16,185,129,0.10)', backdropFilter: 'blur(12px)', borderColor: 'rgba(16,185,129,0.35)', boxShadow: '0 0 20px rgba(16,185,129,0.25)' }}
           >
             {sc.badge}
           </span>
         </motion.div>
 
         {/* ── Metrics ── */}
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-1 bg-white/[0.02] border border-white/[0.05] rounded-lg p-3">
+        <div
+          className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-1 border border-white/[0.07] rounded-lg p-3"
+          style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}
+        >
           {sc.metrics.map(m => (
             <MetricRow key={m.label} metric={m} revealKey={revealKey} />
           ))}
         </div>
 
         {/* ── Explanation accordion ── */}
-        <div className="mt-3 border border-white/[0.06] rounded-lg overflow-hidden">
+        <div
+          className="mt-3 rounded-lg overflow-hidden"
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: expanded ? '1px solid rgba(96,165,250,0.20)' : '1px solid rgba(255,255,255,0.07)',
+          }}
+        >
           <button
             onClick={() => setExpanded(e => !e)}
             className="w-full flex items-center justify-between px-4 py-3 font-mono text-[8px] tracking-[0.3em] uppercase text-white/35 hover:text-white/60 hover:bg-white/[0.02] transition-all duration-150"
