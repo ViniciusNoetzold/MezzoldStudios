@@ -1,6 +1,7 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect, type RefObject } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { useFocusTrap }      from '@/hooks/useFocusTrap';
@@ -144,6 +145,79 @@ const MODAL_WIDTH: Record<'md' | 'xl', string> = {
   md: 'md:max-w-2xl',
   xl: 'md:max-w-4xl',
 };
+
+// ── Portal modal — rendered at document.body to escape stacking contexts ────────
+
+function CaseModal({
+  active,
+  closeModal,
+  modalRef,
+}: {
+  active: Case | null;
+  closeModal: () => void;
+  modalRef: RefObject<HTMLDivElement | null>;
+}) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
+  return createPortal(
+    <AnimatePresence>
+      {active && (
+        <motion.div
+          key="case-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={closeModal}
+          aria-hidden="true"
+          className="fixed inset-0 z-[500] bg-black/82 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+        >
+          <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={active.title}
+            initial={{ opacity: 0, y: 28, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0,  scale: 1    }}
+            exit={{    opacity: 0, y: 14, scale: 0.97  }}
+            transition={{ type: 'spring', stiffness: 310, damping: 30 }}
+            onClick={e => e.stopPropagation()}
+            className={[
+              'flex flex-col w-full max-h-[88vh] rounded-2xl overflow-hidden',
+              MODAL_WIDTH[active.modalSize],
+            ].join(' ')}
+          >
+            {/* Non-scrolling header — X button always reachable */}
+            <div className="shrink-0 flex justify-end px-3 pt-3 pb-1">
+              <button
+                onClick={closeModal}
+                aria-label="Fechar demonstração"
+                className="w-9 h-9 rounded-lg border border-white/10 bg-black/85 backdrop-blur-md flex items-center justify-center text-white/35 hover:text-white hover:border-white/30 transition-all duration-200 shadow-lg"
+              >
+                <X size={13} />
+              </button>
+            </div>
+
+            {/* Scrollable demo content */}
+            <div className="overflow-y-auto flex-1">
+              {active.id === 'performance'        && <PerformanceBenchmarkSimulator />}
+              {active.id === 'monitoring'         && <LiveMonitoringDashboard />}
+              {active.id === 'ui-playground'      && <UIComponentPlayground />}
+              {active.id === 'mezzlink'           && <MezzLink />}
+              {active.id === 'iot-telemetry'      && <IoTTelemetryDashboard />}
+              {active.id === 'automation-flow'    && <AutomationFlowVisualizer />}
+              {active.id === 'stack-configurator' && <StackConfigurator />}
+              {active.id === 'code-quality'       && <CodeQualityDiffViewer />}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
+  );
+}
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
@@ -295,55 +369,8 @@ export function CasesGrid() {
         )}
       </AnimatePresence>
 
-      {/* ── Modal ── */}
-      <AnimatePresence>
-        {active && (
-          <>
-            <motion.div
-              key="backdrop"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.22 }}
-              onClick={closeModal}
-              aria-hidden="true"
-              className="fixed inset-0 z-[200] bg-black/82 backdrop-blur-sm"
-            />
-            <motion.div
-              key="modal"
-              ref={modalRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label={active.title}
-              initial={{ opacity: 0, y: 36, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0,  scale: 1    }}
-              exit={{    opacity: 0, y: 18, scale: 0.97  }}
-              transition={{ type: 'spring', stiffness: 310, damping: 30 }}
-              className={[
-                'fixed inset-x-3 top-[4%] bottom-[4%] z-[201] overflow-y-auto',
-                'md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full',
-                MODAL_WIDTH[active.modalSize],
-              ].join(' ')}
-            >
-              <div className="sticky top-0 z-10 flex justify-end mb-3">
-                <button
-                  onClick={closeModal}
-                  aria-label="Fechar demonstração"
-                  className="w-9 h-9 rounded-lg border border-white/10 bg-black/85 backdrop-blur-md flex items-center justify-center text-white/35 hover:text-white hover:border-white/25 transition-all duration-200"
-                >
-                  <X size={13} />
-                </button>
-              </div>
-              {active.id === 'performance'       && <PerformanceBenchmarkSimulator />}
-              {active.id === 'monitoring'        && <LiveMonitoringDashboard />}
-              {active.id === 'ui-playground'     && <UIComponentPlayground />}
-              {active.id === 'mezzlink'          && <MezzLink />}
-              {active.id === 'iot-telemetry'     && <IoTTelemetryDashboard />}
-              {active.id === 'automation-flow'   && <AutomationFlowVisualizer />}
-              {active.id === 'stack-configurator' && <StackConfigurator />}
-              {active.id === 'code-quality'      && <CodeQualityDiffViewer />}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {/* ── Modal portal (renders at document.body — above header) ── */}
+      <CaseModal active={active} closeModal={closeModal} modalRef={modalRef} />
     </>
   );
 }

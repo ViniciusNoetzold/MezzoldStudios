@@ -72,7 +72,7 @@ export default function CasesPage() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
-                  href="/contact"
+                  href="/#contact"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-electric-red/40 bg-electric-red/[0.08] text-electric-red font-mono text-[9px] tracking-[0.35em] uppercase hover:bg-electric-red/15 hover:border-electric-red/65 hover:shadow-[0_0_28px_rgba(255,0,51,0.18)] transition-all duration-250 active:scale-[0.97]"
                 >
                   SOLICITAR PROPOSTA →
