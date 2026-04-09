@@ -602,10 +602,10 @@ export function UIComponentPlayground() {
         )}
       </div>
 
-      {/* ── Preview panel ── */}
+      {/* ── Preview panel — fixed height keeps all tabs the same size ── */}
       <div
         className="flex-1 min-w-0 overflow-y-auto"
-        style={{ maxHeight: '540px' }}
+        style={{ height: '540px' }}
       >
         <div
           className="min-h-full p-4 md:p-5"
