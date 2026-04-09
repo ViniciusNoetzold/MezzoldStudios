@@ -81,8 +81,7 @@ const defaultSocialLinks = [
 ]; // End social links
 
 const defaultLegalLinks = [
-  { name: "Termos de Uso", href: "#" },
-  { name: "Política de Privacidade", href: "#" },
+  { name: "Política de Privacidade", href: "/privacidade" },
 ];
 
 export const Footer7 = ({
