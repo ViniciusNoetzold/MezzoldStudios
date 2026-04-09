@@ -1,27 +1,42 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { CasesGrid } from '@/components/sections/CasesGrid';
 
 export const metadata = {
-  title: "Cases | Mezzold Studio",
+  title: 'Cases | Mezzold Studio',
+  description: 'Estudos de caso e demonstrações interativas dos projetos e especialidades da Mezzold Studio.',
 };
 
 export default function CasesPage() {
   return (
     <>
       <Header />
-      <main className="flex-1 pt-32 pb-24 px-6 relative z-10">
-        <div className="container mx-auto flex flex-col">
-          <h1 className="font-sans font-black text-5xl md:text-7xl tracking-tighter mb-4 text-white">PORTFÓLIO<span className="text-cyan">.</span></h1>
-          <p className="text-white/60 mb-12 font-mono tracking-widest text-[10px] md:text-xs uppercase">ESTUDOS DE CASO E DESENVOLVIMENTOS RECENTES</p>
+      <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 relative z-10">
+        <div className="container mx-auto max-w-5xl">
 
-          <GlassCard className="flex flex-col items-center justify-center py-24 px-8 text-center">
-            <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30 mb-6">[ STATUS ]</div>
-            <h2 className="font-sans font-black text-3xl md:text-5xl tracking-tighter text-white mb-4">Em produção</h2>
-            <p className="text-white/40 font-mono text-xs max-w-sm">
-              Nossos cases estão sendo preparados com cuidado. Em breve, exemplos reais do nosso trabalho estarão disponíveis aqui.
+          {/* Page header */}
+          <div className="mb-14">
+            <div className="flex items-center gap-3 mb-5">
+              <p className="font-mono text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-electric-red">
+                [ MEZZOLD STUDIO ]
+              </p>
+              <div className="h-px flex-1 bg-white/[0.06]" />
+              <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/15">
+                ESTUDOS DE CASO
+              </p>
+            </div>
+
+            <h1 className="font-sans font-black text-[clamp(3.5rem,11vw,6.5rem)] leading-none tracking-tighter text-white mb-5">
+              PORTFÓLIO<span className="text-electric-red">.</span>
+            </h1>
+
+            <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/30 max-w-md">
+              Demonstrações interativas e estudos de caso das nossas especialidades
             </p>
-          </GlassCard>
+          </div>
+
+          <CasesGrid />
+
         </div>
       </main>
       <Footer />
