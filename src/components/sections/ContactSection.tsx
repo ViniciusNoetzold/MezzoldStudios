@@ -88,7 +88,7 @@ export function ContactSection() {
             {
               icon: MapPinIcon,
               label: 'Endereço',
-              value: 'Sarandi, Rio Grande do Sul',
+              value: 'Sarandi, Rio Grande do Sul - 99560-000',
             },
           ]}
         >
