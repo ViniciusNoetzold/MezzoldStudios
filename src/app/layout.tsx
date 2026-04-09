@@ -59,6 +59,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CookieConsent } from "@/components/ui/cookie-consent";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -72,6 +74,7 @@ export default function RootLayout({
     >
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-[100dvh] flex flex-col font-sans`}>
         <PageTransitionLoader />
+        <CookieConsent />
         {children}
         <Analytics />
       </body>
