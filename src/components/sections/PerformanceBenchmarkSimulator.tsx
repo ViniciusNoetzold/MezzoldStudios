@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 
 // ── Deterministic score generation from URL domain ────────────────────────────
 
@@ -413,15 +414,9 @@ export function PerformanceBenchmarkSimulator() {
                   <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-white/12">
                     Powered by Mezzold Engine™
                   </span>
-                  <a
-                    href="/#contact"
-                    className="group font-mono text-[9px] tracking-[0.15em] uppercase text-emerald/50 hover:text-emerald transition-colors duration-200 flex items-center gap-1.5"
-                  >
-                    Sua plataforma poderia ter isso
-                    <span className="group-hover:translate-x-0.5 transition-transform duration-200 inline-block">
-                      → Falar com a Mezzold
-                    </span>
-                  </a>
+                  <Link href="/#contact" className="inline-flex h-12 items-center justify-center rounded-xl bg-electric-red px-6 font-mono text-[10px] font-bold uppercase tracking-widest text-[#050505] transition-all hover:bg-electric-red/90 hover:shadow-[0_0_20px_rgba(255,0,51,0.4)]">
+                    SOLICITAR PROPOSTA
+                  </Link>
                 </div>
               </motion.div>
             )}

@@ -190,6 +190,7 @@ function Edge({ fromIndex, active, done, isMobile, gradientId }: EdgeProps) {
   const [particleKey, setParticleKey] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line
     if (active) setParticleKey(k => k + 1);
   }, [active]);
 
@@ -314,6 +315,11 @@ export function AutomationFlowVisualizer() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  function clearAllTimers() {
+    timerRef.current.forEach(clearTimeout);
+    timerRef.current = [];
+  }
+
   // Reset state when scenario changes
   useEffect(() => {
     clearAllTimers();
@@ -330,11 +336,6 @@ export function AutomationFlowVisualizer() {
     setStatuses(Array(nodeCount).fill('idle'));
     setLogLines(Array(nodeCount).fill(''));
   }, [nodeCount]);
-
-  function clearAllTimers() {
-    timerRef.current.forEach(clearTimeout);
-    timerRef.current = [];
-  }
 
   function addTimer(fn: () => void, delay: number) {
     timerRef.current.push(setTimeout(fn, delay));

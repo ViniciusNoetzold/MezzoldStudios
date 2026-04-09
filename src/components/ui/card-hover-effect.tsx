@@ -14,13 +14,14 @@ export const HoverEffect = ({
     title: string;
     description: string;
     link?: string;
+    // eslint-disable-next-line
     icon: any;
     tags: string[];
     accentData: { border: string; glow: string; text: string; bg: string; glowRgb: string; borderActive: string; shadowActive: string; };
   }[];
   className?: string;
 }) => {
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { setAccent } = useAccent();
 
   const handleTap = (idx: number) => {

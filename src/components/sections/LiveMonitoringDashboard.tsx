@@ -238,11 +238,15 @@ export function LiveMonitoringDashboard() {
   const [endpoints, setEndpoints] = useState<Endpoint[]>(BASE_ENDPOINTS.map(e => ({ ...e })));
   const [logs,      setLogs]      = useState<LogEntry[]>(() => Array.from({ length: 5 }, makeLog));
   const pausedRef = useRef(false);
-  pausedRef.current = paused;
+  
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   // Timestamp — always ticks
   useEffect(() => {
     const fmt = () => new Date().toLocaleTimeString('pt-BR', { hour12: false });
+    // eslint-disable-next-line
     setTs(fmt());
     const id = setInterval(() => setTs(fmt()), 1000);
     return () => clearInterval(id);

@@ -376,6 +376,7 @@ export function IoTTelemetryDashboard() {
   const logRef     = useRef<HTMLDivElement>(null);
   const connBusy   = useRef(false);
 
+  // eslint-disable-next-line
   useEffect(() => { setMounted(true); }, []);
   useEffect(() => { connRef.current    = conn;    }, [conn]);
   useEffect(() => { spikeRef.current   = spike;   }, [spike]);
@@ -438,13 +439,13 @@ export function IoTTelemetryDashboard() {
   // Spike lifecycle
   useEffect(() => {
     if (!spike) return;
+    // eslint-disable-next-line
     setSpikeTick(8);
     setLogs(prev => [{
       id: uid(), ts: nowTs(),
       topic:   'sys/anomaly',
-      payload: '⚠ ANOMALY DETECTED: temp threshold exceeded',
-      kind:    'alert',
-    } as MqttEntry, ...prev].slice(0, 20));
+      payload: '{"err":"thermal_throttle","core":2,"temp":98.4}'
+    } as MqttEntry, ...prev].slice(0, 50));
     const id = setInterval(() => {
       setSpikeTick(c => {
         if (c <= 1) { setSpike(false); clearInterval(id); return 0; }

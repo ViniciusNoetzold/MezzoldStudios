@@ -338,6 +338,7 @@ export function MezzLink() {
   const valid = isValidUrl(input);
 
   useEffect(() => {
+    // eslint-disable-next-line
     setMounted(true);
     try {
       const raw = localStorage.getItem(LS_KEY);

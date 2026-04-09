@@ -1,6 +1,7 @@
 import { Header }    from '@/components/layout/Header';
 import { Footer }    from '@/components/layout/Footer';
 import { CasesGrid } from '@/components/sections/CasesGrid';
+import Link from 'next/link';
 
 export const metadata = {
   title:       'Cases | Mezzold Studio',
@@ -71,12 +72,9 @@ export default function CasesPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href="/#contact"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-electric-red/40 bg-electric-red/[0.08] text-electric-red font-mono text-[9px] tracking-[0.35em] uppercase hover:bg-electric-red/15 hover:border-electric-red/65 hover:shadow-[0_0_28px_rgba(255,0,51,0.18)] transition-all duration-250 active:scale-[0.97]"
-                >
-                  SOLICITAR PROPOSTA →
-                </a>
+                <Link href="/#contact" className="inline-flex items-center justify-center h-12 px-6 rounded-full font-mono text-[9px] tracking-[0.25em] uppercase text-[#050505] bg-white hover:bg-white/90 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300">
+                  Solicitar Proposta
+                </Link>
                 <a
                   href="/stack"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/[0.08] text-white/35 font-mono text-[9px] tracking-[0.3em] uppercase hover:text-white/60 hover:border-white/18 transition-all duration-200"

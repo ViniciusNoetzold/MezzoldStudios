@@ -10,11 +10,11 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed by Three.js/React
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com", // unsafe-eval needed by Three.js/React
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://images.unsplash.com",
       "font-src 'self'",
-      "connect-src 'self' https://api.resend.com",
+      "connect-src 'self' https://api.resend.com https://vitals.vercel-insights.com",
       "frame-ancestors 'none'",
     ].join('; '),
   },

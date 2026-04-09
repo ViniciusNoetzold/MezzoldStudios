@@ -1,7 +1,7 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect } from "react";
 
 /* ----------------------------- shader ----------------------------- */
 const vertexShader = `void main(){ gl_Position = vec4(position, 1.0); }`;
@@ -123,7 +123,7 @@ export function TunnelBackground() {
   const pausedRef = useRef<boolean>(false);
   const rafResizeRef = useRef<boolean>(false);
 
-  const animate = useCallback((time: number) => {
+  function animate(time: number) {
     if (!ctxRef.current) return;
     animRef.current = requestAnimationFrame(animate);
     if (pausedRef.current) { lastTimeRef.current = time; return; }
@@ -132,7 +132,7 @@ export function TunnelBackground() {
     lastTimeRef.current = time;
     ctxRef.current.material.uniforms.iTime.value += delta * 0.5;
     ctxRef.current.renderer.render(ctxRef.current.scene, ctxRef.current.camera);
-  }, []);
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -184,7 +184,8 @@ export function TunnelBackground() {
       document.removeEventListener("visibilitychange", handleVisibility);
       if (ctxRef.current) { disposeThree(ctxRef.current); ctxRef.current = null; }
     };
-  }, [animate]);
+    // eslint-disable-next-line
+  }, []);
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 }

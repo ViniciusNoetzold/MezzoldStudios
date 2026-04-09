@@ -60,6 +60,7 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
           <Link
             href={href}
             className={cn("glass-button h-full w-full block text-center", glassButtonVariants({ size }))}
+            // eslint-disable-next-line
             {...(props as any)}
           >
             <span

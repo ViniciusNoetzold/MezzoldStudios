@@ -76,7 +76,7 @@ export function SpecialtiesSection() {
                     
                     <div className="flex flex-col gap-2">
                       <span className="font-mono text-[10px] uppercase text-white/40 tracking-widest">
-                        // {item.topic}
+                        {"// "} {item.topic}
                       </span>
                       <h4 className="text-white font-bold text-lg md:text-xl lg:text-2xl tracking-tight leading-snug">
                         {item.title}

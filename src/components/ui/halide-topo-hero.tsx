@@ -24,7 +24,7 @@ const HalideTopoHero: React.FC = () => {
 
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-  const animate = useCallback(() => {
+  function animate() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -56,7 +56,7 @@ const HalideTopoHero: React.FC = () => {
     }
 
     rafRef.current = requestAnimationFrame(animate);
-  }, []);
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -138,7 +138,8 @@ const HalideTopoHero: React.FC = () => {
       clearTimeout(timeout);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [animate]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div

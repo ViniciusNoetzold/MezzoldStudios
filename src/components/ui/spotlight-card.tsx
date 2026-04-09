@@ -38,7 +38,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
 
   useEffect(() => {
     const syncPointer = (e: PointerEvent) => {
-      const { clientX: x, clientY: y } = e;
+      const { clientX: x, clientY: y } = e as unknown as { clientX: number, clientY: number };
       
       if (cardRef.current) {
         cardRef.current.style.setProperty('--x', x.toFixed(2));
@@ -63,7 +63,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
   };
 
   const getInlineStyles = () => {
-    const baseStyles: any = {
+    const baseStyles: React.CSSProperties & Record<string, string | number> = {
       '--base': base,
       '--spread': spread,
       '--radius': '14',
