@@ -9,7 +9,8 @@ import { MezzLink } from './MezzLink';
 import { IoTTelemetryDashboard } from './IoTTelemetryDashboard';
 import { AutomationFlowVisualizer } from './AutomationFlowVisualizer';
 import { StackConfigurator } from './StackConfigurator';
-import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow, Settings2 } from 'lucide-react';
+import { CodeQualityDiffViewer } from './CodeQualityDiffViewer';
+import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow, Settings2, Code2 } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
 
 interface Case {
@@ -92,6 +93,16 @@ const CASES: Case[] = [
     tags:        ['Tech Advisor', 'Lead Gen', 'Wizard', 'Consultivo'],
     accent:      'amber',
     icon:        Settings2,
+    modalSize:   'xl',
+  },
+  {
+    id:          'code-quality',
+    label:       '[ REFATORAÇÃO ]',
+    title:       'Code Quality Diff Viewer',
+    description: 'Visualizador interativo de antes vs depois de refatoração. N+1 queries, callback hell, algoritmos O(n²), cache strategies — transformados em código de produção.',
+    tags:        ['Otimização', 'Refatoração', 'Performance', 'Code Review'],
+    accent:      'red',
+    icon:        Code2,
     modalSize:   'xl',
   },
 ];
@@ -257,8 +268,9 @@ export function CasesGrid() {
               {active.id === 'ui-playground' && <UIComponentPlayground />}
               {active.id === 'mezzlink'      && <MezzLink />}
               {active.id === 'iot-telemetry'      && <IoTTelemetryDashboard />}
-              {active.id === 'automation-flow'   && <AutomationFlowVisualizer />}
-              {active.id === 'stack-configurator' && <StackConfigurator />}
+              {active.id === 'automation-flow'    && <AutomationFlowVisualizer />}
+              {active.id === 'stack-configurator'  && <StackConfigurator />}
+              {active.id === 'code-quality'        && <CodeQualityDiffViewer />}
             </motion.div>
           </>
         )}
