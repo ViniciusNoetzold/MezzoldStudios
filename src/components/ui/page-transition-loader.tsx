@@ -24,15 +24,24 @@ export function PageTransitionLoader() {
     }
   }, [pathname]);
 
-  // Lock body scroll while the loader is visible
+  // Lock body scroll while the loader is visible and add an absolute fail-safe
   useEffect(() => {
+    let failSafeTimer: ReturnType<typeof setTimeout>;
+    
     if (visible) {
       document.body.style.overflow = "hidden";
+      // FAILSAFE: Force hide loader after 8 seconds no matter what,
+      // in case Next.js routing gets aborted or fails silently.
+      failSafeTimer = setTimeout(() => {
+        setVisible(false);
+      }, 8000);
     } else {
       document.body.style.overflow = "";
     }
+    
     return () => {
       document.body.style.overflow = "";
+      if (failSafeTimer) clearTimeout(failSafeTimer);
     };
   }, [visible]);
 
