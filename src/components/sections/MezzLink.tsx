@@ -218,7 +218,8 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
   const [copied, setCopied] = useState(false);
   const shortUrl = `mzld.io/${link.slug}`;
   const qrData   = encodeURIComponent(`https://mzld.io/${link.slug}`);
-  const qrUrl    = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${qrData}&bgcolor=0a0a0a&color=ededed&margin=8`;
+  // 2× resolution → sharp at 120px; blue dots on near-black bg matching MezzLink colours
+  const qrUrl    = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${qrData}&bgcolor=04080f&color=60a5fa&margin=12`;
 
   function copy() {
     navigator.clipboard.writeText(shortUrl).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
@@ -264,12 +265,52 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
             </button>
             <span className="font-mono text-[8px] text-white/20 mt-1">{link.clicks} cliques totais</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-[100px] h-[100px] rounded-lg overflow-hidden border border-white/[0.07] bg-[#0a0a0a] flex items-center justify-center">
+          <div className="flex flex-col items-center gap-1.5">
+            {/* QR code — neon glassmorphism frame */}
+            <div
+              className="relative w-[120px] h-[120px] rounded-xl overflow-hidden border border-blue-500/30 flex items-center justify-center"
+              style={{
+                background: 'radial-gradient(ellipse at center, #04080f 60%, #060d1f 100%)',
+                boxShadow: '0 0 28px rgba(59,130,246,0.12), inset 0 0 12px rgba(59,130,246,0.04)',
+              }}
+            >
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-500/40 rounded-tl-xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-500/40 rounded-tr-xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-500/40 rounded-bl-xl pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500/40 rounded-br-xl pointer-events-none" />
+
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={qrUrl} alt={`QR code for mzld.io/${link.slug}`} className="w-full h-full object-contain" loading="lazy" />
+              <img
+                src={qrUrl}
+                alt={`QR code for ${shortUrl}`}
+                className="w-[96px] h-[96px] object-contain relative z-10"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const sib = e.currentTarget.nextElementSibling as HTMLElement | null;
+                  if (sib) sib.style.display = 'flex';
+                }}
+              />
+              {/* Offline fallback — stylised QR grid */}
+              <div className="hidden absolute inset-0 items-center justify-center">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Top-left finder */}
+                  <rect x="4"  y="4"  width="20" height="20" rx="2" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.6"/>
+                  <rect x="9"  y="9"  width="10" height="10" rx="1" fill="#60a5fa" opacity="0.7"/>
+                  {/* Top-right finder */}
+                  <rect x="48" y="4"  width="20" height="20" rx="2" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.6"/>
+                  <rect x="53" y="9"  width="10" height="10" rx="1" fill="#60a5fa" opacity="0.7"/>
+                  {/* Bottom-left finder */}
+                  <rect x="4"  y="48" width="20" height="20" rx="2" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.6"/>
+                  <rect x="9"  y="53" width="10" height="10" rx="1" fill="#60a5fa" opacity="0.7"/>
+                  {/* Data dots */}
+                  {[30,36,42,30,42,30,36,42].map((x,i) => <rect key={i} x={x} y={[4,4,4,12,12,20,20,20][i]} width="4" height="4" rx="1" fill="#3b82f6" opacity="0.45" />)}
+                  {[4,12,20,30,30,36,42,4,12,20].map((x,i) => <rect key={i} x={x} y={[30,30,30,30,36,36,36,42,42,42][i]} width="4" height="4" rx="1" fill="#3b82f6" opacity="0.35" />)}
+                </svg>
+              </div>
             </div>
-            <span className="font-mono text-[7px] text-white/18 tracking-widest">mzld.io/{link.slug}</span>
+            <span className="font-mono text-[6.5px] text-blue-400/30 tracking-[0.2em] uppercase">{shortUrl}</span>
           </div>
         </div>
 

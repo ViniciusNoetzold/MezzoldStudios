@@ -143,7 +143,7 @@ const AC: Record<Accent, { label: string; border: string; hover: string; tag: st
 
 const MODAL_WIDTH: Record<'md' | 'xl', string> = {
   md: 'md:max-w-2xl',
-  xl: 'md:max-w-4xl',
+  xl: 'md:max-w-5xl',
 };
 
 // ── Portal modal — rendered at document.body to escape stacking contexts ────────

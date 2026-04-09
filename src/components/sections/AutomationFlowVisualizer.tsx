@@ -126,8 +126,8 @@ function NodeCard({ node, status, logLine, index, isMobile }: NodeCardProps) {
       animate={{ opacity: 1, y: 0, x: 0 }}
       transition={{ delay: index * 0.06, duration: 0.35 }}
       className={[
-        'relative flex flex-col border rounded-xl p-3.5 transition-all duration-400 select-none overflow-hidden',
-        'min-w-[120px] md:min-w-0 flex-1',
+        'relative flex flex-col border rounded-xl p-2.5 transition-all duration-400 select-none overflow-hidden',
+        'flex-1 min-w-0',
         s.border, s.glow, s.bg,
       ].join(' ')}
     >
@@ -138,15 +138,15 @@ function NodeCard({ node, status, logLine, index, isMobile }: NodeCardProps) {
       <div className={`absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full shrink-0 ${s.dot}`} />
 
       {/* Icon */}
-      <div className={`w-8 h-8 rounded-lg border flex items-center justify-center mb-2.5 shrink-0 transition-colors duration-300 ${s.border} ${s.bg}`}>
-        <Icon size={14} className={`${s.label} transition-colors duration-300`} />
+      <div className={`w-7 h-7 rounded-lg border flex items-center justify-center mb-1.5 shrink-0 transition-colors duration-300 ${s.border} ${s.bg}`}>
+        <Icon size={12} className={`${s.label} transition-colors duration-300`} />
       </div>
 
       {/* Labels */}
-      <span className={`font-mono font-bold text-[8px] tracking-[0.35em] uppercase block ${s.label} transition-colors duration-300`}>
+      <span className={`font-mono font-bold text-[7.5px] tracking-[0.18em] uppercase truncate block ${s.label} transition-colors duration-300`}>
         {node.label}
       </span>
-      <span className="font-mono text-[7px] tracking-[0.15em] text-white/22 uppercase mt-0.5 block leading-tight">
+      <span className="font-mono text-[6.5px] tracking-[0.12em] text-white/22 uppercase mt-0.5 truncate block leading-tight">
         {node.sublabel}
       </span>
 
@@ -240,8 +240,8 @@ function Edge({ fromIndex, active, done, isMobile, gradientId }: EdgeProps) {
 
   // Horizontal connector (desktop)
   return (
-    <div className="flex items-center shrink-0" style={{ width: 32, minWidth: 24 }}>
-      <svg width="32" height="4" viewBox="0 0 32 4" style={{ overflow: 'visible', width: '100%' }}>
+    <div className="flex items-center shrink-0" style={{ width: 20, minWidth: 12 }}>
+      <svg width="20" height="4" viewBox="0 0 20 4" style={{ overflow: 'visible', width: '100%' }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#3b82f6" />
@@ -254,7 +254,7 @@ function Edge({ fromIndex, active, done, isMobile, gradientId }: EdgeProps) {
         </defs>
         {/* Arrow line */}
         <line
-          x1="0" y1="2" x2="30" y2="2"
+          x1="0" y1="2" x2="18" y2="2"
           stroke={strokeColor}
           strokeWidth="1.2"
           strokeDasharray={done || active ? 'none' : '3 3'}
@@ -262,7 +262,7 @@ function Edge({ fromIndex, active, done, isMobile, gradientId }: EdgeProps) {
         />
         {/* Arrowhead */}
         <polygon
-          points="28,0 32,2 28,4"
+          points="16,0 20,2 16,4"
           fill={done ? 'rgba(16,185,129,0.5)' : active ? '#3b82f6' : 'rgba(255,255,255,0.08)'}
           style={{ transition: 'fill 0.4s' }}
         />
@@ -274,7 +274,7 @@ function Edge({ fromIndex, active, done, isMobile, gradientId }: EdgeProps) {
             fill="#60a5fa"
             filter={`url(#glow-${gradientId})`}
             initial={{ cx: 0, opacity: 1 }}
-            animate={{ cx: 30, opacity: [1, 1, 0] }}
+            animate={{ cx: 18, opacity: [1, 1, 0] }}
             transition={{ duration: PARTICLE_DURATION, ease: 'linear' }}
             cy="2"
           />
@@ -542,8 +542,8 @@ export function AutomationFlowVisualizer() {
         </div>
       </div>
 
-      {/* ── Pipeline canvas ─────────────────────────────────────────────────── */}
-      <div className="relative px-3 py-5 md:px-5 overflow-x-auto">
+      {/* ── Pipeline canvas — overflow-x-auto as safety valve ── */}
+      <div className="relative px-3 py-5 md:px-4 overflow-x-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={scenarioIdx}
