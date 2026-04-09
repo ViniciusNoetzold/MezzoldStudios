@@ -248,8 +248,8 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
             <span className="font-mono font-bold text-sm text-blue-400">mzld.io/{link.slug}</span>
             <p className="font-mono text-[8px] text-white/25 mt-0.5 truncate max-w-[280px]">{link.originalUrl}</p>
           </div>
-          <button onClick={onClose} className="w-7 h-7 rounded-md border border-white/[0.07] flex items-center justify-center text-white/30 hover:text-white/60 hover:border-white/20 transition-all duration-200">
-            <X size={12} />
+          <button onClick={onClose} className="w-9 h-9 md:w-7 md:h-7 rounded-md border border-white/[0.07] flex items-center justify-center text-white/30 hover:text-white/60 hover:border-white/20 transition-all duration-200">
+            <X size={16} className="md:w-3 md:h-3" />
           </button>
         </div>
 
@@ -261,13 +261,13 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
 
         {/* QR + actions */}
         <div className="grid grid-cols-2 gap-4 px-5 py-4 border-t border-white/[0.05]">
-          <div className="flex flex-col gap-2 justify-center">
-            <button onClick={copy} className="flex items-center gap-2 h-9 px-3 rounded-lg border border-blue-500/25 bg-blue-500/[0.06] text-blue-400 font-mono text-[9px] tracking-[0.2em] uppercase hover:bg-blue-500/12 transition-all duration-200">
-              {copied ? <Check size={11} /> : <Copy size={11} />}
+          <div className="flex flex-col gap-3 justify-center">
+            <button onClick={copy} className="flex items-center justify-center target-touch-mobile gap-2 min-h-[48px] md:h-9 md:min-h-0 px-3 rounded-lg border border-blue-500/25 bg-blue-500/[0.06] text-blue-400 font-mono text-xs md:text-[9px] tracking-[0.2em] uppercase hover:bg-blue-500/12 transition-all duration-200">
+              {copied ? <Check size={14} className="md:w-[11px] md:h-[11px]" /> : <Copy size={14} className="md:w-[11px] md:h-[11px]" />}
               {copied ? 'Copiado!' : 'Copiar slug'}
             </button>
-            <button onClick={() => { onSimClick(); onClose(); }} className="flex items-center gap-2 h-9 px-3 rounded-lg border border-white/[0.07] text-white/35 font-mono text-[9px] tracking-[0.2em] uppercase hover:border-white/18 hover:text-white/55 transition-all duration-200">
-              <ExternalLink size={11} /> Simular clique
+            <button onClick={() => { onSimClick(); onClose(); }} className="flex items-center justify-center target-touch-mobile gap-2 min-h-[48px] md:h-9 md:min-h-0 px-3 rounded-lg border border-white/[0.07] text-white/35 font-mono text-xs md:text-[9px] tracking-[0.2em] uppercase hover:border-white/18 hover:text-white/55 transition-all duration-200">
+              <ExternalLink size={14} className="md:w-[11px] md:h-[11px]" /> Simular clique
             </button>
             <span className="font-mono text-[8px] text-white/20 mt-1">{link.clicks} cliques totais</span>
           </div>
@@ -321,9 +321,9 @@ function DetailModal({ link, onClose, onDelete, onSimClick }: {
         </div>
 
         {/* Delete */}
-        <div className="px-5 pb-4">
-          <button onClick={onDelete} className="w-full h-9 rounded-lg border border-electric-red/20 text-electric-red/60 font-mono text-[9px] tracking-[0.25em] uppercase hover:bg-electric-red/[0.06] hover:border-electric-red/35 hover:text-electric-red/80 transition-all duration-200 flex items-center justify-center gap-2">
-            <Trash2 size={11} /> Deletar link
+        <div className="px-5 pb-5">
+          <button onClick={onDelete} className="w-full min-h-[48px] md:h-9 md:min-h-0 rounded-lg border border-electric-red/20 text-electric-red/60 font-mono text-xs md:text-[9px] tracking-[0.25em] uppercase hover:bg-electric-red/[0.06] hover:border-electric-red/35 hover:text-electric-red/80 transition-all duration-200 flex items-center justify-center gap-2">
+            <Trash2 size={14} className="md:w-[11px] md:h-[11px]" /> Deletar link
           </button>
         </div>
       </motion.div>
@@ -441,9 +441,9 @@ export function MezzLink() {
         <button
           onClick={() => setShowClear(true)}
           disabled={links.length === 0}
-          className="absolute right-0 top-0 flex items-center gap-1.5 font-mono text-[8px] tracking-[0.2em] uppercase px-3 py-2 rounded-lg border border-electric-red/18 text-electric-red/40 hover:border-electric-red/40 hover:text-electric-red/70 hover:bg-electric-red/[0.04] disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+          className="absolute right-0 top-0 flex items-center justify-center gap-1.5 font-mono text-xs md:text-[8px] tracking-[0.2em] uppercase min-h-[48px] min-w-[48px] md:min-w-0 md:min-h-0 md:px-3 md:py-2 rounded-lg border border-electric-red/18 text-electric-red/40 hover:border-electric-red/40 hover:text-electric-red/70 hover:bg-electric-red/[0.04] disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
         >
-          <Trash2 size={10} /> Limpar
+          <Trash2 size={14} className="md:w-[10px] md:h-[10px]" /> <span className="hidden md:inline">Limpar</span>
         </button>
       </div>
 
@@ -523,16 +523,16 @@ export function MezzLink() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="font-mono text-[10px] font-bold text-blue-400">mzld.io/{link.slug}</span>
-                      <button onClick={() => copySlug(link.slug)} className="text-white/22 hover:text-blue-400 transition-colors duration-150">
-                        {copying === link.slug ? <Check size={10} /> : <Copy size={10} />}
+                      <button onClick={() => copySlug(link.slug)} className="flex items-center justify-center w-8 h-8 rounded-full bg-white/5 text-white/40 hover:bg-white/10 hover:text-blue-400 transition-colors duration-150">
+                        {copying === link.slug ? <Check size={14} /> : <Copy size={14} />}
                       </button>
                     </div>
                     <span className="font-mono text-[8px] text-white/28 truncate block">{truncate(link.originalUrl, 40)}</span>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-3 shrink-0">
                     <span className="font-mono text-xs font-bold text-white/55 tabular-nums">{link.clicks}</span>
-                    <button onClick={() => setDetail(link)} className="w-7 h-7 rounded border border-white/[0.07] flex items-center justify-center text-white/25 hover:border-blue-500/30 hover:text-blue-400 transition-all duration-150">
-                      <ChevronRight size={12} />
+                    <button onClick={() => setDetail(link)} className="w-10 h-10 rounded border border-white/[0.07] flex items-center justify-center bg-white/5 text-white/50 hover:bg-blue-500/10 hover:border-blue-500/30 hover:text-blue-400 transition-all duration-150">
+                      <ChevronRight size={16} />
                     </button>
                   </div>
                 </div>

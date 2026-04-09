@@ -73,12 +73,12 @@ export function Header() {
 					))}
 				</div>
 				
-				{/* min 44px touch target per iOS HIG / Material 3 */}
+				{/* min 48px touch target per iOS HIG / Material 3 */}
 				<button
 					onClick={() => setOpen(!open)}
 					aria-label={open ? 'Fechar menu' : 'Abrir menu'}
 					aria-expanded={open}
-					className="md:hidden flex items-center justify-center text-white h-11 w-11 rounded-full hover:bg-white/5 active:bg-white/10 transition-colors"
+					className="md:hidden flex items-center justify-center text-white h-12 w-12 rounded-full hover:bg-white/5 active:bg-white/10 transition-colors"
 				>
 					<MenuToggleIcon open={open} className="size-6" duration={300} />
 				</button>

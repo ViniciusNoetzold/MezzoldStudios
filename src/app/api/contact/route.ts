@@ -63,7 +63,14 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { name, email, phone, message } = body;
+    const { name, email, phone, message, companyName_fakeField } = body;
+
+    // Honeypot anti-spam check
+    if (companyName_fakeField) {
+      console.warn('[Honeypot Triggered] Ignored spam bot submission.');
+      // Return 200 to trick the bot into thinking the submission succeeded
+      return NextResponse.json({ success: true, fake: true }, { status: 200 });
+    }
 
     // Presence validation
     if (!name || !email || !message) {

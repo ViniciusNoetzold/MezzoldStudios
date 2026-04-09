@@ -88,7 +88,7 @@ export function ContactSection() {
             {
               icon: MapPinIcon,
               label: 'Endereço',
-              value: 'Sarandi, Rio Grande do Sul - 99560-000',
+              value: 'Sarandi, Rio Grande do Sul, 99560-000',
             },
           ]}
         >
@@ -108,6 +108,7 @@ function ContactForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [companyName_fakeField, setFakeField] = useState("");
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -134,7 +135,7 @@ function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, message }),
+        body: JSON.stringify({ name, email, phone, message, companyName_fakeField }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -216,6 +217,21 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+      
+      {/* Honeypot field - invisible to humans, pure bait for bots */}
+      <div aria-hidden="true" className="hidden opacity-0 absolute top-0 left-0 w-0 h-0 pointer-events-none z-[-100]">
+        <label htmlFor="companyName_fakeField" tabIndex={-1}>Company Name</label>
+        <input
+          id="companyName_fakeField"
+          name="companyName_fakeField"
+          type="text"
+          autoComplete="off"
+          tabIndex={-1}
+          value={companyName_fakeField}
+          onChange={(e) => setFakeField(e.target.value)}
+        />
+      </div>
+
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="contact-name" className="text-white/70 text-xs font-mono tracking-widest uppercase">Nome</Label>
         <input
