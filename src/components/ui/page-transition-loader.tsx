@@ -54,6 +54,17 @@ export function PageTransitionLoader() {
         return;
       }
 
+      try {
+        const currentUrl = new URL(window.location.href);
+        const targetUrl = new URL(anchor.href);
+        // Do not show loader if navigating to the same pathname (e.g. hash link or same page)
+        if (currentUrl.pathname === targetUrl.pathname) {
+          return;
+        }
+      } catch (e) {
+        // Safe fallback in case URL parsing fails
+      }
+
       // Don't start a new timer if one is already running
       if (showTimerRef.current) return;
 
