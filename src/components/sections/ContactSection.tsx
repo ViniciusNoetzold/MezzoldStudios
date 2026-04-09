@@ -6,8 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const inputClass =
   'bg-white/[0.04] border border-white/10 text-white text-base md:text-sm rounded-lg px-3 ' +
@@ -109,6 +110,8 @@ function ContactForm() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [companyName_fakeField, setFakeField] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -135,7 +138,7 @@ function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, message, companyName_fakeField }),
+        body: JSON.stringify({ name, email, phone, message, companyName_fakeField, recaptchaToken }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -143,6 +146,8 @@ function ContactForm() {
       }
       setStatus('success');
     } catch (err: unknown) {
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setRecaptchaToken(null);
       setErrorMsg(err instanceof Error ? err.message : 'Erro ao enviar. Tente novamente.');
       setStatus('error');
     }
@@ -290,13 +295,22 @@ function ContactForm() {
         />
       </div>
 
+      <div className="w-full flex justify-center py-2">
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+          onChange={(token) => setRecaptchaToken(token)}
+          theme="dark"
+        />
+      </div>
+
       {status === 'error' && (
         <p className="text-red-400/80 text-xs font-mono">{errorMsg}</p>
       )}
 
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === 'loading' || !recaptchaToken}
         className="w-full h-12 mt-1 rounded-lg bg-white text-black text-xs font-extrabold uppercase tracking-[0.2em] transition-all duration-200 hover:bg-white/90 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? 'Enviando...' : 'Enviar Proposta'}

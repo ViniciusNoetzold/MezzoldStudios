@@ -63,13 +63,32 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { name, email, phone, message, companyName_fakeField } = body;
+    const { name, email, phone, message, companyName_fakeField, recaptchaToken } = body;
 
     // Honeypot anti-spam check
     if (companyName_fakeField) {
       console.warn('[Honeypot Triggered] Ignored spam bot submission.');
       // Return 200 to trick the bot into thinking the submission succeeded
       return NextResponse.json({ success: true, fake: true }, { status: 200 });
+    }
+
+    if (!recaptchaToken) {
+      return NextResponse.json({ error: 'Falha na verificação anti-robô. Confirme o reCAPTCHA.' }, { status: 400 });
+    }
+
+    const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: process.env.RECAPTCHA_SECRET_KEY || '',
+        response: recaptchaToken
+      }).toString()
+    });
+
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      console.error('[reCAPTCHA Error]', verifyData['error-codes']);
+      return NextResponse.json({ error: 'Falha no reCAPTCHA. Tente novamente.' }, { status: 400 });
     }
 
     // Presence validation
