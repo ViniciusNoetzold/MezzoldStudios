@@ -6,7 +6,8 @@ import { PerformanceBenchmarkSimulator } from './PerformanceBenchmarkSimulator';
 import { LiveMonitoringDashboard } from './LiveMonitoringDashboard';
 import { UIComponentPlayground } from './UIComponentPlayground';
 import { MezzLink } from './MezzLink';
-import { X, Zap, BarChart2, Layers, Link } from 'lucide-react';
+import { IoTTelemetryDashboard } from './IoTTelemetryDashboard';
+import { X, Zap, BarChart2, Layers, Link, Cpu } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
 
 interface Case {
@@ -59,6 +60,16 @@ const CASES: Case[] = [
     tags:        ['Micro-SaaS', 'localStorage', 'Analytics', 'Full-stack Demo'],
     accent:      'amber',
     icon:        Link,
+    modalSize:   'xl',
+  },
+  {
+    id:          'iot-telemetry',
+    label:       '[ IOT & HARDWARE ]',
+    title:       'IoT Telemetry Dashboard',
+    description: 'Monitoramento de hardware e telemetria via MQTT. Visualização de topologia de rede, status e diagnóstico de dispositivos embarcados em tempo real.',
+    tags:        ['IoT', 'MQTT', 'Hardware', 'Real-time'],
+    accent:      'emerald',
+    icon:        Cpu,
     modalSize:   'xl',
   },
 ];
@@ -223,6 +234,7 @@ export function CasesGrid() {
               {active.id === 'monitoring'    && <LiveMonitoringDashboard />}
               {active.id === 'ui-playground' && <UIComponentPlayground />}
               {active.id === 'mezzlink'      && <MezzLink />}
+              {active.id === 'iot-telemetry' && <IoTTelemetryDashboard />}
             </motion.div>
           </>
         )}
