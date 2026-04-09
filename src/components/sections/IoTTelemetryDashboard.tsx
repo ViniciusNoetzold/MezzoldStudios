@@ -85,14 +85,14 @@ interface TopicDef {
 }
 
 const TOPIC_POOL: TopicDef[] = [
-  { topic: 'sensor/temp',      mkPayload: m => `{"value":${m.cpuTemp.toFixed(1)},"unit":"C"}`,                            kind: 'normal' },
-  { topic: 'sensor/wifi',      mkPayload: m => `{"rssi":${m.wifiDbm.toFixed(0)},"q":"${m.wifiDbm>-60?'GOOD':'WEAK'}"}`,  kind: 'normal' },
-  { topic: 'sensor/ram',       mkPayload: m => `{"usage":${m.ramPct.toFixed(1)},"free":${(100-m.ramPct).toFixed(1)}}`,    kind: 'normal' },
-  { topic: 'sensor/hz',        mkPayload: m => `{"freq":${Math.round(m.sensorHz)}}`,                                      kind: 'normal' },
-  { topic: 'status/heartbeat', mkPayload: _  => 'OK',                                                                      kind: 'normal' },
-  { topic: 'status/health',    mkPayload: _  => `{"heap":${Math.floor(rnd(185000,240000))},"ok":true}`,                   kind: 'normal' },
-  { topic: 'sys/log',          mkPayload: _  => '{"level":"INFO","msg":"task_scheduler_ok"}',                              kind: 'normal' },
-  { topic: 'sys/gpio',         mkPayload: _  => `{"pin":${Math.floor(rnd(1,40))},"state":${Math.random()>0.5?1:0}}`,      kind: 'normal' },
+  { topic: '🌡 Temperatura',    mkPayload: m => `${m.cpuTemp.toFixed(1)}°C`,                                               kind: 'normal' },
+  { topic: '📶 Sinal WiFi',     mkPayload: m => `${m.wifiDbm.toFixed(0)} dBm — ${m.wifiDbm>-60?'Boa qualidade':'Sinal fraco'}`, kind: 'normal' },
+  { topic: '💾 Memória',        mkPayload: m => `Uso: ${m.ramPct.toFixed(1)}% — Livre: ${(100-m.ramPct).toFixed(1)}%`,    kind: 'normal' },
+  { topic: '⚡ Frequência',     mkPayload: m => `${Math.round(m.sensorHz)} leituras/s`,                                    kind: 'normal' },
+  { topic: '✓ Heartbeat',      mkPayload: _  => 'Dispositivo respondendo normalmente',                                     kind: 'normal' },
+  { topic: '✓ Saúde',          mkPayload: _  => `Sistema OK — memória heap: ${Math.floor(rnd(185,240))} KB livres`,        kind: 'normal' },
+  { topic: '📋 Log',           mkPayload: _  => 'Agendador de tarefas rodando normalmente',                                 kind: 'normal' },
+  { topic: '🔌 GPIO',          mkPayload: _  => `Pino ${Math.floor(rnd(1,40))}: ${Math.random()>0.5?'ATIVO':'INATIVO'}`,  kind: 'normal' },
 ];
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
@@ -170,7 +170,7 @@ function TempCard({ value, spike, offline }: { value: number; spike: boolean; of
                 value > 60          ? '#f59e0b' :
                 '#10b981';
   return (
-    <MetricShell label="CPU TEMP" offline={offline}>
+    <MetricShell label="Temperatura do dispositivo" offline={offline}>
       <div className="font-mono text-xl font-bold leading-none transition-colors duration-300" style={{ color }}>
         {offline ? '---' : value.toFixed(1)}
         <span className="text-[9px] font-normal ml-1 opacity-55">°C</span>
@@ -194,7 +194,7 @@ function WifiCard({ value, pct, spike, offline }: { value: number; pct: number; 
   // Signal bars
   const bars = [25, 50, 75, 100];
   return (
-    <MetricShell label="RF / WIFI" offline={offline}>
+    <MetricShell label="Qualidade do sinal" offline={offline}>
       <div className="font-mono text-xl font-bold leading-none transition-colors duration-300" style={{ color }}>
         {offline ? '---' : value.toFixed(0)}
         <span className="text-[9px] font-normal ml-1 opacity-55">dBm</span>
@@ -223,7 +223,7 @@ function RamCard({ value, spike, offline }: { value: number; spike: boolean; off
                 value > 70          ? '#f59e0b' :
                 '#10b981';
   return (
-    <MetricShell label="RAM USAGE" offline={offline}>
+    <MetricShell label="Uso de memória" offline={offline}>
       <div className="font-mono text-xl font-bold leading-none transition-colors duration-300" style={{ color }}>
         {offline ? '--.-' : value.toFixed(1)}
         <span className="text-[9px] font-normal ml-1 opacity-55">%</span>
@@ -244,7 +244,7 @@ function HzCard({ value, spike, offline }: { value: number; spike: boolean; offl
   const color = offline ? 'rgba(255,255,255,0.12)' :
                 spike   ? '#ef4444' : '#10b981';
   return (
-    <MetricShell label="SENSOR HZ" offline={offline}>
+    <MetricShell label="Leituras por segundo" offline={offline}>
       <div className="font-mono text-xl font-bold leading-none transition-colors duration-300" style={{ color }}>
         {offline ? '----' : Math.round(value)}
         <span className="text-[9px] font-normal ml-1 opacity-55">Hz</span>
@@ -443,8 +443,8 @@ export function IoTTelemetryDashboard() {
     setSpikeTick(8);
     setLogs(prev => [{
       id: uid(), ts: nowTs(),
-      topic:   'sys/anomaly',
-      payload: '{"err":"thermal_throttle","core":2,"temp":98.4}'
+      topic:   '⚠ Anomalia',
+      payload: 'Temperatura crítica: 98.4°C — limitação térmica ativada no core 2'
     } as MqttEntry, ...prev].slice(0, 50));
     const id = setInterval(() => {
       setSpikeTick(c => {
@@ -475,24 +475,24 @@ export function IoTTelemetryDashboard() {
       setConn('offline');
       setLogs(prev => [{
         id: uid(), ts: nowTs(),
-        topic:   'sys/conn',
-        payload: '✗ CONNECTION LOST: broker unreachable',
+        topic:   '✗ Conexão',
+        payload: 'Conexão perdida — broker inacessível',
         kind:    'warn',
       } as MqttEntry, ...prev].slice(0, 20));
     } else if (conn === 'offline') {
       setConn('reconnecting');
       setLogs(prev => [{
         id: uid(), ts: nowTs(),
-        topic:   'sys/conn',
-        payload: '↺ RECONNECTING to mqtt.mezzold.io...',
+        topic:   '↺ Reconexão',
+        payload: 'Tentando reconectar ao broker...',
         kind:    'warn',
       } as MqttEntry, ...prev].slice(0, 20));
       await sleep(2200);
       setConn('connected');
       setLogs(prev => [{
         id: uid(), ts: nowTs(),
-        topic:   'sys/conn',
-        payload: '✓ MQTT CONNECTED: session restored',
+        topic:   '✓ Conexão',
+        payload: 'Dispositivo reconectado — sessão restaurada',
         kind:    'normal',
       } as MqttEntry, ...prev].slice(0, 20));
     }
@@ -531,7 +531,7 @@ export function IoTTelemetryDashboard() {
         <div className="flex items-center gap-3 min-w-0">
           <StatusDot conn={conn} isAlert={isAlert} />
           <span className="font-mono text-[9px] tracking-[0.22em] uppercase whitespace-nowrap">
-            <span className="text-white/60">DEVICE_01</span>
+            <span className="text-white/60">DISPOSITIVO 01</span>
             <span className="text-white/20 mx-1.5">|</span>
             <span className="text-white/50">ESP32-S3</span>
             <span className="text-white/20 mx-1.5">|</span>
@@ -541,11 +541,11 @@ export function IoTTelemetryDashboard() {
                           conn === 'reconnecting' ? '#f59e0b' : '#10b981',
               transition: 'color 0.4s',
             }}>
-              {isAlert           ? 'ANOMALY DETECTED ⚠' :
-               conn === 'dropping'    ? 'DROPPING...' :
-               isOffline         ? 'DISCONNECTED ✗' :
-               conn === 'reconnecting' ? 'RECONNECTING...' :
-               'MQTT CONNECTED ●'}
+              {isAlert           ? 'ALERTA DE TEMPERATURA ⚠' :
+               conn === 'dropping'    ? 'Desconectando...' :
+               isOffline         ? 'CONEXÃO PERDIDA ✗' :
+               conn === 'reconnecting' ? 'Reconectando...' :
+               'CONECTADO — Monitoramento em tempo real ●'}
             </span>
           </span>
         </div>
@@ -559,7 +559,7 @@ export function IoTTelemetryDashboard() {
             onMouseEnter={e => { if (!spike && conn === 'connected') (e.currentTarget.style.background = 'rgba(239,68,68,0.07)'); }}
             onMouseLeave={e => { (e.currentTarget.style.background = 'transparent'); }}
           >
-            {spike ? `⚡ SPIKE ${spikeTick}s` : '⚡ SIMULAR SPIKE'}
+            {spike ? `⚡ ALERTA ${spikeTick}s` : 'SIMULAR ALERTA DE TEMPERATURA'}
           </button>
 
           <button
@@ -567,12 +567,19 @@ export function IoTTelemetryDashboard() {
             disabled={conn === 'dropping' || conn === 'reconnecting'}
             className="font-mono text-[7px] tracking-[0.22em] uppercase px-3 py-1.5 rounded border border-white/10 text-white/35 hover:text-white/60 hover:border-white/20 hover:bg-white/[0.04] disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
           >
-            {conn === 'connected'    ? 'DESCONECTAR' :
+            {conn === 'connected'    ? 'SIMULAR QUEDA DE CONEXÃO' :
              conn === 'dropping'     ? 'AGUARDE...'  :
              conn === 'offline'      ? '↺ RECONECTAR' :
              'CONECTANDO...'}
           </button>
         </div>
+      </div>
+
+      {/* ── Context line ── */}
+      <div className="px-5 py-2 border-b" style={{ borderColor: 'rgba(16,185,129,0.07)', background: 'rgba(16,185,129,0.015)' }}>
+        <p className="font-mono text-[8.5px] tracking-[0.1em] text-white/30 italic">
+          Conectamos hardware físico à internet — e você acompanha tudo de qualquer lugar, em tempo real.
+        </p>
       </div>
 
       {/* ── Body ── */}
@@ -594,7 +601,7 @@ export function IoTTelemetryDashboard() {
             className="flex items-center justify-between rounded-lg px-4 py-2.5"
             style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.012)' }}
           >
-            <span className="font-mono text-[7px] tracking-[0.35em] uppercase text-white/22">DEVICE UPTIME</span>
+            <span className="font-mono text-[7px] tracking-[0.35em] uppercase text-white/22">Tempo online</span>
             <motion.span
               key={uptime.total}
               initial={{ opacity: 0.4 }}
@@ -671,7 +678,7 @@ export function IoTTelemetryDashboard() {
 
                 {logs.length === 0 && (
                   <p className="font-mono text-[9px] text-white/15 text-center py-10">
-                    {isOffline ? '— no broker connection —' : 'awaiting events...'}
+                    {isOffline ? '— dispositivo desconectado —' : 'aguardando eventos...'}
                   </p>
                 )}
               </div>

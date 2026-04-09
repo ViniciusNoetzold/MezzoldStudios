@@ -15,6 +15,7 @@ interface PipelineNode {
   id: string;
   label: string;
   sublabel: string;
+  human: string;
   icon: React.FC<{ size?: number; className?: string }>;
   logs: string[];
   errorLog?: string;
@@ -33,39 +34,39 @@ const SCENARIOS: Scenario[] = [
     id: 'ecommerce',
     label: 'E-commerce Order',
     nodes: [
-      { id: 'trigger',      label: 'WEBHOOK',       sublabel: 'Trigger',        icon: Webhook,     logs: ['POST /webhook/order', 'payload: 2.4 KB', 'auth: Bearer ✓'],           errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Schema & Rules', icon: ShieldCheck, logs: ['Validando schema JSON...', 'Verificando estoque...', 'stock_id: OK'],  errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Customer Data',  icon: Sparkles,    logs: ['Buscando perfil CRM...', 'LTV: R$ 4.280', 'Segmento: Premium'],       errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'Payment Gateway',icon: Globe,       logs: ['POST api.stripe.com', 'amount: R$ 399,00', 'charge_id: ch_3Qx...'],  errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Order Engine',   icon: Cpu,         logs: ['Reservando estoque...', 'Calculando frete...', 'ETA: 3–5 dias'],      errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'db',           label: 'DATABASE',       sublabel: 'PostgreSQL',     icon: Database,    logs: ['INSERT orders (1 row)', 'UPDATE inventory', 'tx committed OK'],       errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Email + Push',   icon: Bell,        logs: ['Enviando e-mail cliente...', 'Push notif: entregue', 'SMS: OK'],      errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
+      { id: 'trigger',      label: 'WEBHOOK',       sublabel: 'Trigger',        human: 'evento recebido',          icon: Webhook,     logs: ['POST /webhook/order', 'payload: 2.4 KB', 'auth: Bearer ✓'],           errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Schema & Rules', human: 'dados verificados',         icon: ShieldCheck, logs: ['Validando schema JSON...', 'Verificando estoque...', 'stock_id: OK'],  errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Customer Data',  human: 'informações completadas',   icon: Sparkles,    logs: ['Buscando perfil CRM...', 'LTV: R$ 4.280', 'Segmento: Premium'],       errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'Payment Gateway',human: 'sistema externo consultado',icon: Globe,       logs: ['POST api.stripe.com', 'amount: R$ 399,00', 'charge_id: ch_3Qx...'],  errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Order Engine',   human: 'pedido processado',         icon: Cpu,         logs: ['Reservando estoque...', 'Calculando frete...', 'ETA: 3–5 dias'],      errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'db',           label: 'DATABASE',       sublabel: 'PostgreSQL',     human: 'dados salvos',              icon: Database,    logs: ['INSERT orders (1 row)', 'UPDATE inventory', 'tx committed OK'],       errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Email + Push',   human: 'cliente notificado',        icon: Bell,        logs: ['Enviando e-mail cliente...', 'Push notif: entregue', 'SMS: OK'],      errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
     ],
   },
   {
     id: 'saas-billing',
     label: 'SaaS Billing',
     nodes: [
-      { id: 'trigger',      label: 'CRON JOB',       sublabel: 'Scheduler',      icon: Activity,    logs: ['schedule: 0 9 * * *', 'triggered: 09:00 UTC', '247 subscriptions'],  errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Plan & Status',  icon: ShieldCheck, logs: ['Checando planos ativos...', 'trial_end: 3 próximos', 'overdue: 12'], errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Usage Metrics',  icon: Sparkles,    logs: ['Coletando uso mensal...', 'api_calls: 84.302', 'storage: 12.4 GB'],  errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'Stripe Billing', icon: Globe,       logs: ['GET /subscriptions', 'charging 231 subs...', 'rate limit: ok'],      errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Invoice Engine', icon: Cpu,         logs: ['Gerando 231 faturas...', 'Aplicando descontos...', 'tax: BR/SP'],     errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'db',           label: 'DATABASE',       sublabel: 'MongoDB',        icon: Database,    logs: ['upsert invoices: 231', 'update mrr: +R$12.8k', 'snapshot saved'],     errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Slack + Email',  icon: Bell,        logs: ['#billing channel: ✓', 'Relatório PDF enviado', 'audit log: OK'],     errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
+      { id: 'trigger',      label: 'CRON JOB',       sublabel: 'Scheduler',      human: 'tarefa agendada',           icon: Activity,    logs: ['schedule: 0 9 * * *', 'triggered: 09:00 UTC', '247 subscriptions'],  errorLog: '⚠ Falha no agendador — tentando novamente...' },
+      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Plan & Status',  human: 'dados verificados',         icon: ShieldCheck, logs: ['Checando planos ativos...', 'trial_end: 3 próximos', 'overdue: 12'], errorLog: '⚠ Falha na validação — tentando novamente...' },
+      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Usage Metrics',  human: 'informações completadas',   icon: Sparkles,    logs: ['Coletando uso mensal...', 'api_calls: 84.302', 'storage: 12.4 GB'],  errorLog: '⚠ Falha ao coletar métricas — tentando novamente...' },
+      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'Stripe Billing', human: 'sistema externo consultado',icon: Globe,       logs: ['GET /subscriptions', 'charging 231 subs...', 'rate limit: ok'],      errorLog: '⚠ Gateway de pagamento demorou — tentando novamente...' },
+      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Invoice Engine', human: 'faturas processadas',       icon: Cpu,         logs: ['Gerando 231 faturas...', 'Aplicando descontos...', 'tax: BR/SP'],     errorLog: '⚠ Falha no motor de faturas — tentando novamente...' },
+      { id: 'db',           label: 'DATABASE',       sublabel: 'MongoDB',        human: 'dados salvos',              icon: Database,    logs: ['upsert invoices: 231', 'update mrr: +R$12.8k', 'snapshot saved'],     errorLog: '⚠ Falha ao salvar — tentando novamente...' },
+      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Slack + Email',  human: 'cliente notificado',        icon: Bell,        logs: ['#billing channel: ✓', 'Relatório PDF enviado', 'audit log: OK'],     errorLog: '⚠ Falha no envio — tentando novamente...' },
     ],
   },
   {
     id: 'lead-capture',
     label: 'Lead Capture',
     nodes: [
-      { id: 'trigger',      label: 'FORMULÁRIO',     sublabel: 'Web Hook',       icon: Webhook,     logs: ['POST /api/leads', 'origin: landing-v3', 'utm_source: google'],      errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Spam & Format',  icon: ShieldCheck, logs: ['reCAPTCHA score: 0.92', 'email syntax: OK', 'honeypot: clear'],     errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Lead Scoring',   icon: Sparkles,    logs: ['Clearbit lookup...', 'company: Acme Corp', 'score: 87/100'],        errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'HubSpot CRM',    icon: Globe,       logs: ['POST /crm/contacts', 'pipeline: MQL', 'owner: auto-assign'],        errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Segmentation',   icon: Cpu,         logs: ['Classificando segmento...', 'ICP match: 94%', 'priority: HIGH'],    errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'db',           label: 'DATABASE',       sublabel: 'Supabase',       icon: Database,    logs: ['INSERT leads (1 row)', 'UPDATE score_history', 'realtime: emitted'],errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
-      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Sales Team',     icon: Bell,        logs: ['Slack #sales-hot: ✓', 'Email SDR: enviado', 'Calendly: agendado'],  errorLog: '⚠ Timeout após 5000ms — Ativando retry...' },
+      { id: 'trigger',      label: 'FORMULÁRIO',     sublabel: 'Web Hook',       human: 'lead recebido',             icon: Webhook,     logs: ['POST /api/leads', 'origin: landing-v3', 'utm_source: google'],      errorLog: '⚠ Falha ao receber lead — tentando novamente...' },
+      { id: 'validate',     label: 'VALIDAÇÃO',      sublabel: 'Spam & Format',  human: 'dados verificados',         icon: ShieldCheck, logs: ['reCAPTCHA score: 0.92', 'email syntax: OK', 'honeypot: clear'],     errorLog: '⚠ Falha na validação — tentando novamente...' },
+      { id: 'enrich',       label: 'ENRIQUECIMENTO', sublabel: 'Lead Scoring',   human: 'informações completadas',   icon: Sparkles,    logs: ['Clearbit lookup...', 'company: Acme Corp', 'score: 87/100'],        errorLog: '⚠ Falha ao enriquecer dados — tentando novamente...' },
+      { id: 'external-api', label: 'API EXTERNA',    sublabel: 'HubSpot CRM',    human: 'sistema externo consultado',icon: Globe,       logs: ['POST /crm/contacts', 'pipeline: MQL', 'owner: auto-assign'],        errorLog: '⚠ CRM demorou — tentando novamente...' },
+      { id: 'process',      label: 'PROCESSAMENTO',  sublabel: 'Segmentation',   human: 'lead classificado',         icon: Cpu,         logs: ['Classificando segmento...', 'ICP match: 94%', 'priority: HIGH'],    errorLog: '⚠ Falha na classificação — tentando novamente...' },
+      { id: 'db',           label: 'DATABASE',       sublabel: 'Supabase',       human: 'dados salvos',              icon: Database,    logs: ['INSERT leads (1 row)', 'UPDATE score_history', 'realtime: emitted'],errorLog: '⚠ Falha ao salvar — tentando novamente...' },
+      { id: 'notify',       label: 'NOTIFICAÇÃO',    sublabel: 'Sales Team',     human: 'equipe notificada',         icon: Bell,        logs: ['Slack #sales-hot: ✓', 'Email SDR: enviado', 'Calendly: agendado'],  errorLog: '⚠ Falha no envio — tentando novamente...' },
     ],
   },
 ];
@@ -188,6 +189,11 @@ function NodeCard({ node, status, logLine, index, isMobile }: NodeCardProps) {
       {/* Sublabel */}
       <span className="font-mono text-[6.5px] tracking-[0.12em] text-white/22 uppercase mt-0.5 block leading-tight truncate">
         {node.sublabel}
+      </span>
+
+      {/* Human description */}
+      <span className="font-mono text-[6px] tracking-[0.08em] text-white/30 italic mt-0.5 block leading-tight">
+        {node.human}
       </span>
 
       {/* Mini log bubble */}
@@ -518,8 +524,8 @@ export function AutomationFlowVisualizer() {
             <span className="font-mono font-bold text-[10px] tracking-[0.25em] uppercase text-white/80">
               AUTOMATION FLOW
             </span>
-            <p className="font-mono text-[7px] tracking-[0.2em] text-white/22 uppercase">
-              event-driven pipeline visualizer
+            <p className="font-mono text-[7px] tracking-[0.14em] text-white/22">
+              Veja como automatizamos processos que antes precisavam de pessoas
             </p>
           </div>
         </div>
@@ -573,7 +579,7 @@ export function AutomationFlowVisualizer() {
             className="flex items-center gap-1.5 h-8 px-4 rounded-lg border border-emerald/40 bg-emerald/[0.08] font-mono text-[8px] tracking-[0.25em] uppercase text-emerald hover:bg-emerald/15 hover:border-emerald/60 hover:shadow-[0_0_18px_rgba(16,185,129,0.2)] disabled:opacity-35 disabled:cursor-not-allowed transition-all duration-200 active:scale-[0.97]"
           >
             <Play size={9} />
-            DISPARAR EVENTO
+            ▶ VER AUTOMAÇÃO FUNCIONANDO
           </button>
 
           <button
@@ -582,7 +588,7 @@ export function AutomationFlowVisualizer() {
             className="flex items-center gap-1.5 h-8 px-4 rounded-lg border border-amber-400/35 bg-amber-400/[0.06] font-mono text-[8px] tracking-[0.25em] uppercase text-amber-400/80 hover:bg-amber-400/12 hover:border-amber-400/55 disabled:opacity-35 disabled:cursor-not-allowed transition-all duration-200 active:scale-[0.97]"
           >
             <AlertTriangle size={9} />
-            SIMULAR ERRO
+            ⚠ SIMULAR FALHA E RECUPERAÇÃO
           </button>
         </div>
       </div>
@@ -657,7 +663,7 @@ export function AutomationFlowVisualizer() {
               <div className="w-1.5 h-1.5 rounded-full bg-yellow-400/30" />
               <div className="w-1.5 h-1.5 rounded-full bg-emerald/30" />
             </div>
-            <span className="font-mono text-[7px] tracking-[0.38em] uppercase text-white/22">[ PIPELINE LOGS ]</span>
+            <span className="font-mono text-[7px] tracking-[0.38em] uppercase text-white/22">[ REGISTRO DE ATIVIDADE ]</span>
           </div>
           <span className="font-mono text-[6.5px] tracking-[0.2em] uppercase text-white/14">
             {pipelineLogs.length} eventos
@@ -711,7 +717,7 @@ export function AutomationFlowVisualizer() {
         {/* Event counter */}
         <div className="flex items-center gap-2">
           <span className="font-mono text-[7px] tracking-[0.28em] uppercase text-white/22">
-            EVENTOS PROCESSADOS HOJE:
+            Automações executadas hoje:
           </span>
           <motion.span
             key={eventCount}

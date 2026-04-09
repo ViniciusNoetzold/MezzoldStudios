@@ -9,6 +9,7 @@ type ContactInfoProps = React.ComponentProps<'div'> & {
 	label: string;
 	value: string;
 	copyable?: boolean;
+	href?: string;
 };
 
 type ContactCardProps = React.ComponentProps<'div'> & {
@@ -101,10 +102,18 @@ export function ContactCard({
 }
 
 /** Compact row chip used on mobile */
-function MobileContactChip({ icon: Icon, label, value, copyable, className, ...props }: ContactInfoProps) {
+function MobileContactChip({ icon: Icon, label, value, copyable, href, className, ...props }: ContactInfoProps) {
 	const [copied, setCopied] = useState(false);
 
-	function handleCopy() {
+	function handleClick() {
+		if (href) {
+			if (href.startsWith('mailto:')) {
+				window.location.href = href;
+			} else {
+				window.open(href, '_blank', 'noopener,noreferrer');
+			}
+			return;
+		}
 		if (!copyable) return;
 		navigator.clipboard.writeText(value).then(() => {
 			setCopied(true);
@@ -116,10 +125,10 @@ function MobileContactChip({ icon: Icon, label, value, copyable, className, ...p
 		<div
 			className={cn(
 				'flex items-center gap-3 px-3 py-2.5 rounded-lg border border-white/8 bg-white/[0.03]',
-				copyable && 'cursor-pointer select-none active:scale-[0.98] transition-transform duration-100',
+				(copyable || href) && 'cursor-pointer select-none active:scale-[0.98] transition-transform duration-100',
 				className,
 			)}
-			onClick={handleCopy}
+			onClick={handleClick}
 			{...props}
 		>
 			<div className="shrink-0 rounded-md bg-white/5 p-2 text-white/60">
@@ -139,10 +148,18 @@ function MobileContactChip({ icon: Icon, label, value, copyable, className, ...p
 }
 
 /** Full card used on desktop */
-function ContactInfo({ icon: Icon, label, value, copyable, className, ...props }: ContactInfoProps) {
+function ContactInfo({ icon: Icon, label, value, copyable, href, className, ...props }: ContactInfoProps) {
 	const [copied, setCopied] = useState(false);
 
-	function handleCopy() {
+	function handleClick() {
+		if (href) {
+			if (href.startsWith('mailto:')) {
+				window.location.href = href;
+			} else {
+				window.open(href, '_blank', 'noopener,noreferrer');
+			}
+			return;
+		}
 		if (!copyable) return;
 		navigator.clipboard.writeText(value).then(() => {
 			setCopied(true);
@@ -154,10 +171,10 @@ function ContactInfo({ icon: Icon, label, value, copyable, className, ...props }
 		<div
 			className={cn(
 				'flex items-center gap-3 py-3',
-				copyable && 'cursor-pointer select-none group/copy',
+				(copyable || href) && 'cursor-pointer select-none group/copy hover:bg-white/[0.02] rounded-xl px-2 -mx-2 transition-colors',
 				className,
 			)}
-			onClick={handleCopy}
+			onClick={handleClick}
 			{...props}
 		>
 			<div className="bg-white/5 border border-white/10 rounded-lg p-3 text-white shrink-0">

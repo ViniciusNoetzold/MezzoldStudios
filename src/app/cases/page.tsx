@@ -1,6 +1,7 @@
 import { Header }    from '@/components/layout/Header';
 import { Footer }    from '@/components/layout/Footer';
 import { CasesGrid } from '@/components/sections/CasesGrid';
+import { BGPattern } from '@/components/ui/bg-pattern';
 import Link from 'next/link';
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function CasesPage() {
     <>
       <Header />
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 relative z-10">
+        <BGPattern variant="dots" mask="fade-bottom" className="opacity-50" />
         <div className="container mx-auto max-w-5xl">
 
           {/* ── Hero section ── */}
@@ -32,8 +34,7 @@ export default function CasesPage() {
             </h1>
 
             <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/30 max-w-lg">
-              Demonstrações interativas e estudos de caso das nossas especialidades
-              em performance, automação, design systems e micro-SaaS.
+              Veja o que construímos — e imagine o que faremos pelo seu negócio
             </p>
           </div>
 

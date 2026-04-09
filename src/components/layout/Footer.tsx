@@ -1,29 +1,5 @@
-import Link from 'next/link';
+import { Footer7 } from '@/components/ui/footer-7';
 
 export function Footer() {
-  return (
-    <footer className="pt-10 pb-6 relative z-10 bg-[#020202]">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
-        <div className="col-span-1 md:col-span-2">
-          <h2 className="font-sans font-black text-2xl tracking-tighter mb-4">MEZZOLD STUDIO</h2>
-          <p className="text-white/60 max-w-sm mb-6 text-sm">
-            Engenharia de soluções digitais de alta performance. Construímos plataformas inovadoras para marcas SaaS e digital-first.
-          </p>
-        </div>
-        <div className="col-span-1 md:col-span-2">
-          <h3 className="font-mono tracking-widest text-xs mb-6 uppercase text-white/40">Links</h3>
-          <ul className="grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
-            <li><Link href="/cases" className="hover:text-white transition-colors">Portfólio</Link></li>
-            <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-            <li><Link href="/#contact" className="hover:text-white transition-colors">Contato</Link></li>
-            <li><Link href="/docs" className="hover:text-white transition-colors">Documentação</Link></li>
-            <li><Link href="/stack" className="hover:text-white transition-colors">Stack Tech</Link></li>
-          </ul>
-        </div>
-      </div>
-      <div className="container mx-auto px-6 pt-8 border-t border-white/5 flex justify-center md:justify-between items-center text-xs text-white/40 font-mono">
-        <p>© 2026 Mezzold Studio. Todos os direitos reservados.</p>
-      </div>
-    </footer>
-  );
+  return <Footer7 />;
 }

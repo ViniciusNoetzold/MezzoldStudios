@@ -429,10 +429,13 @@ export function MezzLink() {
           </div>
           <h2 className="font-sans font-black text-2xl tracking-tighter text-white">MEZZLINK</h2>
           <span className="font-mono text-[7px] tracking-[0.3em] uppercase px-2 py-0.5 rounded border border-blue-500/20 text-blue-400/60 bg-blue-500/[0.04]">
-            MICRO-SAAS DEMO
+            PRODUTO REAL — DEMO AO VIVO
           </span>
         </div>
         <p className="font-mono text-[8px] tracking-[0.18em] text-white/25">Encurte. Rastreie. Escale.</p>
+        <p className="font-mono text-[8.5px] tracking-[0.1em] text-white/30 italic mt-2 max-w-md text-center">
+          Este é um produto real que construímos do zero — com analytics, persistência de dados e interface profissional. É assim que entregamos Micro-SaaS.
+        </p>
 
         {/* Clear all — absolute top-right */}
         <button
@@ -446,11 +449,11 @@ export function MezzLink() {
 
       {/* ── KPI cards ── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-5">
-        <Stat label="Total de links"   value={String(links.length)}             icon={Link}              />
-        <Stat label="Total de cliques" value={totalClicks.toLocaleString('pt-BR')} icon={MousePointerClick} />
-        <Stat label="Mais popular"     value={mostPopular ? `/${mostPopular.slug}` : '—'}
-              sub={mostPopular ? `${mostPopular.clicks} cliques` : undefined}    icon={TrendingUp}        />
-        <Stat label="Cliques hoje"     value={String(clicksToday)}              icon={Activity}          />
+        <Stat label="Links criados"      value={String(links.length)}             icon={Link}              />
+        <Stat label="Acessos registrados" value={totalClicks.toLocaleString('pt-BR')} icon={MousePointerClick} />
+        <Stat label="Link mais acessado"  value={mostPopular ? `/${mostPopular.slug}` : '—'}
+              sub={mostPopular ? `${mostPopular.clicks} acessos` : undefined}    icon={TrendingUp}        />
+        <Stat label="Acessos hoje"     value={String(clicksToday)}              icon={Activity}          />
       </div>
 
       {/* ── Input bar ── */}
@@ -481,7 +484,7 @@ export function MezzLink() {
           disabled={!valid}
           className="shrink-0 h-11 px-6 rounded-xl border font-mono text-[9px] tracking-[0.25em] uppercase transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed bg-blue-500/[0.08] border-blue-500/30 text-blue-400 hover:bg-blue-500/15 hover:border-blue-500/50 hover:shadow-[0_0_24px_rgba(59,130,246,0.14)] active:scale-[0.98]"
         >
-          Encurtar →
+          Criar link →
         </button>
       </div>
 
@@ -489,14 +492,14 @@ export function MezzLink() {
       {links.length === 0 ? (
         <div className="border border-white/[0.04] border-dashed rounded-xl py-14 flex flex-col items-center gap-3">
           <Link size={20} className="text-white/12" />
-          <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/18">Nenhum link criado</span>
+          <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/18">Nenhum link criado ainda — cole uma URL acima para começar</span>
         </div>
       ) : (
         <div className="border border-white/[0.07] rounded-xl overflow-hidden">
           {/* Table header */}
           <div className="hidden md:grid grid-cols-[120px_1fr_72px_60px_52px_80px] gap-3 px-4 py-2.5 border-b border-white/[0.06]"
             style={{ background: 'rgba(96, 165, 250, 0.06)' }}>
-            {['SLUG', 'URL ORIGINAL', 'CLIQUES', 'TREND', 'DATA', ''].map(h => (
+            {['SEU LINK', 'DESTINO', 'ACESSOS', 'TENDÊNCIA', 'DATA', ''].map(h => (
               <span key={h} className="font-mono text-[7px] tracking-[0.28em] uppercase text-white/20 last:text-right">{h}</span>
             ))}
           </div>

@@ -340,13 +340,18 @@ export function LiveMonitoringDashboard() {
         </div>
       </div>
 
+      {/* ── Context line ── */}
+      <p className="font-mono text-[9px] tracking-[0.12em] text-white/30 italic mb-4">
+        É assim que monitoramos sistemas em produção — em tempo real, sem surpresas.
+      </p>
+
       {/* ── KPIs ── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
-        <KPI label="Requests / seg" value={kpi.requests.toLocaleString('pt-BR')} sub="req/s" />
-        <KPI label="Latência média"  value={`${kpi.latency}ms`}                  sub="avg p50" />
-        <KPI label="Uptime"          value="99.97%"                              sub="últimos 30d" dim />
+        <KPI label="Acessos por segundo" value={kpi.requests.toLocaleString('pt-BR')} sub="req/s" />
+        <KPI label="Velocidade de resposta"  value={`${kpi.latency}ms`}            sub="avg p50" />
+        <KPI label="Disponibilidade do sistema" value="99.97%"                    sub="últimos 30d" dim />
         <KPI
-          label="Erros / hora"
+          label="Falhas por hora"
           value={String(kpi.errors)}
           sub="error rate"
           dim={kpi.errors === 0}
@@ -357,7 +362,7 @@ export function LiveMonitoringDashboard() {
       <div className="border border-white/[0.06] rounded-lg bg-black/25 p-3.5 mb-3">
         <div className="flex items-center justify-between mb-2.5">
           <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/25">
-            [ THROUGHPUT EM TEMPO REAL ]
+            [ ACESSOS EM TEMPO REAL ]
           </span>
           <motion.span
             key={kpi.requests}
@@ -377,14 +382,14 @@ export function LiveMonitoringDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         <div className="border border-white/[0.06] rounded-lg bg-black/25 p-4">
           <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/25 block mb-3">
-            [ DISTRIBUIÇÃO DE STATUS ]
+            [ SAÚDE DAS REQUISIÇÕES ]
           </span>
           <Donut d={dist} />
         </div>
 
         <div className="border border-white/[0.06] rounded-lg bg-black/25 p-4">
           <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/25 block mb-3">
-            [ LATÊNCIA POR ENDPOINT ]
+            [ VELOCIDADE POR PÁGINA ]
           </span>
           <EndpointBars eps={endpoints} />
         </div>
@@ -393,7 +398,7 @@ export function LiveMonitoringDashboard() {
       {/* ── Log table ── */}
       <div className="border border-white/[0.06] rounded-lg bg-black/25 p-4">
         <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/25 block mb-3">
-          [ LOGS RECENTES ]
+          [ ATIVIDADE RECENTE ]
         </span>
 
         {/* Header row */}

@@ -21,7 +21,7 @@ interface Scenario {
 
 const SCENARIOS: Scenario[] = [
   {
-    id: 'n1', tab: 'N+1 Query', lang: 'PYTHON', file: 'dashboard.py',
+    id: 'n1', tab: 'Consulta lenta ao banco', lang: 'PYTHON', file: 'dashboard.py',
     before: [
       { text: '# [BUG] N+1: executa 1 + N queries no banco' },
       { text: 'def get_dashboard(db):' },
@@ -49,15 +49,15 @@ const SCENARIOS: Scenario[] = [
       { text: '    } for u in users]' },
     ],
     metrics: [
-      { label: 'Queries',    before: '1 + N (47)',       after: '1 (JOIN)' },
-      { label: 'Tempo',      before: '~2.400ms',         after: '~12ms'   },
-      { label: 'Memória',    before: '340 MB',           after: '28 MB'   },
+      { label: 'Consultas ao banco', before: '47 consultas', after: '1 consulta' },
+      { label: 'Tempo de resposta',  before: '2.4 segundos', after: '12 milissegundos' },
+      { label: 'Memória usada',      before: '340 MB',       after: '28 MB' },
     ],
-    badge: '−99.5% latência',
-    explanation: 'O problema N+1 ocorre quando um ORM executa uma query adicional para cada item de uma lista. Com `joinedload()`, o SQLAlchemy gera um único `SELECT ... JOIN` buscando tudo de uma vez. Resultado: de 47 queries para 1, reduzindo latência em 99.5% e eliminando gargalo no pool de conexões.',
+    badge: '−99.5% mais rápido',
+    explanation: 'Imagine que você precisa buscar 50 pedidos e, para cada um, o sistema vai ao banco perguntar "quem fez esse pedido?". São 51 viagens ao banco. Nós resolvemos isso em 1 viagem só — buscando tudo de uma vez com um JOIN. Resultado: seu sistema fica 200× mais rápido e usa 12× menos memória.',
   },
   {
-    id: 'cb', tab: 'Callback Hell', lang: 'JAVASCRIPT', file: 'auth.js',
+    id: 'cb', tab: 'Código difícil de manter', lang: 'JAVASCRIPT', file: 'auth.js',
     before: [
       { text: '// [BUG] Callback pyramid — impossível de manter' },
       { text: 'function loadProfile(userId, cb) {', hl: 'bad' },
@@ -87,11 +87,11 @@ const SCENARIOS: Scenario[] = [
       { label: 'Error handling', before: 'Manual ×3', after: 'try/catch'  },
       { label: 'Linhas',      before: '13 linhas',    after: '7 linhas'   },
     ],
-    badge: '−46% código, DX +500%',
-    explanation: 'Callbacks aninhados criam o "Pyramid of Doom": cada nível de indentação adiciona complexidade cognitiva e superfície de falha. Com async/await, o fluxo se torna linear como código síncrono. Um único `try/catch` substitui todos os `if (err)` manuais. Manutenção e debugging ficam drásticamente mais simples.',
+    badge: '−46% código, muito mais simples',
+    explanation: 'Imagine uma receita de bolo onde cada etapa só começa dentro da etapa anterior — fica impossível de ler. Era assim que esse código funcionava. Reescrevemos para que cada passo seja claro e sequencial. Resultado: menos código, menos erros, e qualquer desenvolvedor entende em segundos — não em horas.',
   },
   {
-    id: 'cache', tab: 'Cache Strategy', lang: 'NODE.JS', file: 'products.ts',
+    id: 'cache', tab: 'Sistema sem cache', lang: 'NODE.JS', file: 'products.ts',
     before: [
       { text: '// [BUG] Zero cache — DB hit em toda request' },
       { text: 'app.get("/api/products", async (req, res) => {', hl: 'bad' },
@@ -120,11 +120,11 @@ const SCENARIOS: Scenario[] = [
       { label: 'Queries/min',  before: '1.200',          after: '~24'      },
       { label: 'Custo DB',     before: 'R$ 180/mês',     after: 'R$ 12/mês' },
     ],
-    badge: '−98% tempo, −98% custo',
-    explanation: 'Sem cache, cada requisição bate direto no banco — custoso e lento. A estratégia redis.get → cache hit → redis.set elimina 98% das queries com um TTL de 5 minutos. Para dados que mudam raramente (produtos, configs), o cache-aside pattern é a solução padrão de sistemas de alta performance.',
+    badge: '−98% mais rápido, −98% de custo',
+    explanation: 'Imagine que cada vez que um cliente abre seu site, o sistema corre até o estoque para buscar a lista de produtos — mesmo que ela não tenha mudado. Com cache, buscamos uma vez e guardamos a resposta por 5 minutos. De 1.200 consultas por minuto para apenas 24. Seu sistema fica mais rápido e sua conta de banco de dados cai 93%.',
   },
   {
-    id: 'on2', tab: 'O(n²) → O(n)', lang: 'JAVASCRIPT', file: 'utils.js',
+    id: 'on2', tab: 'Algoritmo ineficiente', lang: 'JAVASCRIPT', file: 'utils.js',
     before: [
       { text: '// [BUG] O(n²) — loop duplo aninhado' },
       { text: 'function findDuplicates(arr) {' },
@@ -159,8 +159,8 @@ const SCENARIOS: Scenario[] = [
       { label: '10k itens',    before: '~3.200ms', after: '~4ms'    },
       { label: 'Memória',      before: '450 MB',   after: '28 MB'   },
     ],
-    badge: '−99.9% tempo execução',
-    explanation: 'O loop duplo compara cada elemento com todos os outros: n×(n-1)/2 comparações. Com 10k itens, são 50 milhões de operações. Usando um Set (hash table), cada inserção e lookup é O(1) amortizado. O algoritmo passa a processar cada elemento apenas uma vez: n operações totais. Uma reescrita de 3 linhas, ganho exponencial.',
+    badge: '−99.9% mais rápido',
+    explanation: 'Imagine verificar duplicatas comparando cada pessoa de uma fila com todas as outras. Com 10.000 pessoas, são 50 milhões de comparações. Nossa solução cria uma lista de "já vimos esse" e verifica em tempo zero. De 50 milhões de operações para apenas 10.000 — uma reescrita simples com ganho exponencial.',
   },
 ];
 
@@ -209,7 +209,7 @@ function CodePanel({ lines, side, revealKey }: {
 }) {
   const isBefore = side === 'before';
   const accentColor = isBefore ? '#f87171' : '#4ade80';
-  const labelText   = isBefore ? '[ ANTES ]' : '[ DEPOIS ]';
+  const labelText   = isBefore ? '[ ANTES DA MEZZOLD ]' : '[ DEPOIS DA MEZZOLD ]';
 
   return (
     <div
@@ -363,7 +363,7 @@ export function CodeQualityDiffViewer() {
                 : 'text-white/25',
             ].join(' ')}
           >
-            {tab === 'before' ? '[ ANTES ]' : '[ DEPOIS ]'}
+            {tab === 'before' ? '[ ANTES DA MEZZOLD ]' : '[ DEPOIS DA MEZZOLD ]'}
           </button>
         ))}
       </div>
@@ -452,7 +452,7 @@ export function CodeQualityDiffViewer() {
             onClick={() => setExpanded(e => !e)}
             className="w-full flex items-center justify-between px-4 py-3 font-mono text-[8px] tracking-[0.3em] uppercase text-white/35 hover:text-white/60 hover:bg-white/[0.02] transition-all duration-150"
           >
-            <span>[ VER EXPLICAÇÃO TÉCNICA ]</span>
+            <span>[ ENTENDER EM LINGUAGEM SIMPLES ]</span>
             <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
               <ChevronDown size={11} />
             </motion.div>

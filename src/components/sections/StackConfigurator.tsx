@@ -36,7 +36,7 @@ interface Selections {
 const STEP_DEFS: StepDef[] = [
   {
     key: 'product', icon: Globe,
-    subtitle: 'ETAPA 1 — PRODUTO',
+    subtitle: 'ETAPA 1 — QUE TIPO DE PROJETO VOCÊ PRECISA?',
     title: 'Que tipo de produto você quer construir?',
     multiple: false,
     options: [
@@ -50,11 +50,11 @@ const STEP_DEFS: StepDef[] = [
   },
   {
     key: 'frontend', icon: Layers,
-    subtitle: 'ETAPA 2 — FRONTEND',
+    subtitle: 'ETAPA 2 — COMO SERÁ A APARÊNCIA?',
     title: 'Escolha o stack de interface',
     multiple: false,
     options: [
-      { id: 'nextjs',  label: 'Next.js',       sublabel: 'React + SSR/SSG robusto',        weight: 2 },
+      { id: 'nextjs',  label: 'Next.js',       sublabel: 'Rápido, moderno, ideal para a maioria dos projetos', weight: 2 },
       { id: 'nuxt',    label: 'Nuxt.js',       sublabel: 'Vue com superpoderes',            weight: 2 },
       { id: 'react',   label: 'React SPA',     sublabel: 'Client-side altamente dinâmico',  weight: 2 },
       { id: 'vue',     label: 'Vue.js',        sublabel: 'Reativo e progressivo',           weight: 1 },
@@ -64,7 +64,7 @@ const STEP_DEFS: StepDef[] = [
   },
   {
     key: 'backend', icon: Server,
-    subtitle: 'ETAPA 3 — BACKEND',
+    subtitle: 'ETAPA 3 — COMO FUNCIONARÁ POR DENTRO?',
     title: 'Escolha o stack de servidor',
     multiple: false,
     options: [
@@ -72,17 +72,17 @@ const STEP_DEFS: StepDef[] = [
       { id: 'nextapi',  label: 'Next.js API Routes', sublabel: 'Backend no mesmo projeto',          weight: 1 },
       { id: 'spring',   label: 'Spring Boot',        sublabel: 'Java enterprise-grade',             weight: 3 },
       { id: 'fastapi',  label: 'FastAPI',            sublabel: 'Python assíncrono de alta perf',    weight: 2 },
-      { id: 'supabase', label: 'Supabase',           sublabel: 'BaaS open-source com Postgres',     weight: 1 },
+      { id: 'supabase', label: 'Supabase',           sublabel: 'Banco de dados pronto, sem complicação', weight: 1 },
       { id: 'firebase', label: 'Firebase',           sublabel: 'Google BaaS serverless',            weight: 1 },
     ],
   },
   {
     key: 'infra', icon: Cloud,
-    subtitle: 'ETAPA 4 — INFRAESTRUTURA',
+    subtitle: 'ETAPA 4 — ONDE VAI RODAR?',
     title: 'Onde vai rodar?',
     multiple: false,
     options: [
-      { id: 'vercel',     label: 'Vercel',         sublabel: 'Edge-first, zero DevOps',      weight: 1 },
+      { id: 'vercel',     label: 'Vercel',         sublabel: 'Hospedagem automática, sem servidor para gerenciar', weight: 1 },
       { id: 'aws',        label: 'AWS',            sublabel: 'Escala enterprise global',      weight: 3 },
       { id: 'railway',    label: 'Railway',        sublabel: 'Deploy simples e eficiente',    weight: 1 },
       { id: 'vps',        label: 'VPS Linux',      sublabel: 'Controle total do servidor',    weight: 2 },
@@ -92,12 +92,12 @@ const STEP_DEFS: StepDef[] = [
   },
   {
     key: 'integrations', icon: Plug,
-    subtitle: 'ETAPA 5 — INTEGRAÇÕES',
+    subtitle: 'ETAPA 5 — COM O QUE PRECISA SE CONECTAR?',
     title: 'Selecione as integrações',
     multiple: true,
     options: [
-      { id: 'stripe',    label: 'Stripe',           sublabel: 'Pagamentos e assinaturas',  weight: 1 },
-      { id: 'auth',      label: 'Autenticação',     sublabel: 'Auth0, Clerk, NextAuth',    weight: 1 },
+      { id: 'stripe',    label: 'Stripe',           sublabel: 'Pagamentos online e assinaturas', weight: 1 },
+      { id: 'auth',      label: 'Login & Autenticação', sublabel: 'Área de membros segura — Auth0, Clerk, NextAuth', weight: 1 },
       { id: 'analytics', label: 'Analytics',        sublabel: 'GA4, Mixpanel, Posthog',    weight: 1 },
       { id: 'crm',       label: 'CRM',              sublabel: 'HubSpot, Pipedrive, Zoho',  weight: 2 },
       { id: 'email',     label: 'Email Marketing',  sublabel: 'Resend, Mailchimp, Brevo',  weight: 1 },
@@ -152,19 +152,19 @@ const TIER_CFG = {
     color: '#34d399', border: 'border-emerald/40',  shadow: 'shadow-[0_0_30px_rgba(52,211,153,0.1)]',
     icon: Rocket,
     label: 'STARTER BUILD',
-    message: 'Valida rápido, escala depois. Esse stack foi projetado para lançar em semanas. Zero débito técnico desde o primeiro commit.',
+    message: 'Projeto objetivo — podemos entregar rápido e com qualidade. Esse stack foi projetado para lançar em semanas.',
   },
   Pro: {
     color: '#60a5fa', border: 'border-blue-400/40',  shadow: 'shadow-[0_0_30px_rgba(96,165,250,0.1)]',
     icon: Zap,
     label: 'PRO BUILD',
-    message: 'Stack robusto com escala planejada. Esse é o centro do nosso portfólio — entregamos mais de 20 projetos nesse nível.',
+    message: 'Projeto robusto — temos experiência sólida com esse perfil. Esse é o centro do nosso portfólio, com mais de 20 projetos entregues nesse nível.',
   },
   Enterprise: {
     color: '#ff4d6e', border: 'border-red-400/40', shadow: 'shadow-[0_0_30px_rgba(255,77,110,0.1)]',
     icon: Building2,
     label: 'ENTERPRISE BUILD',
-    message: 'Arquitetura de alto nível com zero tolerância a falhas. Esse é exatamente nosso core — sistemas críticos que não podem parar.',
+    message: 'Projeto de alta complexidade — esse é exatamente o nosso core. Arquitetura de alto nível com zero tolerância a falhas, para sistemas que não podem parar.',
   },
 };
 
@@ -397,7 +397,7 @@ export function StackConfigurator() {
         style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div>
           <span className="font-mono font-bold text-[10px] tracking-[0.3em] uppercase text-white/70">STACK CONFIGURATOR</span>
-          <p className="font-mono text-[7px] tracking-[0.2em] text-white/20 uppercase mt-0.5">Mezzold Studio · Tech Advisor</p>
+          <p className="font-mono text-[7px] tracking-[0.2em] text-white/20 mt-0.5">Monte o projeto ideal para o seu negócio</p>
         </div>
         {step > 0 && step < 5 && (
           <button onClick={reset} className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.2em] uppercase text-white/25 hover:text-white/50 transition-colors duration-200">
@@ -551,7 +551,7 @@ export function StackConfigurator() {
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = tier.color + '1e'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = tier.color + '10'; }}
                     >
-                      <ExternalLink size={12} /> SOLICITAR PROPOSTA
+                      <ExternalLink size={12} /> QUERO UMA PROPOSTA PARA ESSE PROJETO →
                     </a>
                     <button
                       onClick={reset}

@@ -78,7 +78,7 @@ const CIRC = 2 * Math.PI * R;
 // ── Metric helpers ────────────────────────────────────────────────────────────
 
 const METRIC_LABELS: Record<string, string> = { lcp: 'LCP', cls: 'CLS', ttfb: 'TTFB', fid: 'FID' };
-const METRIC_DESCS: Record<string, string>  = { lcp: 'Largest Contentful Paint', cls: 'Cumulative Layout Shift', ttfb: 'Time to First Byte', fid: 'First Input Delay' };
+const METRIC_DESCS: Record<string, string>  = { lcp: 'Velocidade de carregamento', cls: 'Estabilidade visual', ttfb: 'Tempo de resposta do servidor', fid: 'Resposta ao primeiro clique' };
 
 function metricBarPct(m: Metrics, key: keyof Omit<Metrics, 'score'>): number {
   switch (key) {
@@ -283,7 +283,7 @@ export function PerformanceBenchmarkSimulator() {
         </span>
         <div className="flex-1 h-px bg-emerald/20" />
         <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-white/15">
-          MEZZOLD ENGINE v4.2
+          Testado pela Mezzold
         </span>
       </div>
 
@@ -331,7 +331,7 @@ export function PerformanceBenchmarkSimulator() {
               </button>
             )}
             <span className="font-mono text-[7px] tracking-[0.2em] uppercase text-white/15">
-              ENGINE v4.2
+              Mezzold Engine
             </span>
           </div>
         </div>
@@ -390,7 +390,7 @@ export function PerformanceBenchmarkSimulator() {
                         : 'bg-white/[0.02] border-white/[0.06] text-white/15 cursor-not-allowed',
                     ].join(' ')}
                   >
-                    {phase === 'scanning' ? 'Analisando...' : 'Analisar →'}
+                    {phase === 'scanning' ? 'Analisando...' : 'Testar agora →'}
                   </button>
                 </div>
               </motion.div>
@@ -438,11 +438,11 @@ export function PerformanceBenchmarkSimulator() {
                       boxShadow: '0 0 20px rgba(16,185,129,0.22)',
                     }}
                   >
-                    ⬡ ELITE PERFORMANCE
+                    Site extremamente rápido ✓
                   </motion.div>
 
                   <span className="font-mono text-[7px] text-white/18 tracking-wider mt-1">
-                    Powered by Mezzold Engine v4.2
+                    Análise feita pela Mezzold
                   </span>
                 </div>
 
@@ -550,7 +550,7 @@ export function PerformanceBenchmarkSimulator() {
                   className="flex items-center gap-3 shrink-0"
                 >
                   <span className={`font-mono text-[9px] tracking-[0.4em] uppercase font-bold ${isElite ? 'text-emerald' : 'text-cyan'}`}>
-                    {isElite ? '⬡ ELITE PERFORMANCE' : '◈ HIGH PERFORMANCE'}
+                    {isElite ? 'Site extremamente rápido ✓' : 'Site com boa performance ◈'}
                   </span>
                   <span className="font-mono text-[7px] text-white/20 tracking-wider">{domain}</span>
                 </motion.div>
@@ -581,11 +581,11 @@ export function PerformanceBenchmarkSimulator() {
                         boxShadow:    `0 0 20px ${isElite ? 'rgba(16,185,129,0.22)' : 'rgba(6,182,212,0.22)'}`,
                       }}
                     >
-                      {isElite ? '⬡ ELITE PERFORMANCE' : '◈ HIGH PERFORMANCE'}
+                      {isElite ? 'Site extremamente rápido ✓' : 'Site com boa performance ◈'}
                     </motion.div>
 
                     <span className="font-mono text-[7px] text-white/18 tracking-wider mt-1">
-                      Powered by Mezzold Engine v4.2
+                      Análise feita pela Mezzold
                     </span>
                   </motion.div>
 
@@ -629,7 +629,7 @@ export function PerformanceBenchmarkSimulator() {
                     >
                       <div>
                         <p className="font-mono text-[9px] text-white/45 leading-relaxed">
-                          Sua plataforma poderia ter isso.
+                          Quer que seu site tenha essa performance?
                         </p>
                         <p className="font-mono text-[7.5px] text-white/20 mt-0.5">
                           Construímos isso do zero para cada cliente.

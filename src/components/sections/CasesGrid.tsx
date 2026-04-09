@@ -15,6 +15,8 @@ import { StackConfigurator }             from './StackConfigurator';
 import { CodeQualityDiffViewer }          from './CodeQualityDiffViewer';
 import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow, Settings2, Code2 } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
+import { Parallax3DCard } from '@/components/ui/parallax-3d-card';
+import { BGPattern } from '@/components/ui/bg-pattern';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -25,6 +27,7 @@ interface Case {
   id:          string;
   label:       string;
   category:    Category;
+  context:     string;
   title:       string;
   description: string;
   tags:        string[];
@@ -38,6 +41,7 @@ interface Case {
 const CASES: Case[] = [
   {
     id: 'performance', label: '[ PERFORMANCE ]', category: 'PERFORMANCE',
+    context:     'Quer saber se seu site é rápido?',
     title:       'Performance Benchmark Simulator',
     description: 'Analise a performance de qualquer site em tempo real. Visualize Core Web Vitals, TTFB, LCP e mais — com engine proprietária da Mezzold.',
     tags:        ['Core Web Vitals', 'Lighthouse', 'Next.js', 'Edge Network'],
@@ -45,6 +49,7 @@ const CASES: Case[] = [
   },
   {
     id: 'monitoring', label: '[ DASHBOARD ]', category: 'DASHBOARD',
+    context:     'Veja um painel de controle ao vivo',
     title:       'Live Monitoring Dashboard',
     description: 'Centro de comando em tempo real com KPIs, gráficos animados e logs ao vivo — gerado por engine proprietária, sem backend.',
     tags:        ['Real-time', 'WebSockets', 'Recharts', 'Data Viz'],
@@ -52,13 +57,15 @@ const CASES: Case[] = [
   },
   {
     id: 'ui-playground', label: '[ DESIGN SYSTEM ]', category: 'UI/UX',
+    context:     'Explore nossos componentes de interface',
     title:       'UI Component Playground',
     description: 'Vitrine interativa do design system da Mezzold. Experimente ao vivo os componentes, estados e animações que o estúdio entrega.',
     tags:        ['Design System', 'Framer Motion', 'Tailwind v4', 'Storybook'],
     accent: 'red', icon: Layers, modalSize: 'xl',
   },
   {
-    id: 'mezzlink', label: '[ MICRO-SAAS ]', category: 'MICRO-SAAS',
+    id: 'mezzlink', label: '[ PRODUTO REAL — DEMO AO VIVO ]', category: 'MICRO-SAAS',
+    context:     'Um produto real, construído do zero',
     title:       'MezzLink — Encurtador de Links',
     description: 'Produto SaaS funcional com encurtamento de URLs, analytics em tempo real, QR Code e persistência local — zero backend.',
     tags:        ['Micro-SaaS', 'localStorage', 'Analytics', 'Full-stack Demo'],
@@ -66,6 +73,7 @@ const CASES: Case[] = [
   },
   {
     id: 'iot-telemetry', label: '[ IOT & HARDWARE ]', category: 'IOT',
+    context:     'Hardware conectado à nuvem',
     title:       'IoT Telemetry Dashboard',
     description: 'Monitoramento de hardware e telemetria via MQTT. Visualização de topologia, status e diagnóstico de dispositivos embarcados em tempo real.',
     tags:        ['IoT', 'MQTT', 'Hardware', 'Real-time'],
@@ -73,6 +81,7 @@ const CASES: Case[] = [
   },
   {
     id: 'automation-flow', label: '[ AUTOMAÇÃO ]', category: 'AUTOMAÇÃO',
+    context:     'Processos automáticos sem intervenção humana',
     title:       'Automation Flow Visualizer',
     description: 'Diagrama interativo de pipeline event-driven. Dispare um evento e assista o fluxo percorrer cada nó em tempo real, com simulação de erros e recuperação automática.',
     tags:        ['Event-driven', 'Webhooks', 'BPMN', 'Resilience'],
@@ -80,6 +89,7 @@ const CASES: Case[] = [
   },
   {
     id: 'stack-configurator', label: '[ CONSULTORIA ]', category: 'AUTOMAÇÃO',
+    context:     'Monte o projeto ideal para o seu negócio',
     title:       'Stack Configurator',
     description: 'Monte seu stack ideal em 5 etapas guiadas e receba uma análise de complexidade, estimativa de prazo e proposta personalizada da Mezzold.',
     tags:        ['Tech Advisor', 'Lead Gen', 'Wizard', 'Consultivo'],
@@ -87,6 +97,7 @@ const CASES: Case[] = [
   },
   {
     id: 'code-quality', label: '[ REFATORAÇÃO ]', category: 'PERFORMANCE',
+    context:     'Código ruim custa dinheiro. Veja a diferença.',
     title:       'Code Quality Diff Viewer',
     description: 'Visualizador interativo de antes vs depois de refatoração. N+1 queries, callback hell, O(n²) — transformados em código de produção.',
     tags:        ['Otimização', 'Refatoração', 'Performance', 'Code Review'],
@@ -145,6 +156,10 @@ const MODAL_WIDTH: Record<'md' | 'xl', string> = {
   md: 'md:max-w-2xl',
   xl: 'md:max-w-5xl',
 };
+
+// ── Cover art styles per accent ───────────────────────────────────────────────
+
+
 
 // ── Portal modal — rendered at document.body to escape stacking contexts ────────
 
@@ -277,7 +292,16 @@ export function CasesGrid() {
       </div>
 
       {/* ── Grid ── */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <motion.div layout className="relative grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Dots background */}
+        <BGPattern
+          variant="dots"
+          fill="rgba(255,255,255,0.04)"
+          size={22}
+          mask="fade-edges"
+          className="rounded-2xl"
+        />
+
         <AnimatePresence mode="popLayout">
           {filtered.map((c, i) => {
             const a    = AC[c.accent];
@@ -290,49 +314,82 @@ export function CasesGrid() {
                 animate={{ opacity: 1, scale: 1,    y: 0  }}
                 exit={{    opacity: 0, scale: 0.94, y: -8  }}
                 transition={{ duration: 0.28, delay: i * 0.05 }}
-                onClick={() => setActiveId(c.id)}
-                className={[
-                  'group relative border rounded-xl p-6 cursor-pointer transition-all duration-300',
-                  'bg-white/[0.02] backdrop-blur-sm overflow-hidden',
-                  a.border, a.hover,
-                ].join(' ')}
               >
-                {/* Corner bracket */}
-                <div className={`absolute top-0 left-0 w-5 h-5 border-t border-l rounded-tl-xl pointer-events-none ${a.border}`} />
+                <Parallax3DCard
+                  onClick={() => setActiveId(c.id)}
+                  className="w-full h-full"
+                >
+                  <div
+                    className={[
+                      'group relative w-full h-full border rounded-2xl overflow-hidden transition-all duration-500',
+                      'bg-black/20 backdrop-blur-md',
+                      a.border, a.hover,
+                    ].join(' ')}
+                  >
+                    {/* Background Pattern inside card */}
+                    <div className="absolute inset-0 z-0 opacity-[0.10]">
+                      <BGPattern variant="dots" fill="rgba(255,255,255,1)" size={24} mask="fade-bottom" />
+                    </div>
 
-                {/* Hover blob */}
-                <div className={`absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl ${a.blob}`} />
+                    {/* Inner content wrapper with translateZ for parallax */}
+                    <div
+                      style={{ transform: 'translateZ(40px)', transformStyle: 'preserve-3d' }}
+                      className="relative z-10 flex flex-col p-8 h-full"
+                    >
+                      {/* Corner bracket */}
+                      <div className={`absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 rounded-tl-2xl pointer-events-none transition-colors duration-300 ${a.border}`} />
 
-                {/* Category label */}
-                <span className={`font-mono text-[9px] tracking-[0.4em] uppercase mb-4 block ${a.label}`}>
-                  {c.label}
-                </span>
+                      {/* Hover blob */}
+                      <div className={`absolute top-0 right-0 w-48 h-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[80px] -translate-y-1/2 translate-x-1/4 ${a.blob}`} />
 
-                {/* Icon + title */}
-                <div className="flex items-start gap-3 mb-3">
-                  <div className={`shrink-0 w-9 h-9 rounded-lg border flex items-center justify-center ${a.border} bg-white/[0.03]`}>
-                    <Icon size={14} className={a.label} />
+                      {/* Top section: Category & Context */}
+                      <div style={{ transform: 'translateZ(20px)' }} className="mb-6 perspective-[1000px]">
+                        <span className={`font-mono text-[9px] tracking-[0.4em] uppercase mb-4 block ${a.label}`}>
+                          {c.label}
+                        </span>
+                        <p className="font-mono text-[9px] tracking-[0.15em] text-white/40 italic leading-snug">
+                          {c.context}
+                        </p>
+                      </div>
+
+                      {/* Middle section: Icon, Title */}
+                      <div style={{ transform: 'translateZ(30px)' }} className="mb-6 perspective-[1000px]">
+                        <div className="flex items-center gap-4 mb-5">
+                          <div className={`shrink-0 w-12 h-12 rounded-xl border flex items-center justify-center ${a.border} bg-white/[0.03] shadow-inner group-hover:bg-white/[0.06] transition-colors duration-300`}>
+                            <Icon size={20} className={a.label} />
+                          </div>
+                          <h2 className="font-sans font-black text-xl tracking-tight text-white leading-snug">
+                            {c.title}
+                          </h2>
+                        </div>
+                        {/* Dynamic gradient divider line based on accent color */}
+                        <div className="h-px w-full bg-white/[0.08]" />
+                      </div>
+
+                      {/* Description */}
+                      <p style={{ transform: 'translateZ(10px)' }} className="text-white/50 text-sm leading-relaxed mb-8 flex-1 perspective-[1000px]">
+                        {c.description}
+                      </p>
+
+                      {/* Bottom section: Tags & Button */}
+                      <div style={{ transform: 'translateZ(25px)' }} className="mt-auto flex flex-col gap-6 perspective-[1000px]">
+                        <div className="flex flex-wrap gap-2">
+                          {c.tags.map(tag => (
+                            <span key={tag} className={`font-mono text-[8.5px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-md border bg-black/40 backdrop-blur-sm shadow-[inset_0_1px_rgba(255,255,255,0.05)] ${a.tag}`}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center justify-between mt-2 pt-2">
+                          <button className={`font-mono text-[9px] tracking-[0.3em] uppercase px-5 py-3 rounded-lg border transition-all duration-300 backdrop-blur-md group-hover:shadow-lg ${a.btn}`}>
+                            Ver demonstração →
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h2 className="font-sans font-black text-lg tracking-tight text-white leading-snug">
-                    {c.title}
-                  </h2>
-                </div>
-
-                {/* Description */}
-                <p className="text-white/45 text-sm leading-[1.7] mb-5">{c.description}</p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {c.tags.map(tag => (
-                    <span key={tag} className={`font-mono text-[8px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-md border bg-white/[0.02] ${a.tag}`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <button className={`font-mono text-[9px] tracking-[0.3em] uppercase px-4 py-2 rounded-lg border transition-all duration-200 ${a.btn}`}>
-                  Ver demo →
-                </button>
+                </Parallax3DCard>
               </motion.div>
             );
           })}

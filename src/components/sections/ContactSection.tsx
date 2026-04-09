@@ -77,12 +77,13 @@ export function ContactSection() {
               icon: MailIcon,
               label: 'Email',
               value: 'mezzoldstudio@gmail.com',
+              href: 'mailto:mezzoldstudio@gmail.com',
             },
             {
               icon: PhoneIcon,
               label: 'Telefone',
               value: '+55 (54) 99713-1399',
-              copyable: true,
+              href: 'https://w.app/mezzold',
             },
             {
               icon: MapPinIcon,

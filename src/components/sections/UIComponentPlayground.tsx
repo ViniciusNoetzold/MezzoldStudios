@@ -543,12 +543,12 @@ transition={{
 
 type Tab = 'buttons' | 'cards' | 'inputs' | 'badges' | 'motion';
 
-const TABS: { id: Tab; label: string; Icon: React.FC<{ size?: number; className?: string }> }[] = [
-  { id: 'buttons', label: 'Buttons', Icon: MousePointer },
-  { id: 'cards',   label: 'Cards',   Icon: Layers       },
-  { id: 'inputs',  label: 'Inputs',  Icon: ToggleLeft   },
-  { id: 'badges',  label: 'Badges',  Icon: Tag          },
-  { id: 'motion',  label: 'Motion',  Icon: Sparkles     },
+const TABS: { id: Tab; label: string; desc: string; Icon: React.FC<{ size?: number; className?: string }> }[] = [
+  { id: 'buttons', label: 'Botões',      desc: 'Ações claras que guiam o usuário',             Icon: MousePointer },
+  { id: 'cards',   label: 'Cards',       desc: 'Blocos de informação com hierarquia visual',    Icon: Layers       },
+  { id: 'inputs',  label: 'Formulários', desc: 'Entrada de dados com feedback inteligente',     Icon: ToggleLeft   },
+  { id: 'badges',  label: 'Etiquetas',   desc: 'Status e categorias em um olhar',               Icon: Tag          },
+  { id: 'motion',  label: 'Animações',   desc: 'Movimento que comunica, não distrai',           Icon: Sparkles     },
 ];
 
 export function UIComponentPlayground() {
@@ -563,7 +563,7 @@ export function UIComponentPlayground() {
 
         {/* Logo row (desktop only) */}
         <div className="hidden md:flex items-center gap-2 px-4 py-3.5 border-b border-white/[0.06]">
-          <span className="font-mono text-[7px] tracking-[0.35em] uppercase text-white/18">[ DESIGN SYSTEM ]</span>
+          <span className="font-mono text-[7px] tracking-[0.22em] uppercase text-white/18">[ BIBLIOTECA DE COMPONENTES ]</span>
         </div>
 
         {/* Tabs */}
@@ -615,7 +615,7 @@ export function UIComponentPlayground() {
           }}
         >
           {/* Section header */}
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-1">
             <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-electric-red">
               [ {TABS.find(t => t.id === tab)?.label.toUpperCase()} ]
             </span>
@@ -637,6 +637,11 @@ export function UIComponentPlayground() {
               </div>
             )}
           </div>
+
+          {/* Tab description */}
+          <p className="font-mono text-[8px] tracking-[0.1em] text-white/28 italic mb-4">
+            {TABS.find(t => t.id === tab)?.desc}
+          </p>
 
           {/* Content */}
           <AnimatePresence mode="wait">

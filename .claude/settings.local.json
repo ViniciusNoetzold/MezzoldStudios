@@ -38,7 +38,19 @@
       "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md c:/Users/noetz/Desktop/MezzoldV3Last/.claude/skills/security-best-practices/SKILL.md)",
       "Bash(cp /tmp/wshobson-agents/plugins/security-scanning/skills/stride-analysis-patterns/SKILL.md __TRACKED_VAR__/security-best-practices/SKILL.md)",
       "Bash(npm i:*)",
-      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.get\\('dependencies',{}\\).items\\(\\)]\")"
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.get\\('dependencies',{}\\).items\\(\\)]\")",
+      "Bash(claude update:*)",
+      "Bash(sudo npm:*)",
+      "Bash(npm install:*)",
+      "Bash(rtk npx:*)",
+      "Bash(npm --version)",
+      "Bash(rtk ls:*)",
+      "Bash(rtk read:*)",
+      "Bash(rtk npm:*)",
+      "Bash(npm exec:*)",
+      "WebFetch(domain:21st.dev)",
+      "Skill(shadcn)",
+      "Bash(rtk grep:*)"
     ]
   }
 }

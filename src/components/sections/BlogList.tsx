@@ -25,10 +25,6 @@ export function BlogList() {
               <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/30">
                 {featured.date}
               </span>
-              <span className="w-px h-2.5 bg-white/20" />
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/30">
-                {featured.readTime} leitura
-              </span>
             </div>
 
             {/* Title */}
@@ -83,10 +79,6 @@ export function BlogList() {
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <span className="font-mono text-[9px] tracking-[0.35em] uppercase text-electric-red/80">
                   {post.category}
-                </span>
-                <span className="w-px h-2.5 bg-white/20" />
-                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/25">
-                  {post.readTime} leitura
                 </span>
               </div>
               <span className="font-mono font-black text-[2.25rem] leading-none text-white/[0.09] group-hover:text-electric-red/[0.22] transition-colors duration-500 select-none shrink-0">
