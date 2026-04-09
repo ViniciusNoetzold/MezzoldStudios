@@ -7,7 +7,8 @@ import { LiveMonitoringDashboard } from './LiveMonitoringDashboard';
 import { UIComponentPlayground } from './UIComponentPlayground';
 import { MezzLink } from './MezzLink';
 import { IoTTelemetryDashboard } from './IoTTelemetryDashboard';
-import { X, Zap, BarChart2, Layers, Link, Cpu } from 'lucide-react';
+import { AutomationFlowVisualizer } from './AutomationFlowVisualizer';
+import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
 
 interface Case {
@@ -70,6 +71,16 @@ const CASES: Case[] = [
     tags:        ['IoT', 'MQTT', 'Hardware', 'Real-time'],
     accent:      'emerald',
     icon:        Cpu,
+    modalSize:   'xl',
+  },
+  {
+    id:          'automation-flow',
+    label:       '[ AUTOMAÇÃO ]',
+    title:       'Automation Flow Visualizer',
+    description: 'Diagrama interativo de pipeline event-driven. Dispare um evento e assista o fluxo percorrer cada nó em tempo real, com simulação de erros e recuperação automática.',
+    tags:        ['Event-driven', 'Webhooks', 'BPMN', 'Resilience'],
+    accent:      'cyan',
+    icon:        Workflow,
     modalSize:   'xl',
   },
 ];
@@ -235,6 +246,7 @@ export function CasesGrid() {
               {active.id === 'ui-playground' && <UIComponentPlayground />}
               {active.id === 'mezzlink'      && <MezzLink />}
               {active.id === 'iot-telemetry' && <IoTTelemetryDashboard />}
+              {active.id === 'automation-flow' && <AutomationFlowVisualizer />}
             </motion.div>
           </>
         )}
