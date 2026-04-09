@@ -8,7 +8,8 @@ import { UIComponentPlayground } from './UIComponentPlayground';
 import { MezzLink } from './MezzLink';
 import { IoTTelemetryDashboard } from './IoTTelemetryDashboard';
 import { AutomationFlowVisualizer } from './AutomationFlowVisualizer';
-import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow } from 'lucide-react';
+import { StackConfigurator } from './StackConfigurator';
+import { X, Zap, BarChart2, Layers, Link, Cpu, Workflow, Settings2 } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
 
 interface Case {
@@ -81,6 +82,16 @@ const CASES: Case[] = [
     tags:        ['Event-driven', 'Webhooks', 'BPMN', 'Resilience'],
     accent:      'cyan',
     icon:        Workflow,
+    modalSize:   'xl',
+  },
+  {
+    id:          'stack-configurator',
+    label:       '[ CONSULTORIA ]',
+    title:       'Stack Configurator',
+    description: 'Monte seu stack ideal em 5 etapas guiadas e receba uma análise de complexidade, estimativa de prazo e proposta personalizada da Mezzold.',
+    tags:        ['Tech Advisor', 'Lead Gen', 'Wizard', 'Consultivo'],
+    accent:      'amber',
+    icon:        Settings2,
     modalSize:   'xl',
   },
 ];
@@ -245,8 +256,9 @@ export function CasesGrid() {
               {active.id === 'monitoring'    && <LiveMonitoringDashboard />}
               {active.id === 'ui-playground' && <UIComponentPlayground />}
               {active.id === 'mezzlink'      && <MezzLink />}
-              {active.id === 'iot-telemetry' && <IoTTelemetryDashboard />}
-              {active.id === 'automation-flow' && <AutomationFlowVisualizer />}
+              {active.id === 'iot-telemetry'      && <IoTTelemetryDashboard />}
+              {active.id === 'automation-flow'   && <AutomationFlowVisualizer />}
+              {active.id === 'stack-configurator' && <StackConfigurator />}
             </motion.div>
           </>
         )}
