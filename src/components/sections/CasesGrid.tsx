@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
+import { useFocusTrap }      from '@/hooks/useFocusTrap';
 import { PerformanceBenchmarkSimulator } from './PerformanceBenchmarkSimulator';
 import { LiveMonitoringDashboard }        from './LiveMonitoringDashboard';
 import { UIComponentPlayground }          from './UIComponentPlayground';
@@ -148,7 +150,15 @@ const MODAL_WIDTH: Record<'md' | 'xl', string> = {
 export function CasesGrid() {
   const [filter,   setFilter]   = useState<FilterKey>('TODOS');
   const [activeId, setActiveId] = useState<string | null>(null);
-  const active = CASES.find(c => c.id === activeId) ?? null;
+  const active    = CASES.find(c => c.id === activeId) ?? null;
+  const modalRef  = useRef<HTMLDivElement>(null);
+
+  // Scroll lock — compensates scrollbar width to prevent layout shift on Windows
+  useLockBodyScroll(!!activeId);
+
+  // Focus trap + Escape key — cleaned up automatically on unmount
+  const closeModal = useCallback(() => setActiveId(null), []);
+  useFocusTrap(modalRef, !!activeId, closeModal);
 
   const filtered = filter === 'TODOS' ? CASES : CASES.filter(c => c.category === filter);
 
@@ -293,24 +303,30 @@ export function CasesGrid() {
               key="backdrop"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
-              onClick={() => setActiveId(null)}
-              className="fixed inset-0 z-50 bg-black/82 backdrop-blur-sm"
+              onClick={closeModal}
+              aria-hidden="true"
+              className="fixed inset-0 z-[200] bg-black/82 backdrop-blur-sm"
             />
             <motion.div
               key="modal"
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={active.title}
               initial={{ opacity: 0, y: 36, scale: 0.97 }}
               animate={{ opacity: 1, y: 0,  scale: 1    }}
               exit={{    opacity: 0, y: 18, scale: 0.97  }}
               transition={{ type: 'spring', stiffness: 310, damping: 30 }}
               className={[
-                'fixed inset-x-3 top-[4%] bottom-[4%] z-50 overflow-y-auto',
+                'fixed inset-x-3 top-[4%] bottom-[4%] z-[201] overflow-y-auto',
                 'md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full',
                 MODAL_WIDTH[active.modalSize],
               ].join(' ')}
             >
               <div className="sticky top-0 z-10 flex justify-end mb-3">
                 <button
-                  onClick={() => setActiveId(null)}
+                  onClick={closeModal}
+                  aria-label="Fechar demonstração"
                   className="w-9 h-9 rounded-lg border border-white/10 bg-black/85 backdrop-blur-md flex items-center justify-center text-white/35 hover:text-white hover:border-white/25 transition-all duration-200"
                 >
                   <X size={13} />
