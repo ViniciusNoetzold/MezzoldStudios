@@ -20,6 +20,7 @@ export function PageTransitionLoader() {
         clearTimeout(showTimerRef.current);
         showTimerRef.current = null;
       }
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(false);
     }
   }, [pathname]);
@@ -70,7 +71,7 @@ export function PageTransitionLoader() {
         if (currentUrl.pathname === targetUrl.pathname) {
           return;
         }
-      } catch (e) {
+      } catch (_) {
         // Safe fallback in case URL parsing fails
       }
 

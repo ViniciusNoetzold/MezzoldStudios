@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Home, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline";
@@ -40,6 +41,7 @@ export function Component() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -137,12 +139,12 @@ export function Component() {
         {/* Support link */}
         <p className="text-white/25 text-xs font-mono mt-2">
           Algo quebrado?{" "}
-          <a
+          <Link
             href="/#contact"
             className="text-electric-red/60 hover:text-electric-red transition-colors underline underline-offset-4"
           >
             Fale com a gente
-          </a>
+          </Link>
         </p>
       </div>
 

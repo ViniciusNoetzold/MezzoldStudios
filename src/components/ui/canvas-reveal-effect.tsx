@@ -227,7 +227,8 @@ const ContextDestroyer = () => {
     return () => {
       // Force lose context when unmounting to free up WebGL contexts immediately
       // This prevents "WebGLRenderer: Context Lost" when rapidly hovering multiple cards
-      const extension = gl.getExtension('WEBGL_lose_context');
+      const context = gl.getContext();
+      const extension = context.getExtension('WEBGL_lose_context');
       if (extension) extension.loseContext();
     };
   }, [gl]);
