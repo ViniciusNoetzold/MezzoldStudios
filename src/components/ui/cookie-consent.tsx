@@ -17,6 +17,9 @@ export function CookieConsent() {
 
   const handleAccept = () => {
     localStorage.setItem("mezzold_cookie_consent", "true");
+    // Also set a cookie with security flags for cross-site protection
+    const oneYear = 60 * 60 * 24 * 365;
+    document.cookie = `mezzold_cookie_consent=true; path=/; max-age=${oneYear}; SameSite=Lax; Secure`;
     setShow(false);
   };
 

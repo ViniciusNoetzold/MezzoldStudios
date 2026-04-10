@@ -33,6 +33,13 @@ function isValidEmail(email: string): boolean {
 }
 
 export async function POST(request: Request) {
+  // Startup guard: fail immediately with a clear log if secret key is missing
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+  if (!recaptchaSecretKey) {
+    console.error('[CONFIG ERROR] RECAPTCHA_SECRET_KEY environment variable is not set.');
+    return NextResponse.json({ error: 'Configuração do servidor inválida. Tente novamente mais tarde.' }, { status: 503 });
+  }
+
   // Body size guard — reject oversized payloads before parsing
   const contentLength = Number(request.headers.get('content-length') ?? 0);
   if (contentLength > MAX_BODY_BYTES) {
@@ -72,25 +79,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, fake: true }, { status: 200 });
     }
 
-    if (!recaptchaToken) {
-      return NextResponse.json({ error: 'Falha na verificação anti-robô. Confirme o reCAPTCHA.' }, { status: 400 });
-    }
-
-    const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        secret: process.env.RECAPTCHA_SECRET_KEY || '',
-        response: recaptchaToken
-      }).toString()
-    });
-
-    const verifyData = await verifyRes.json();
-    if (!verifyData.success) {
-      console.error('[reCAPTCHA Error]', verifyData['error-codes']);
-      return NextResponse.json({ error: 'Falha no reCAPTCHA. Tente novamente.' }, { status: 400 });
-    }
-
+    // ── Input validation FIRST (cheap, no network) ─────────────────────────
     // Presence validation
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -99,8 +88,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Type validation
+    // Strict type validation — reject arrays, objects, numbers, etc.
     if (typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string') {
+      return NextResponse.json({ error: 'Dados inválidos.' }, { status: 400 });
+    }
+    if (phone !== undefined && phone !== null && typeof phone !== 'string') {
       return NextResponse.json({ error: 'Dados inválidos.' }, { status: 400 });
     }
 
@@ -113,6 +105,29 @@ export async function POST(request: Request) {
     if (!isValidEmail(email)) {
       return NextResponse.json({ error: 'Email inválido.' }, { status: 400 });
     }
+    // ── End input validation ────────────────────────────────────────────────
+
+    // reCAPTCHA verification AFTER input validation (expensive network call)
+    if (!recaptchaToken) {
+      return NextResponse.json({ error: 'Falha na verificação anti-robô. Confirme o reCAPTCHA.' }, { status: 400 });
+    }
+
+    const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: recaptchaSecretKey,
+        response: recaptchaToken
+      }).toString()
+    });
+
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      console.error('[reCAPTCHA Error]', verifyData['error-codes']);
+      return NextResponse.json({ error: 'Falha no reCAPTCHA. Tente novamente.' }, { status: 400 });
+    }
+
+    // (Input validation was already performed above, before reCAPTCHA check)
 
     // Escape all user input before interpolating into HTML
     const safeName = escapeHtml(name.trim());

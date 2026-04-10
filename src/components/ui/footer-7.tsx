@@ -65,18 +65,18 @@ const defaultSocialLinks = [
   },
   {
     icon: <FaFacebook className="size-5" />,
-    href: "/404",
-    label: "Facebook",
+    href: "#",
+    label: "Facebook (em breve)",
   },
   {
     icon: <FaGithub className="size-5" />,
-    href: "/404",
-    label: "GitHub",
+    href: "#",
+    label: "GitHub (em breve)",
   },
   {
     icon: <FaLinkedin className="size-5" />,
-    href: "/404",
-    label: "LinkedIn",
+    href: "#",
+    label: "LinkedIn (em breve)",
   },
 ]; // End social links
 
