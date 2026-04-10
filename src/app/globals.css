@@ -94,18 +94,18 @@
 }
 
 /* ── Scrollbar ───────────────────────────────────────────────────────────────
-   Opção 1 — Remover completamente (descomente este bloco e comente a Opção 2)
+   Opção 1 — Remover completamente 
+─────────────────────────────────────────────────────────────────────────── */
 html, body {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari and Opera */
 }
-   ─────────────────────────────────────────────────────────────────────────── */
 
-/* ── Opção 2 — Scrollbar estilizada (dark/vermelho, ativa por padrão) ──────── */
+/* ── Opção 2 — Scrollbar estilizada (desativada) ──────── 
 html, body {
   scrollbar-width: thin;
   scrollbar-color: #2a2a2a #0a0a0a;
@@ -124,7 +124,7 @@ html, body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-electric-red);
 }
-/* ─────────────────────────────────────────────────────────────────────────── */
+─────────────────────────────────────────────────────────────────────────── */
 
 /* ── Mobile performance: reduce GPU-expensive effects on touch devices ──────── */
 @media (hover: none) {
