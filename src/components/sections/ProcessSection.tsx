@@ -84,29 +84,29 @@ function MobileScrollTimeline() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ type: "spring", damping: 20, delay: 0.1 }}
                 className={cn(
-                  "w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10 bg-[#0a0a0a]",
-                  "bg-white/[0.02]"
+                  "w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-card",
+                  "bg-foreground/[0.02]"
                 )}
                 style={{
                   boxShadow: `0 0 25px rgba(255, 255, 255, 0.05)`
                 }}
               >
-                <Icon className="text-white/80" size={24} strokeWidth={1.5} />
+                <Icon className="text-foreground/80" size={24} strokeWidth={1.5} />
               </motion.div>
             </div>
 
             {/* Content */}
             <div className="flex-1 pt-1 pb-2">
               <div className="flex items-center gap-3 mb-3">
-                <span className="font-mono text-[10px] font-bold text-white/40">
+                <span className="font-mono text-[10px] font-bold text-foreground/40">
                   {phase.id}
                 </span>
-                <div className="h-px bg-white/10 flex-grow" />
+                <div className="h-px bg-[var(--border)] flex-grow" />
               </div>
-              <h3 className="font-sans font-black text-xl text-white tracking-tight leading-[1.1] mb-3 whitespace-pre-line">
+              <h3 className="font-sans font-black text-xl text-foreground tracking-tight leading-[1.1] mb-3 whitespace-pre-line">
                 {phase.title}
               </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-foreground/50 text-sm leading-relaxed">
                 {phase.desc}
               </p>
             </div>
@@ -120,7 +120,7 @@ function MobileScrollTimeline() {
 /* ─── Section ─────────────────────────────────────────────── */
 export function ProcessSection() {
   return (
-    <section className="relative bg-[#0a0a0a] py-16 md:py-24 px-4 sm:px-6 lg:px-12">
+    <section className="relative bg-surface-secondary py-16 md:py-24 px-4 sm:px-6 lg:px-12">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -133,7 +133,7 @@ export function ProcessSection() {
           transition={{ duration: 0.7 }}
         >
 
-          <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tighter text-white">
+          <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tighter text-foreground">
             COMO CONSTRUÍMOS<br />O FUTURO
           </h2>
         </motion.div>
@@ -154,24 +154,24 @@ export function ProcessSection() {
                 transition={{ duration: 0.5, delay: index * 0.06 }}
               >
                 <CardSpotlight
-                  className="h-full p-8 md:p-10 transition-colors hover:border-white/10"
-                  color="#202020"
+                  className="h-full p-8 md:p-10 transition-colors hover:border-[var(--border)]"
+                  color="var(--bg-card)"
                   canvasColors={[[255, 255, 255], [100, 100, 100]]}
                   radius={300}
                 >
                   <div className="flex justify-between items-start mb-12 relative z-10">
-                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10 bg-white/[0.02]">
-                      <Icon className="text-white/80" size={26} strokeWidth={1.5} />
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-foreground/[0.02]">
+                      <Icon className="text-foreground/80" size={26} strokeWidth={1.5} />
                     </div>
                   </div>
                   <div className="flex items-center gap-4 mb-8 relative z-10">
-                    <span className="font-mono text-[10px] md:text-xs font-bold text-white/40">{phase.id}</span>
-                    <div className="h-[1px] bg-white/10 flex-grow" />
+                    <span className="font-mono text-[10px] md:text-xs font-bold text-foreground/40">{phase.id}</span>
+                    <div className="h-[1px] bg-[var(--border)] flex-grow" />
                   </div>
-                  <h3 className="font-sans font-black text-xl md:text-2xl text-white tracking-tight leading-[1.1] mb-6 whitespace-pre-line relative z-10">
+                  <h3 className="font-sans font-black text-xl md:text-2xl text-foreground tracking-tight leading-[1.1] mb-6 whitespace-pre-line relative z-10">
                     {phase.title}
                   </h3>
-                  <p className="text-white/50 text-sm leading-relaxed mt-auto relative z-10">
+                  <p className="text-foreground/50 text-sm leading-relaxed mt-auto relative z-10">
                     {phase.desc}
                   </p>
                 </CardSpotlight>

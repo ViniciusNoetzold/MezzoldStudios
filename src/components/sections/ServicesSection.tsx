@@ -90,19 +90,19 @@ const servicesData: ServiceCardData[] = [
 function ServiceFront({ data }: { data: ServiceCardData }) {
   const Icon = data.icon;
   return (
-    <div className="flex flex-col h-full w-full p-6 md:p-8 text-left bg-neutral-950/90 backdrop-blur-md border border-white/5 relative overflow-hidden group-hover/flipping-card:opacity-0 transition-opacity duration-300">
-      <div className="flex justify-between items-center mb-6 md:mb-10 font-mono text-[9px] md:text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase">
+    <div className="flex flex-col h-full w-full p-6 md:p-8 text-left bg-card/90 backdrop-blur-md border border-[var(--border)] relative overflow-hidden group-hover/flipping-card:opacity-0 transition-opacity duration-300">
+      <div className="flex justify-between items-center mb-6 md:mb-10 font-mono text-[9px] md:text-[10px] font-bold text-foreground/40 tracking-[0.2em] uppercase">
         <span className="text-cyan-400 flex items-center gap-1.5">
           <Icon size={14} strokeWidth={2} />
         </span>
-        <div className="h-[1px] bg-white/10 flex-grow mx-3 md:mx-4"></div>
+        <div className="h-[1px] bg-[var(--border)] flex-grow mx-3 md:mx-4"></div>
         <span>{data.unit}</span>
       </div>
       
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-sans font-black mb-3 md:mb-6 text-white leading-tight tracking-tight pr-4">
+      <h3 className="text-2xl md:text-3xl lg:text-4xl font-sans font-black mb-3 md:mb-6 text-foreground leading-tight tracking-tight pr-4">
         {data.front.title}
       </h3>
-      <p className="text-xs md:text-sm lg:text-base text-white/60 font-sans mb-auto leading-relaxed">
+      <p className="text-xs md:text-sm lg:text-base text-foreground/60 font-sans mb-auto leading-relaxed">
         {data.front.description}
       </p>
     </div>
@@ -112,25 +112,25 @@ function ServiceFront({ data }: { data: ServiceCardData }) {
 function ServiceBack({ data }: { data: ServiceCardData }) {
   const Icon = data.icon;
   return (
-    <div className="flex flex-col h-full w-full p-6 md:p-8 text-left bg-neutral-950 border border-white/[0.05] relative overflow-hidden group/back">
+    <div className="flex flex-col h-full w-full p-6 md:p-8 text-left bg-card border border-[var(--border)] relative overflow-hidden group/back">
       
       {/* Subtle ambient glow */}
-      <div className="absolute -top-32 -right-32 w-72 h-72 bg-white/[0.03] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute -top-32 -right-32 w-72 h-72 bg-foreground/[0.03] blur-[100px] rounded-full pointer-events-none" />
 
       {/* Header */}
-      <div className="flex items-center gap-2 mb-6 md:mb-8 pb-4 border-b border-white/[0.05] relative z-10">
+      <div className="flex items-center gap-2 mb-6 md:mb-8 pb-4 border-b border-[var(--border)] relative z-10">
         <span className="text-cyan-400"><Icon size={14} strokeWidth={2} /></span>
-        <span className="font-mono text-[9px] md:text-[10px] text-white/30 tracking-[0.2em] uppercase">{data.unit}</span>
+        <span className="font-mono text-[9px] md:text-[10px] text-foreground/30 tracking-[0.2em] uppercase">{data.unit}</span>
       </div>
 
       {/* Attributes — editorial style: big value + label */}
       <div className="grid grid-cols-2 gap-x-4 gap-y-6 mb-auto relative z-10">
         {data.back.attributes.map(attr => (
           <div key={attr.label} className="flex flex-col gap-1">
-            <span className={cn("font-sans font-black text-lg md:text-xl tracking-tight", attr.valueColor || "text-white")}>
+            <span className={cn("font-sans font-black text-lg md:text-xl tracking-tight", attr.valueColor || "text-foreground")}>
               {attr.value}
             </span>
-            <span className="font-mono text-[9px] uppercase text-white/30 tracking-[0.12em]">
+            <span className="font-mono text-[9px] uppercase text-foreground/30 tracking-[0.12em]">
               {attr.label}
             </span>
           </div>
@@ -159,26 +159,26 @@ function MobileServiceCard({ data, isOpen, onToggle }: { data: ServiceCardData, 
       tabIndex={0}
       aria-expanded={isOpen}
       aria-controls={`service-details-${data.id}`}
-      className={cn("flex flex-col rounded-2xl border transition-colors duration-300 overflow-hidden relative cursor-pointer", isOpen ? "border-white/20 bg-[#0c0c0c]" : "border-white/[0.08] bg-[#0c0c0c]/60 hover:bg-[#0c0c0c]")}
+      className={cn("flex flex-col rounded-2xl border transition-colors duration-300 overflow-hidden relative cursor-pointer", isOpen ? "border-foreground/20 bg-card" : "border-white/[0.08] bg-card/60 hover:bg-card")}
       onClick={onToggle}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
     >
-      <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/[0.02] blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-64 h-64 bg-foreground/[0.02] blur-[80px] rounded-full pointer-events-none" />
 
       {/* Front: icon + title + description */}
-      <div className={cn("p-6 relative z-10", isOpen ? "border-b border-white/[0.05]" : "")}>
-        <div className="flex justify-between items-center mb-5 font-mono text-[9px] font-bold text-white/40 tracking-[0.2em] uppercase">
+      <div className={cn("p-6 relative z-10", isOpen ? "border-b border-[var(--border)]" : "")}>
+        <div className="flex justify-between items-center mb-5 font-mono text-[9px] font-bold text-foreground/40 tracking-[0.2em] uppercase">
           <span className="text-cyan-400 flex items-center gap-1.5">
             <Icon size={14} strokeWidth={2} />
           </span>
-          <div className="h-[1px] bg-white/10 flex-grow mx-3"></div>
+          <div className="h-[1px] bg-[var(--border)] flex-grow mx-3"></div>
           <span>{data.unit}</span>
         </div>
         
-        <h3 className="text-2xl font-sans font-black mb-3 text-white leading-tight tracking-tight">
+        <h3 className="text-2xl font-sans font-black mb-3 text-foreground leading-tight tracking-tight">
           {data.front.title}
         </h3>
-        <p className="text-sm text-white/60 font-sans leading-relaxed">
+        <p className="text-sm text-foreground/60 font-sans leading-relaxed">
           {data.front.description}
         </p>
       </div>
@@ -196,10 +196,10 @@ function MobileServiceCard({ data, isOpen, onToggle }: { data: ServiceCardData, 
           <div className="grid grid-cols-2 gap-x-4 gap-y-5">
             {data.back.attributes.map(attr => (
               <div key={attr.label} className="flex flex-col gap-1">
-                <span className={cn("font-sans font-black text-xl tracking-tight", attr.valueColor || "text-white")}>
+                <span className={cn("font-sans font-black text-xl tracking-tight", attr.valueColor || "text-foreground")}>
                   {attr.value}
                 </span>
-                <span className="font-mono text-[9px] uppercase text-white/30 tracking-[0.12em]">
+                <span className="font-mono text-[9px] uppercase text-foreground/30 tracking-[0.12em]">
                   {attr.label}
                 </span>
               </div>

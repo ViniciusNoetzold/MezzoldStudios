@@ -75,12 +75,12 @@ const accentMap: Record<string, {
   border: string; glow: string; text: string; bg: string;
   glowRgb: string; borderActive: string; shadowActive: string;
 }> = {
-  emerald: { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '16,185,129', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  cyan:    { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '103,232,249', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  violet:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '139,92,246', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  orange:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '249,115,22', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  sky:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '14,165,233', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  red:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-white/[0.02]', glowRgb: '239,68,68', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  emerald: { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '16,185,129', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  cyan:    { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '103,232,249', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  violet:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '139,92,246', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  orange:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '249,115,22', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  sky:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '14,165,233', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  red:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '239,68,68', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
 };
 
 /* ─── Mobile carousel ───────────────────────────────────────── */
@@ -147,8 +147,8 @@ function MobileCarousel() {
                 animate={{ scale: isActive ? 1 : 0.93, opacity: isActive ? 1 : 0.45 }}
                 transition={{ type: 'spring', damping: 28, stiffness: 300 }}
                 className={cn(
-                  'relative rounded-2xl border bg-[#0a0a0a] p-5 overflow-hidden transition-shadow duration-500 h-full',
-                  isActive ? `${a.borderActive} ${a.shadowActive}` : 'border-white/8'
+                  'relative rounded-2xl border bg-card p-5 overflow-hidden transition-shadow duration-500 h-full',
+                  isActive ? `${a.borderActive} ${a.shadowActive}` : 'border-[var(--border)]'
                 )}
               >
                 {/* Glow sweep */}
@@ -169,7 +169,7 @@ function MobileCarousel() {
                 </AnimatePresence>
 
                 {/* Icon */}
-                <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-4 border border-white/5 relative z-10', a.bg)}>
+                <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-4 border border-[var(--border)] relative z-10', a.bg)}>
                   <Icon className={cn('size-5', a.text)} strokeWidth={1.5} />
                 </div>
 
@@ -179,12 +179,12 @@ function MobileCarousel() {
                 </p>
 
                 {/* Title */}
-                <h3 className="font-sans font-black text-base text-white uppercase tracking-tight leading-snug mb-3 relative z-10">
+                <h3 className="font-sans font-black text-base text-foreground uppercase tracking-tight leading-snug mb-3 relative z-10">
                   {f.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/50 text-xs leading-relaxed mb-4 relative z-10">
+                <p className="text-foreground/50 text-xs leading-relaxed mb-4 relative z-10">
                   {f.description}
                 </p>
 
@@ -195,7 +195,7 @@ function MobileCarousel() {
                       key={tag}
                       className={cn(
                         'font-mono text-[8px] tracking-widest uppercase border px-2 py-0.5 rounded transition-colors',
-                        isActive ? `${a.text} border-current/30 bg-current/5` : 'border-white/10 text-white/30 bg-white/[0.02]'
+                        isActive ? `${a.text} border-current/30 bg-current/5` : 'border-white/10 text-white/30 bg-foreground/[0.02]'
                       )}
                     >
                       {tag}
@@ -243,7 +243,7 @@ export function PortfolioSection() {
   const { accentRgb } = useAccent();
 
   return (
-    <section id="portfolio" className="pt-16 pb-8 md:py-24 relative px-4 sm:px-5 md:px-6 bg-[#030303] overflow-hidden">
+    <section id="portfolio" className="pt-16 pb-8 md:py-24 relative px-4 sm:px-5 md:px-6 bg-surface-secondary overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50 transition-opacity" 
@@ -271,10 +271,10 @@ export function PortfolioSection() {
           transition={{ duration: 0.7 }}
         >
 
-          <h2 className="font-sans font-black text-3xl md:text-5xl lg:text-7xl tracking-tighter text-white uppercase mb-4 md:mb-6">
+          <h2 className="font-sans font-black text-3xl md:text-5xl lg:text-7xl tracking-tighter text-foreground uppercase mb-4 md:mb-6">
             Engenharia & Design Radical
           </h2>
-          <p className="text-white/60 text-sm tracking-wide md:text-base leading-relaxed max-w-2xl mx-auto mb-8 md:mb-0">
+          <p className="text-foreground/60 text-sm tracking-wide md:text-base leading-relaxed max-w-2xl mx-auto mb-8 md:mb-0">
             Explora as nossas soluções avançadas desenvolvidas para a mais alta performance corporativa.
           </p>
         </motion.div>
