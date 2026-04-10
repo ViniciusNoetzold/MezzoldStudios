@@ -105,7 +105,8 @@ body::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
 
-/* ── Opção 2 — Scrollbar estilizada (desativada) ──────── 
+/*
+   Opção 2 — Scrollbar estilizada (desativada — ative trocando com a Opção 1 acima)
 html, body {
   scrollbar-width: thin;
   scrollbar-color: #2a2a2a #0a0a0a;
@@ -124,7 +125,7 @@ html, body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-electric-red);
 }
-─────────────────────────────────────────────────────────────────────────── */
+*/
 
 /* ── Mobile performance: reduce GPU-expensive effects on touch devices ──────── */
 @media (hover: none) {
