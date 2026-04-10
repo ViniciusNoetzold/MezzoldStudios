@@ -116,6 +116,7 @@ export const Footer7 = ({
                 <li key={idx} className="font-medium hover:text-white transition-colors">
                   <Link
                     href={social.href}
+                    prefetch={social.href === "/404" ? false : undefined}
                     aria-label={social.label}
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
