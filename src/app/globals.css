@@ -93,7 +93,7 @@
   }
 }
 
-/* ── Scrollbar — Glass Aero (macOS / Win11 style) ─────────────────────────── */
+/* --- Scrollbar - Glass Aero (macOS / Win11 style) --- */
 
 /* Firefox (thin track, semi-transparent glass-like thumb) */
 html, body {
@@ -154,7 +154,7 @@ html, body {
   background: transparent;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────── */
+/* --- end scrollbar --- */
 
 /* ── Mobile performance: reduce GPU-expensive effects on touch devices ──────── */
 @media (hover: none) {
