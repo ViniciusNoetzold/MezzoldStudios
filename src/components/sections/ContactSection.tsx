@@ -295,13 +295,18 @@ function ContactForm() {
         />
       </div>
 
-      <div className="w-full flex justify-center py-2">
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-          onChange={(token) => setRecaptchaToken(token)}
-          theme="dark"
-        />
+      <div className="w-full flex justify-center py-1">
+        {/* Wrapper to clip native ReCAPTCHA borders and apply the Mezzold Studio theme */}
+        <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-[#222] shadow-xl relative inline-flex justify-center transition-colors hover:border-cyan/30 duration-300">
+          <div className="m-[-1px]">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(token) => setRecaptchaToken(token)}
+              theme="dark"
+            />
+          </div>
+        </div>
       </div>
 
       {status === 'error' && (
