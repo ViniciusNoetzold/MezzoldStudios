@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef, useCallback } from "react";
+import React, { useMemo, useRef, useCallback, useEffect } from "react";
 import * as THREE from "three";
 
 export const CanvasRevealEffect = ({
@@ -221,9 +221,23 @@ interface ShaderProps {
   maxFps?: number;
 }
 
+const ContextDestroyer = () => {
+  const gl = useThree((state) => state.gl);
+  useEffect(() => {
+    return () => {
+      // Force lose context when unmounting to free up WebGL contexts immediately
+      // This prevents "WebGLRenderer: Context Lost" when rapidly hovering multiple cards
+      const extension = gl.getExtension('WEBGL_lose_context');
+      if (extension) extension.loseContext();
+    };
+  }, [gl]);
+  return null;
+};
+
 const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
   return (
-    <Canvas className="absolute inset-0 h-full w-full">
+    <Canvas className="absolute inset-0 h-full w-full" gl={{ preserveDrawingBuffer: false }}>
+      <ContextDestroyer />
       <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
     </Canvas>
   );
