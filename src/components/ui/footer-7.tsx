@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   FaInstagram,
   FaFacebook,
@@ -113,14 +114,14 @@ export const Footer7 = ({
             <ul className="flex items-center space-x-6 text-white/50">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-white transition-colors">
-                  <a
+                  <Link
                     href={social.href}
                     aria-label={social.label}
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   >
                     {social.icon}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -134,7 +135,7 @@ export const Footer7 = ({
                 <ul className="space-y-3 text-sm text-white/60">
                   {section.links.map((link, linkIdx) => (
                     <li key={linkIdx} className="font-medium hover:text-white transition-colors">
-                      <a href={link.href}>{link.name}</a>
+                      <Link href={link.href}>{link.name}</Link>
                     </li>
                   ))}
                 </ul>

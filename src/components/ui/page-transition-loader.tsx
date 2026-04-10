@@ -25,6 +25,21 @@ export function PageTransitionLoader() {
     }
   }, [pathname]);
 
+  // Handle BFCache (back/forward cache) restoration
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setVisible(false);
+        if (showTimerRef.current) {
+          clearTimeout(showTimerRef.current);
+          showTimerRef.current = null;
+        }
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   // Lock body scroll while the loader is visible and add an absolute fail-safe
   useEffect(() => {
     let failSafeTimer: ReturnType<typeof setTimeout>;
