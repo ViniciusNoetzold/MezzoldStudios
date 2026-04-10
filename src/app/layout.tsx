@@ -3,6 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PageTransitionLoader } from "@/components/ui/page-transition-loader";
+import { CookieConsent } from "@/components/ui/cookie-consent";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { themeScript } from "@/lib/theme-script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,8 +62,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { CookieConsent } from "@/components/ui/cookie-consent";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,14 +70,19 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className="dark"
-      style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
+      style={{ colorScheme: "dark light" }}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-[100dvh] flex flex-col font-sans`}>
-        <PageTransitionLoader />
-        <CookieConsent />
-        {children}
-        <Analytics />
+        <ThemeProvider>
+          <PageTransitionLoader />
+          <CookieConsent />
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
