@@ -187,7 +187,7 @@ function calcScore(sel: Selections) {
 
 function buildUrl(sel: Selections): string {
   const parts = [sel.product, sel.frontend, sel.backend, sel.infra, ...sel.integrations].filter(Boolean);
-  return `/contact?stack=${parts.join('-')}`;
+  return `/#contact?stack=${parts.join('-')}`;
 }
 
 function getLabel(stepIdx: number, id: string) {
