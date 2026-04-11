@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/components/layout/ThemeProvider';
 
 const HalideTopoHero: React.FC = () => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   const canvasRef = useRef<HTMLDivElement>(null);
   const layersRef = useRef<HTMLDivElement[]>([]);
   const glowRef = useRef<HTMLDivElement>(null);
 
-  // Smooth interpolation values using refs
   const currentRotX = useRef(55);
   const currentRotZ = useRef(-25);
   const targetRotX = useRef(55);
@@ -21,6 +24,12 @@ const HalideTopoHero: React.FC = () => {
   const glowPos = useRef({ x: 50, y: 50 });
   const rafRef = useRef<number>(0);
   const isHovering = useRef(false);
+  const isLightRef = useRef(isLight);
+
+  // Keep ref in sync with prop so the RAF loop reads it without stale closure
+  useEffect(() => {
+    isLightRef.current = isLight;
+  }, [isLight]);
 
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -30,29 +39,25 @@ const HalideTopoHero: React.FC = () => {
 
     const speed = isHovering.current ? 0.08 : 0.03;
 
-    // Smooth rotation
     currentRotX.current = lerp(currentRotX.current, targetRotX.current, speed);
     currentRotZ.current = lerp(currentRotZ.current, targetRotZ.current, speed);
-
     canvas.style.transform = `rotateX(${currentRotX.current}deg) rotateZ(${currentRotZ.current}deg)`;
 
-    // Smooth layer parallax
     layersRef.current.forEach((layer, index) => {
       if (!layer) return;
       const depth = (index + 1) * 20;
       const tx = targetLayerPos.current[index];
       const cx = currentLayerPos.current[index];
-
       cx.x = lerp(cx.x, tx.x, speed);
       cx.y = lerp(cx.y, tx.y, speed);
-
       layer.style.transform = `translateZ(${depth}px) translate(${cx.x}px, ${cx.y}px)`;
     });
 
-    // Smooth glow follow
     if (glowRef.current) {
-      glowRef.current.style.background = 
-        `radial-gradient(circle 400px at ${glowPos.current.x}% ${glowPos.current.y}%, rgba(255,0,51,0.18) 0%, rgba(255,80,0,0.08) 40%, transparent 70%)`;
+      const glowColor = isLightRef.current
+        ? `radial-gradient(circle 400px at ${glowPos.current.x}% ${glowPos.current.y}%, rgba(220,0,40,0.14) 0%, rgba(200,60,0,0.06) 40%, transparent 70%)`
+        : `radial-gradient(circle 400px at ${glowPos.current.x}% ${glowPos.current.y}%, rgba(255,0,51,0.18) 0%, rgba(255,80,0,0.08) 40%, transparent 70%)`;
+      glowRef.current.style.background = glowColor;
     }
 
     rafRef.current = requestAnimationFrame(animate);
@@ -62,7 +67,6 @@ const HalideTopoHero: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Respect reduced-motion preference — keep static pose, skip RAF
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -101,7 +105,6 @@ const HalideTopoHero: React.FC = () => {
       });
     };
 
-    // Entrance animation
     canvas.style.opacity = '0';
     canvas.style.transform = 'rotateX(90deg) rotateZ(0deg) scale(0.8)';
 
@@ -111,7 +114,6 @@ const HalideTopoHero: React.FC = () => {
       setTimeout(() => { canvas.style.transition = 'none'; }, 2600);
     }, 300);
 
-    // Stop the RAF loop when the hero is fully scrolled out of view
     const wrapper = canvas.closest('[data-halide-wrapper]') ?? canvas.parentElement;
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -141,6 +143,53 @@ const HalideTopoHero: React.FC = () => {
     // eslint-disable-next-line
   }, []);
 
+  /* ─── Theme-specific style tokens ────────────────────────── */
+  const layer1Style: React.CSSProperties = isLight
+    ? {
+        filter: 'grayscale(0.4) contrast(1.05) brightness(0.72)',
+        boxShadow: 'inset 0 0 80px 20px rgba(220,220,225,0.55), 0 30px 80px rgba(160,160,170,0.45)',
+        border: '1px solid rgba(0,0,0,0.07)',
+      }
+    : {
+        filter: 'grayscale(0.6) contrast(1.2) brightness(0.45)',
+        boxShadow: 'inset 0 0 80px 20px rgba(2,2,2,0.9), 0 30px 80px rgba(0,0,0,0.9)',
+        border: '1px solid rgba(255,255,255,0.04)',
+      };
+
+  const layer2Style: React.CSSProperties = isLight
+    ? {
+        filter: 'grayscale(0.5) contrast(1.1) brightness(0.9)',
+        opacity: 0.25,
+        mixBlendMode: 'multiply',
+      }
+    : {
+        filter: 'grayscale(0.1) contrast(1.4) brightness(0.7)',
+        opacity: 0.45,
+        mixBlendMode: 'screen',
+      };
+
+  const layer4Style: React.CSSProperties = isLight
+    ? {
+        border: '1px solid rgba(200,0,30,0.08)',
+        background: 'radial-gradient(ellipse at top right, rgba(200,0,30,0.09), transparent 65%)',
+        boxShadow: 'inset 0 0 50px rgba(200,0,30,0.04)',
+        opacity: 0.85,
+        mixBlendMode: 'multiply',
+      }
+    : {
+        border: '1px solid rgba(255,0,51,0.08)',
+        background: 'radial-gradient(ellipse at top right, rgba(255,0,51,0.12), transparent 65%)',
+        boxShadow: 'inset 0 0 50px rgba(255,0,51,0.06)',
+        opacity: 0.9,
+        mixBlendMode: 'overlay',
+      };
+
+  const topoColor = isLight ? 'rgba(180,0,30,0.07)' : 'rgba(255,0,51,0.06)';
+
+  const shineStyle: React.CSSProperties = isLight
+    ? { background: 'linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 50%, rgba(255,255,255,0.15) 100%)' }
+    : { background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)' };
+
   return (
     <div
       data-halide-wrapper
@@ -164,7 +213,7 @@ const HalideTopoHero: React.FC = () => {
           willChange: 'transform',
         }}
       >
-        {/* Layer 1 – Base image, brighter */}
+        {/* Layer 1 – Base image */}
         <div
           ref={(el) => { if (el) layersRef.current[0] = el; }}
           style={{
@@ -173,14 +222,12 @@ const HalideTopoHero: React.FC = () => {
             backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1400')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(0.6) contrast(1.2) brightness(0.45)',
             borderRadius: '24px',
-            boxShadow: 'inset 0 0 80px 20px rgba(2,2,2,0.9), 0 30px 80px rgba(0,0,0,0.9)',
-            border: '1px solid rgba(255,255,255,0.04)',
+            ...layer1Style,
           }}
         />
 
-        {/* Layer 2 – Brighter accent overlay */}
+        {/* Layer 2 – Accent overlay */}
         <div
           ref={(el) => { if (el) layersRef.current[1] = el; }}
           style={{
@@ -189,39 +236,35 @@ const HalideTopoHero: React.FC = () => {
             backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1400')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(0.1) contrast(1.4) brightness(0.7)',
-            opacity: 0.45,
-            mixBlendMode: 'screen',
             borderRadius: '24px',
+            ...layer2Style,
           }}
         />
 
-        {/* Layer 3 – Dynamic glow that reacts to mouse */}
+        {/* Layer 3 – Dynamic glow that follows mouse */}
         <div
           ref={glowRef}
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'radial-gradient(circle 400px at 50% 50%, rgba(255,0,51,0.18) 0%, transparent 70%)',
+            background: isLight
+              ? 'radial-gradient(circle 400px at 50% 50%, rgba(220,0,40,0.14) 0%, transparent 70%)'
+              : 'radial-gradient(circle 400px at 50% 50%, rgba(255,0,51,0.18) 0%, transparent 70%)',
             borderRadius: '24px',
-            mixBlendMode: 'overlay',
+            mixBlendMode: isLight ? 'multiply' : 'overlay',
             pointerEvents: 'none',
             transition: 'background 0.15s ease',
           }}
         />
 
-        {/* Layer 4 – Static red neon tint on top */}
+        {/* Layer 4 – Static red neon tint */}
         <div
           ref={(el) => { if (el) layersRef.current[2] = el; }}
           style={{
             position: 'absolute',
             inset: 0,
-            border: '1px solid rgba(255,0,51,0.08)',
-            background: 'radial-gradient(ellipse at top right, rgba(255,0,51,0.12), transparent 65%)',
-            boxShadow: 'inset 0 0 50px rgba(255,0,51,0.06)',
-            opacity: 0.9,
-            mixBlendMode: 'overlay',
             borderRadius: '24px',
+            ...layer4Style,
           }}
         />
 
@@ -233,8 +276,7 @@ const HalideTopoHero: React.FC = () => {
             height: '200%',
             top: '-50%',
             left: '-50%',
-            backgroundImage:
-              'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 38px, rgba(255,0,51,0.06) 39px, transparent 40px)',
+            backgroundImage: `repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 38px, ${topoColor} 39px, transparent 40px)`,
             transform: 'translateZ(140px)',
             pointerEvents: 'none',
           }}
@@ -245,10 +287,10 @@ const HalideTopoHero: React.FC = () => {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)',
             borderRadius: '24px',
             transform: 'translateZ(5px)',
             pointerEvents: 'none',
+            ...shineStyle,
           }}
         />
       </div>

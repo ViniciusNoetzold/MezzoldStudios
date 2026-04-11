@@ -97,7 +97,7 @@ export function HeroSection() {
         {/* Headline */}
         <h1
           className="font-sans font-black text-[clamp(2.75rem,10vw,8.5rem)] tracking-tighter text-foreground mb-3 md:mb-6 leading-[0.88]"
-          style={{ mixBlendMode: 'normal' }}
+          style={{ mixBlendMode: 'difference' }}
         >
           MEZZOLD
         </h1>
