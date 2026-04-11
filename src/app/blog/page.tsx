@@ -22,23 +22,23 @@ export default function BlogPage() {
               <p className="font-mono text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-electric-red">
                 [ MEZZOLD STUDIO ]
               </p>
-              <div className="h-px flex-1 bg-white/[0.06]" />
-              <p className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-white/20">
+              <div className="h-px flex-1 bg-[var(--border)]" />
+              <p className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-foreground/20">
                 {posts.length} ARTIGOS
               </p>
             </div>
 
             {/* Title */}
-            <h1 className="font-sans font-black text-[clamp(4rem,12vw,7rem)] leading-none tracking-tighter text-white mb-6">
+            <h1 className="font-sans font-black text-[clamp(4rem,12vw,7rem)] leading-none tracking-tighter text-foreground mb-6">
               BLOG<span className="text-electric-red">.</span>
             </h1>
 
             {/* Bottom row: description + decorative line */}
             <div className="flex items-center gap-6">
-              <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/35 whitespace-nowrap">
+              <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/35 whitespace-nowrap">
                 IDEIAS, TÉCNICAS E BASTIDORES DO ESTÚDIO
               </p>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-foreground/10 to-transparent" />
             </div>
 
           </div>

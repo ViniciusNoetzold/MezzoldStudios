@@ -11,7 +11,7 @@ export function BlogList() {
       {/* ── Featured post ── */}
       <Link
         href={`/blog/${featured.slug}`}
-        className="group block border-t border-white/[0.08] pt-10 pb-12 md:pt-14 md:pb-16"
+        className="group block border-t border-[var(--border)] pt-10 pb-12 md:pt-14 md:pb-16"
       >
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-12">
           {/* Content */}
@@ -22,36 +22,36 @@ export function BlogList() {
                 {featured.category}
               </span>
               <span className="w-px h-2.5 bg-white/20" />
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/30">
+              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-foreground/30">
                 {featured.date}
               </span>
             </div>
 
             {/* Title */}
-            <h2 className="font-sans font-black text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2.75rem] tracking-tighter text-white leading-[1.08] mb-5 group-hover:text-white/90 transition-colors duration-300">
+            <h2 className="font-sans font-black text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2.75rem] tracking-tighter text-foreground leading-[1.08] mb-5 group-hover:text-foreground/90 transition-colors duration-300">
               {featured.title}
             </h2>
 
             {/* Excerpt */}
-            <p className="text-white/60 text-sm md:text-base leading-[1.8] max-w-xl">
+            <p className="text-foreground/60 text-sm md:text-base leading-[1.8] max-w-xl">
               {featured.excerpt}
             </p>
 
             {/* CTA */}
             <div className="mt-8 inline-flex items-center gap-2">
-              <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-white/25 group-hover:text-electric-red transition-colors duration-300">
+              <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-foreground/25 group-hover:text-electric-red transition-colors duration-300">
                 Ler artigo
               </span>
               <ArrowUpRight
                 size={13}
-                className="text-white/20 group-hover:text-electric-red group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                className="text-foreground/20 group-hover:text-electric-red group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
               />
             </div>
           </div>
 
           {/* Index number */}
           <div className="shrink-0 self-start md:self-end select-none">
-            <span className="font-mono font-black text-[6rem] md:text-[9rem] leading-none text-white/[0.07] group-hover:text-electric-red/[0.18] transition-colors duration-500">
+            <span className="font-mono font-black text-[6rem] md:text-[9rem] leading-none text-foreground/[0.07] group-hover:text-electric-red/[0.18] transition-colors duration-500">
               01
             </span>
           </div>
@@ -59,7 +59,7 @@ export function BlogList() {
       </Link>
 
       {/* ── Divider ── */}
-      <div className="h-px bg-white/[0.13]" />
+      <div className="h-px bg-[var(--border)]" />
 
       {/* ── Grid of remaining posts ── */}
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -68,10 +68,10 @@ export function BlogList() {
             key={post.slug}
             href={`/blog/${post.slug}`}
             className={[
-              'group relative flex flex-col py-9 md:py-11 border-b border-white/[0.13]',
-              'hover:bg-white/[0.015] transition-colors duration-300',
+              'group relative flex flex-col py-9 md:py-11 border-b border-[var(--border)]',
+              'hover:bg-foreground/[0.015] transition-colors duration-300',
               // Right border on left-column cells
-              i % 2 === 0 ? 'md:border-r md:border-white/[0.13] md:pr-10' : 'md:pl-10',
+              i % 2 === 0 ? 'md:border-r md:border-[var(--border)] md:pr-10' : 'md:pl-10',
             ].join(' ')}
           >
             {/* Top row: meta + index */}
@@ -81,33 +81,33 @@ export function BlogList() {
                   {post.category}
                 </span>
               </div>
-              <span className="font-mono font-black text-[2.25rem] leading-none text-white/[0.09] group-hover:text-electric-red/[0.22] transition-colors duration-500 select-none shrink-0">
+              <span className="font-mono font-black text-[2.25rem] leading-none text-foreground/[0.09] group-hover:text-electric-red/[0.22] transition-colors duration-500 select-none shrink-0">
                 {String(i + 2).padStart(2, '0')}
               </span>
             </div>
 
             {/* Title */}
-            <h3 className="font-sans font-black text-lg md:text-xl tracking-tight text-white leading-[1.2] mb-3 group-hover:text-white/90 transition-colors duration-300">
+            <h3 className="font-sans font-black text-lg md:text-xl tracking-tight text-foreground leading-[1.2] mb-3 group-hover:text-foreground/90 transition-colors duration-300">
               {post.title}
             </h3>
 
             {/* Excerpt */}
-            <p className="text-white/55 text-sm leading-[1.75] line-clamp-2 mb-6 flex-1">
+            <p className="text-foreground/55 text-sm leading-[1.75] line-clamp-2 mb-6 flex-1">
               {post.excerpt}
             </p>
 
             {/* Date + CTA */}
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/20">
+              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-foreground/20">
                 {post.date}
               </span>
               <div className="flex items-center gap-1.5">
-                <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/20 group-hover:text-electric-red transition-colors duration-300">
+                <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-foreground/20 group-hover:text-electric-red transition-colors duration-300">
                   Ler
                 </span>
                 <ArrowUpRight
                   size={11}
-                  className="text-white/15 group-hover:text-electric-red group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                  className="text-foreground/15 group-hover:text-electric-red group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
                 />
               </div>
             </div>

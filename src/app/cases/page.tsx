@@ -23,17 +23,17 @@ export default function CasesPage() {
               <p className="font-mono text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-electric-red">
                 [ MEZZOLD STUDIO ]
               </p>
-              <div className="h-px flex-1 bg-white/[0.06]" />
-              <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-white/15">
+              <div className="h-px flex-1 bg-[var(--border)]" />
+              <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-foreground/15">
                 ESTUDOS DE CASO
               </p>
             </div>
 
-            <h1 className="font-sans font-black text-[clamp(3.5rem,11vw,6.5rem)] leading-none tracking-tighter text-white mb-5">
+            <h1 className="font-sans font-black text-[clamp(3.5rem,11vw,6.5rem)] leading-none tracking-tighter text-foreground mb-5">
               PORTFÓLIO<span className="text-electric-red">.</span>
             </h1>
 
-            <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/30 max-w-lg">
+            <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 max-w-lg">
               Veja o que construímos — e imagine o que faremos pelo seu negócio
             </p>
           </div>
@@ -45,13 +45,13 @@ export default function CasesPage() {
           <section className="mt-24 relative">
             {/* Top divider */}
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-px flex-1 bg-white/[0.06]" />
-              <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-white/15">FIM DOS CASES</span>
-              <div className="h-px flex-1 bg-white/[0.06]" />
+              <div className="h-px flex-1 bg-[var(--border)]" />
+              <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-foreground/15">FIM DOS CASES</span>
+              <div className="h-px flex-1 bg-[var(--border)]" />
             </div>
 
             {/* CTA card */}
-            <div className="relative border border-white/[0.07] rounded-2xl p-10 md:p-14 overflow-hidden text-center bg-white/[0.015]">
+            <div className="relative border border-[var(--border)] rounded-2xl p-10 md:p-14 overflow-hidden text-center bg-foreground/[0.015]">
               {/* Corner accents */}
               <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-electric-red/20 rounded-tl-2xl pointer-events-none" />
               <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-electric-red/20 rounded-br-2xl pointer-events-none" />
@@ -63,11 +63,11 @@ export default function CasesPage() {
                 [ PRÓXIMO PASSO ]
               </p>
 
-              <h2 className="font-sans font-black text-[clamp(1.6rem,5vw,3rem)] tracking-tight text-white leading-tight mb-5">
+              <h2 className="font-sans font-black text-[clamp(1.6rem,5vw,3rem)] tracking-tight text-foreground leading-tight mb-5">
                 Não encontrou<br className="hidden md:block" /> o que procurava?
               </h2>
 
-              <p className="font-mono text-[10px] md:text-xs tracking-[0.15em] text-white/35 max-w-sm mx-auto mb-8 leading-relaxed">
+              <p className="font-mono text-[10px] md:text-xs tracking-[0.15em] text-foreground/35 max-w-sm mx-auto mb-8 leading-relaxed">
                 Cada projeto da Mezzold é construído do zero para os requisitos específicos
                 do cliente. Vamos conversar sobre o seu.
               </p>
@@ -78,22 +78,22 @@ export default function CasesPage() {
                 </Link>
                 <a
                   href="/stack"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/[0.08] text-white/35 font-mono text-[9px] tracking-[0.3em] uppercase hover:text-white/60 hover:border-white/18 transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[var(--border)] text-foreground/35 font-mono text-[9px] tracking-[0.3em] uppercase hover:text-foreground/60 hover:border-foreground/18 transition-all duration-200"
                 >
                   VER STACK TÉCNICO
                 </a>
               </div>
 
               {/* Small stat row */}
-              <div className="flex items-center justify-center gap-6 mt-10 pt-8 border-t border-white/[0.05]">
+              <div className="flex items-center justify-center gap-6 mt-10 pt-8 border-t border-[var(--border)]">
                 {[
                   { value: '8+',     label: 'Cases publicados' },
                   { value: '100%',   label: 'Feito sob medida' },
                   { value: '< 48h',  label: 'Resposta garantida' },
                 ].map(stat => (
                   <div key={stat.label} className="text-center">
-                    <p className="font-sans font-black text-xl text-white tracking-tighter">{stat.value}</p>
-                    <p className="font-mono text-[7px] tracking-[0.25em] uppercase text-white/22 mt-0.5">{stat.label}</p>
+                    <p className="font-sans font-black text-xl text-foreground tracking-tighter">{stat.value}</p>
+                    <p className="font-mono text-[7px] tracking-[0.25em] uppercase text-foreground/22 mt-0.5">{stat.label}</p>
                   </div>
                 ))}
               </div>

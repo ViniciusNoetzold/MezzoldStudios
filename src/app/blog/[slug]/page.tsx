@@ -29,7 +29,7 @@ function renderSection(section: Section, i: number, headingIndex: number) {
           <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-electric-red mt-[6px] md:mt-[7px] select-none">
             {String(headingIndex).padStart(2, '0')}
           </span>
-          <span className="font-sans font-black text-xl md:text-2xl tracking-tight text-white leading-snug">
+          <span className="font-sans font-black text-xl md:text-2xl tracking-tight text-foreground leading-snug">
             {section.text}
           </span>
         </h2>
@@ -37,7 +37,7 @@ function renderSection(section: Section, i: number, headingIndex: number) {
 
     case 'paragraph':
       return (
-        <p key={i} className="text-white/60 font-sans text-[15px] md:text-base leading-[1.85] mb-6 tracking-[0.01em]">
+        <p key={i} className="text-foreground/60 font-sans text-[15px] md:text-base leading-[1.85] mb-6 tracking-[0.01em]">
           {section.text}
         </p>
       );
@@ -49,7 +49,7 @@ function renderSection(section: Section, i: number, headingIndex: number) {
       return (
         <ul key={i} className="my-6 space-y-3 pl-0">
           {section.items?.map((item, j) => (
-            <li key={j} className="flex gap-4 text-white/60 text-[15px] md:text-base leading-[1.75]">
+            <li key={j} className="flex gap-4 text-foreground/60 text-[15px] md:text-base leading-[1.75]">
               <span className="shrink-0 font-mono text-electric-red text-[10px] mt-[5px] select-none">▸</span>
               {item}
             </li>
@@ -59,16 +59,16 @@ function renderSection(section: Section, i: number, headingIndex: number) {
 
     case 'callout':
       return (
-        <div key={i} className="my-8 relative overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.025]">
+        <div key={i} className="my-8 relative overflow-hidden rounded-xl border border-[var(--border)] bg-foreground/[0.025]">
           {/* Left accent */}
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-electric-red" />
           {/* Top label */}
-          <div className="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-white/[0.06]">
+          <div className="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-[var(--border)]">
             <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-electric-red font-bold">
               NOTA
             </span>
           </div>
-          <p className="px-5 py-4 text-white/70 text-[14px] md:text-[15px] leading-[1.8] font-sans">
+          <p className="px-5 py-4 text-foreground/70 text-[14px] md:text-[15px] leading-[1.8] font-sans">
             {section.text}
           </p>
         </div>
@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {/* Back */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-white/30 hover:text-white/70 transition-colors duration-200 mb-12 group"
+            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-foreground/30 hover:text-foreground/70 transition-colors duration-200 mb-12 group"
           >
             <ArrowLeft size={11} className="transition-transform group-hover:-translate-x-0.5" />
             Blog
@@ -113,18 +113,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <span className={`font-mono text-[9px] tracking-[0.3em] uppercase px-2.5 py-1 rounded-md border ${post.categoryColor} font-bold`}>
                 {post.category}
               </span>
-              <span className="flex items-center gap-1.5 font-mono text-[9px] text-white/25 tracking-[0.15em] uppercase">
+              <span className="flex items-center gap-1.5 font-mono text-[9px] text-foreground/25 tracking-[0.15em] uppercase">
                 <Calendar size={9} /> {post.date}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="font-sans font-black text-3xl md:text-[2.6rem] tracking-tight text-white leading-[1.15] mb-6">
+            <h1 className="font-sans font-black text-3xl md:text-[2.6rem] tracking-tight text-foreground leading-[1.15] mb-6">
               {post.title}
             </h1>
 
             {/* Excerpt */}
-            <p className="text-white/45 text-[15px] md:text-base leading-[1.8] border-l-[2px] border-electric-red pl-5">
+            <p className="text-foreground/45 text-[15px] md:text-base leading-[1.8] border-l-[2px] border-electric-red pl-5">
               {post.excerpt}
             </p>
 
@@ -132,11 +132,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           {/* Divider */}
           <div className="flex items-center gap-4 mb-12">
-            <div className="h-px flex-1 bg-white/[0.07]" />
-            <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-white/15">
+            <div className="h-px flex-1 bg-[var(--border)]" />
+            <span className="font-mono text-[8px] tracking-[0.4em] uppercase text-foreground/15">
               MEZZOLD STUDIO
             </span>
-            <div className="h-px flex-1 bg-white/[0.07]" />
+            <div className="h-px flex-1 bg-[var(--border)]" />
           </div>
 
           {/* Article body */}
@@ -148,11 +148,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </article>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-white/[0.07]">
+          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[var(--border)]">
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-[9px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-lg border border-white/[0.08] text-white/35 bg-white/[0.03]"
+                className="font-mono text-[9px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-lg border border-[var(--border)] text-foreground/35 bg-foreground/[0.03]"
               >
                 {tag}
               </span>
@@ -160,8 +160,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Next post */}
-          <div className="mt-12 pt-8 border-t border-white/[0.07]">
-            <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 mb-4">
+          <div className="mt-12 pt-8 border-t border-[var(--border)]">
+            <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/25 mb-4">
               Próximo artigo
             </p>
             <Link
