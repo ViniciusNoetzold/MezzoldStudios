@@ -44,9 +44,9 @@ export function HeroSection() {
         <HalideTopoHero />
       </div>
 
-      {/* ── Mobile: flat dark code image ── */}
+      {/* ── Mobile: flat dark code image (dark mode only) ── */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none md:hidden"
+        className="absolute inset-0 z-0 pointer-events-none hidden dark:block md:hidden"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800')`,
           backgroundSize: 'cover',
@@ -71,7 +71,7 @@ export function HeroSection() {
       {/* ── Red accent glow top-center ── */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] md:w-[60vw] h-[35vh] z-[1] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.1), transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse at top, rgba(255,0,51,0.07), transparent 70%)' }}
       />
 
       {/* ── Grain texture overlay ── */}
@@ -97,7 +97,7 @@ export function HeroSection() {
         {/* Headline */}
         <h1
           className="font-sans font-black text-[clamp(2.75rem,10vw,8.5rem)] tracking-tighter text-foreground mb-3 md:mb-6 leading-[0.88]"
-          style={{ mixBlendMode: 'difference' }}
+          style={{ mixBlendMode: 'normal' }}
         >
           MEZZOLD
         </h1>

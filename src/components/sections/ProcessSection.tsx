@@ -91,14 +91,14 @@ function MobileScrollTimeline() {
                   boxShadow: `0 0 25px rgba(255, 255, 255, 0.05)`
                 }}
               >
-                <Icon className="text-foreground/80" size={24} strokeWidth={1.5} />
+                <Icon className="text-foreground" size={24} strokeWidth={1.5} />
               </motion.div>
             </div>
 
             {/* Content */}
             <div className="flex-1 pt-1 pb-2">
               <div className="flex items-center gap-3 mb-3">
-                <span className="font-mono text-[10px] font-bold text-foreground/40">
+                <span className="font-mono text-[10px] font-bold text-foreground/60">
                   {phase.id}
                 </span>
                 <div className="h-px bg-[var(--border)] flex-grow" />
@@ -106,7 +106,7 @@ function MobileScrollTimeline() {
               <h3 className="font-sans font-black text-xl text-foreground tracking-tight leading-[1.1] mb-3 whitespace-pre-line">
                 {phase.title}
               </h3>
-              <p className="text-foreground/50 text-sm leading-relaxed">
+              <p className="text-foreground/70 text-sm leading-relaxed">
                 {phase.desc}
               </p>
             </div>
@@ -161,17 +161,17 @@ export function ProcessSection() {
                 >
                   <div className="flex justify-between items-start mb-12 relative z-10">
                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-foreground/[0.02]">
-                      <Icon className="text-foreground/80" size={26} strokeWidth={1.5} />
+                      <Icon className="text-foreground" size={26} strokeWidth={1.5} />
                     </div>
                   </div>
                   <div className="flex items-center gap-4 mb-8 relative z-10">
-                    <span className="font-mono text-[10px] md:text-xs font-bold text-foreground/40">{phase.id}</span>
+                    <span className="font-mono text-[10px] md:text-xs font-bold text-foreground/60">{phase.id}</span>
                     <div className="h-[1px] bg-[var(--border)] flex-grow" />
                   </div>
                   <h3 className="font-sans font-black text-xl md:text-2xl text-foreground tracking-tight leading-[1.1] mb-6 whitespace-pre-line relative z-10">
                     {phase.title}
                   </h3>
-                  <p className="text-foreground/50 text-sm leading-relaxed mt-auto relative z-10">
+                  <p className="text-foreground/70 text-sm leading-relaxed mt-auto relative z-10">
                     {phase.desc}
                   </p>
                 </CardSpotlight>

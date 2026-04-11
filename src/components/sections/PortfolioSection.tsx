@@ -195,7 +195,7 @@ function MobileCarousel() {
                       key={tag}
                       className={cn(
                         'font-mono text-[8px] tracking-widest uppercase border px-2 py-0.5 rounded transition-colors',
-                        isActive ? `${a.text} border-current/30 bg-current/5` : 'border-white/10 text-white/30 bg-foreground/[0.02]'
+                        isActive ? `${a.text} border-current/30 bg-current/5` : 'border-white/15 text-white/50 bg-foreground/[0.04]'
                       )}
                     >
                       {tag}

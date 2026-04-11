@@ -99,7 +99,7 @@ export const HoverEffect = ({
                         'font-mono text-[9px] tracking-widest uppercase border px-2 py-1 rounded transition-colors',
                         isHovered
                           ? [accent.text, 'border-current/30 bg-current/5']
-                          : 'border-white/10 text-white/40 bg-white/[0.02]'
+                          : 'border-white/15 text-white/55 bg-white/[0.04]'
                       )}
                     >
                       {tag}
@@ -124,7 +124,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-6 overflow-hidden bg-[#0a0a0a] border relative z-20 transition-colors duration-300",
+        "rounded-2xl h-full w-full p-6 overflow-hidden bg-[#141414] border relative z-20 transition-colors duration-300",
         className
       )}
     >
@@ -159,7 +159,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-4 text-white/70 tracking-wide leading-relaxed text-xs md:text-sm flex-1",
+        "mt-4 text-white/80 tracking-wide leading-relaxed text-xs md:text-sm flex-1",
         className
       )}
     >
