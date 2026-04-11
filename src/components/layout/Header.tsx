@@ -1,17 +1,13 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { GlassButton } from '../ui/glass-button';
 import { MenuToggleIcon } from '../ui/menu-toggle-icon';
 import { useScroll } from '../ui/use-scroll';
-import { useTheme } from '../layout/ThemeProvider';
 
 export function Header() {
 	const [open, setOpen] = React.useState(false);
 	const scrolled = useScroll(10);
-	const { theme, toggleTheme } = useTheme();
 
 	const links = [
 		{ label: 'Blog', href: '/blog' },
@@ -71,49 +67,8 @@ export function Header() {
 					))}
 				</div>
 
-				{/* Desktop: toggle pill */}
-				<div className="hidden md:flex items-center gap-4">
-					<button
-						onClick={toggleTheme}
-						aria-label="Alternar tema"
-						className="flex items-center rounded-full border border-[var(--border)] text-[10px] font-mono tracking-widest uppercase overflow-hidden transition-colors duration-300"
-					>
-						<span
-							className={cn(
-								'px-3 py-1.5 transition-colors duration-300',
-								theme === 'light'
-									? 'bg-foreground text-[var(--bg-primary)]'
-									: 'text-foreground/40 hover:text-foreground/70'
-							)}
-						>
-							Light
-						</span>
-						<span
-							className={cn(
-								'px-3 py-1.5 transition-colors duration-300',
-								theme === 'dark'
-									? 'bg-foreground text-[var(--bg-primary)]'
-									: 'text-foreground/40 hover:text-foreground/70'
-							)}
-						>
-							Dark
-						</span>
-					</button>
-				</div>
-
-				{/* Mobile: theme icon + hamburger */}
-				<div className="md:hidden flex items-center gap-2">
-					<button
-						onClick={toggleTheme}
-						aria-label="Alternar tema"
-						className="flex items-center justify-center text-foreground/70 h-10 w-10 rounded-full hover:bg-foreground/5 transition-colors"
-					>
-						{theme === 'dark'
-							? <Sun size={16} strokeWidth={2} />
-							: <Moon size={16} strokeWidth={2} />
-						}
-					</button>
-
+				{/* Mobile: hamburger only */}
+				<div className="md:hidden flex items-center">
 					<button
 						onClick={() => setOpen(!open)}
 						aria-label={open ? 'Fechar menu' : 'Abrir menu'}
