@@ -50,7 +50,8 @@
       "Bash(npm exec:*)",
       "WebFetch(domain:21st.dev)",
       "Skill(shadcn)",
-      "Bash(rtk grep:*)"
+      "Bash(rtk grep:*)",
+      "Bash(rtk git:*)"
     ]
   }
 }
