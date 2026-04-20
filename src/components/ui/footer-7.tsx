@@ -56,7 +56,7 @@ const defaultSections = [
 const defaultSocialLinks = [
   {
     icon: <FaWhatsapp className="size-5" />,
-    href: "https://w.app/mezzold",
+    href: "https://wa.me/5554997131399?text=Ol%C3%A1!%20Tenho%20interesse%20nos%20servi%C3%A7os%20da%20Mezzold%20Studio%20e%20gostaria%20de%20saber%20mais%20sobre%20como%20podem%20me%20ajudar.",
     label: "WhatsApp",
   },
   {
