@@ -235,23 +235,23 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           </div>
 
           {/* Byline */}
-          <div className="flex items-center flex-wrap gap-y-3 py-4 border-t border-b border-[var(--border)]">
+          <div className="flex items-center py-4 border-t border-b border-[var(--border)]">
             {[
               { label: 'Autor', val: 'Mezzold Studio' },
               { label: 'Categoria', val: post.category },
               { label: 'Leitura', val: post.readTime },
             ].map((item, idx, arr) => (
-              <div key={item.label} className="flex items-center">
-                <div className="flex flex-col gap-0.5 px-5 first:pl-0">
+              <div key={item.label} className="flex items-center shrink-0">
+                <div className={`flex flex-col gap-0.5 ${idx === 0 ? 'pr-6' : 'px-6'}`}>
                   <span className="font-mono text-[7px] tracking-[0.22em] uppercase text-foreground/35">
                     {item.label}
                   </span>
-                  <span className="font-mono text-[9px] tracking-[0.10em] uppercase text-foreground/58">
+                  <span className="font-mono text-[9px] tracking-[0.10em] uppercase text-foreground/60">
                     {item.val}
                   </span>
                 </div>
                 {idx < arr.length - 1 && (
-                  <div className="w-px h-8 bg-[var(--border)] shrink-0" />
+                  <div className="w-px h-8 bg-[var(--border)]" />
                 )}
               </div>
             ))}

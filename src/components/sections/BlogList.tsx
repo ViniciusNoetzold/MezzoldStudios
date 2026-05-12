@@ -127,10 +127,7 @@ export function BlogList() {
 
           <Link
             href={`/blog/${featured.slug}`}
-            className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 transition-all duration-300 hover:border-electric-red hover:-translate-y-1"
-            style={{
-              boxShadow: undefined,
-            }}
+            className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 transition-all duration-300 hover:border-electric-red hover:-translate-y-1 hover:shadow-[0_0_60px_-20px_rgba(255,0,51,.18)]"
           >
             {/* Left panel */}
             <div className="px-7 py-8 md:px-[48px] md:py-[52px] flex flex-col relative z-10">
@@ -265,7 +262,7 @@ export function BlogList() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[12px] p-8 flex flex-col transition-all duration-300 hover:border-white/20 hover:-translate-y-1"
+                  className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[12px] p-8 flex flex-col transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_0_40px_-15px_rgba(255,0,51,.10)]"
                 >
                   {/* Top row: category + index number */}
                   <div className="flex items-start justify-between mb-[18px]">
@@ -303,7 +300,7 @@ export function BlogList() {
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-[13px] leading-[1.7] text-foreground/58 mb-6 flex-1">
+                  <p className="text-[13px] leading-[1.7] text-foreground/60 mb-6 line-clamp-3">
                     {post.excerpt}
                   </p>
 
