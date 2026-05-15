@@ -12,7 +12,7 @@
 }
 
 @theme {
-  --color-mezzold-bg: #020202;
+  --color-mezzold-bg: #14161b;
   --color-mezzold-text: #ededed;
   --color-electric-red: #ff0033;
   --color-emerald: #10b981;
@@ -33,20 +33,20 @@
 @layer base {
   :root,
   [data-theme="dark"] {
-    --bg-primary: #020202;
-    --bg-secondary: #030303;
-    --bg-card: #111111;
+    --bg-primary: #14161b;
+    --bg-secondary: #181b21;
+    --bg-card: #1d2027;
     --text-primary: #ededed;
     --text-secondary: #a0a0a0;
     --accent: #ff0033;
-    --border: rgba(255, 255, 255, 0.08);
-    --nav-bg: rgba(2, 2, 2, 0.85);
-    --hero-overlay: rgba(2, 2, 2, 0.65);
-    --hero-bottom-fade: rgba(2, 2, 2, 0.98);
-    --hero-vignette: rgba(0, 0, 0, 0.75);
+    --border: rgba(255, 255, 255, 0.10);
+    --nav-bg: rgba(20, 22, 27, 0.92);
+    --hero-overlay: rgba(14, 16, 20, 0.55);
+    --hero-bottom-fade: rgba(20, 22, 27, 0.98);
+    --hero-vignette: rgba(0, 0, 0, 0.60);
     --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border-color: rgba(255, 255, 255, 0.10);
-    --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+    --glass-border-color: rgba(255, 255, 255, 0.12);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
     --scrollbar-thumb-hover-start: rgba(255, 0, 51, 0.35);
     --scrollbar-thumb-hover-end: rgba(255, 0, 51, 0.15);
     --scrollbar-thumb-hover-border: rgba(255, 0, 51, 0.25);
@@ -73,7 +73,7 @@
 
   /* Premium dark navbar — ensures content never bleeds through */
   .nav-solid {
-    background: rgba(8, 8, 8, 0.92);
+    background: rgba(20, 22, 27, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }

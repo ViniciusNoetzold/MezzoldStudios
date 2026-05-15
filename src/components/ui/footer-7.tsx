@@ -111,7 +111,7 @@ export const Footer7 = ({
             <p className="max-w-[70%] text-sm text-foreground/60">
               {description}
             </p>
-            <ul className="flex items-center space-x-6 text-foreground/50">
+            <ul className="flex items-center space-x-6 text-foreground/60">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-foreground transition-colors">
                   <Link
@@ -130,7 +130,7 @@ export const Footer7 = ({
           <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx}>
-                <h3 className="mb-4 font-mono tracking-widest text-xs uppercase text-foreground/40">
+                <h3 className="mb-4 font-mono tracking-widest text-xs uppercase text-foreground/50">
                   {section.title}
                 </h3>
                 <ul className="space-y-3 text-sm text-foreground/60">
@@ -144,7 +144,7 @@ export const Footer7 = ({
             ))}
           </div>
         </div>
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-[var(--border)] py-8 text-xs font-mono text-foreground/40 md:flex-row md:items-center md:text-left">
+        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-[var(--border)] py-8 text-xs font-mono text-foreground/50 md:flex-row md:items-center md:text-left">
           <p className="order-2 lg:order-1">{copyright}</p>
           <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
             {legalLinks.map((link, idx) => (
