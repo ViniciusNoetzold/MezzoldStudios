@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '../ui/menu-toggle-icon';
 import { useScroll } from '../ui/use-scroll';
@@ -8,10 +9,13 @@ import { useScroll } from '../ui/use-scroll';
 export function Header() {
 	const [open, setOpen] = React.useState(false);
 	const scrolled = useScroll(10);
+	const pathname = usePathname();
+	const isBlog = pathname?.startsWith('/blog') ?? false;
 
 	const links = [
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Portfólio', href: '/cases' },
+		{ label: 'Clientes', href: '/clientes' },
 		{ label: 'Contato', href: '/#contact' },
 	];
 
@@ -40,9 +44,14 @@ export function Header() {
 			className={cn(
 				'fixed left-0 right-0 z-50 mx-auto w-full transition-all duration-500 ease-out flex flex-col items-center justify-center',
 				{
-					'top-0 max-w-full rounded-none border-b border-transparent bg-transparent': !scrolled && !open,
-					'top-0 md:top-6 max-w-full md:max-w-4xl md:rounded-full border-b md:border border-transparent md:border-glass-border glass-panel shadow-lg': scrolled && !open,
-					'top-0 max-w-full glass-panel border-b border-glass-border rounded-none': open,
+					// Non-blog, top-of-page: keep elegant transparent hero overlap
+					'top-0 max-w-full rounded-none border-b border-transparent bg-transparent': !isBlog && !scrolled && !open,
+					// Non-blog, scrolled: floating capsule with premium solid bg
+					'top-0 md:top-6 max-w-full md:max-w-4xl md:rounded-full border-b md:border border-transparent md:border-[rgba(255,255,255,0.10)] nav-solid shadow-lg': !isBlog && scrolled && !open,
+					// Blog top-of-page OR mobile menu open: full-width solid bar so content never bleeds through
+					'top-0 max-w-full rounded-none border-b border-[rgba(255,255,255,0.10)] nav-solid': open || (isBlog && !scrolled && !open),
+					// Blog scrolled: solid floating capsule
+					'top-0 md:top-6 max-w-full md:max-w-4xl md:rounded-full border-b md:border border-[rgba(255,255,255,0.10)] nav-solid shadow-lg': isBlog && scrolled && !open,
 				}
 			)}
 		>

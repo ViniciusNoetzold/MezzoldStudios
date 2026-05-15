@@ -70,6 +70,13 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border-color);
   }
+
+  /* Premium dark navbar — ensures content never bleeds through */
+  .nav-solid {
+    background: rgba(8, 8, 8, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
   
   .glow-red {
     box-shadow: 0 0 40px -10px rgba(255, 0, 51, 0.15);
@@ -268,4 +275,27 @@ html, body {
   border-width: 10px;
 }
 /* ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Clientes page: browser preview scroll animation ────────────────────────
+   The 8s slow scroll can't be expressed with Tailwind utilities alone         */
+.preview-scroll {
+  transform: translateY(0);
+  transition: transform 8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.group:hover .preview-scroll {
+  transform: translateY(-55%);
+}
+
+@media (hover: none) {
+  .preview-scroll {
+    animation: clientPreviewScroll 14s ease-in-out infinite;
+    transition: none;
+  }
+}
+
+@keyframes clientPreviewScroll {
+  0%, 12%  { transform: translateY(0);    }
+  50%, 62% { transform: translateY(-40%); }
+  100%     { transform: translateY(0);    }
+}
 

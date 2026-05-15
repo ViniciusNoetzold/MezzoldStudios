@@ -24,7 +24,7 @@ export function BlogList() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden min-h-[58vh] flex items-end pt-[160px] pb-[100px] px-6">
+      <section className="relative overflow-hidden min-h-[58vh] flex items-end pt-[180px] md:pt-[200px] pb-[100px] px-6">
         {/* Grid background */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -90,7 +90,7 @@ export function BlogList() {
             <div className="flex-1 h-px bg-[var(--border)]" />
           </div>
 
-          <p className="max-w-[560px] text-[14px] leading-[1.75] text-foreground/60 mb-10">
+          <p className="max-w-[620px] text-[16px] md:text-[17px] leading-[1.8] text-foreground/78 mb-10">
             Ideias, bastidores e estratégias sobre performance, design, código,
             automação e negócios digitais.
           </p>
@@ -105,7 +105,7 @@ export function BlogList() {
             ].map((t) => (
               <span
                 key={t}
-                className="font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/35 px-3 py-1.5 border border-[var(--border)] rounded-[4px]"
+                className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/55 px-3 py-1.5 border border-[var(--border)] rounded-[4px]"
               >
                 {t}
               </span>
@@ -119,7 +119,7 @@ export function BlogList() {
         <div className="max-w-[1100px] mx-auto">
           {/* Section label */}
           <div className="flex items-center gap-3 mb-5">
-            <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-foreground/35">
+            <span className="font-mono text-[11px] tracking-[0.28em] uppercase text-foreground/50">
               [ DESTAQUE ]
             </span>
             <div className="flex-1 h-px bg-[var(--border)]" />
@@ -131,22 +131,22 @@ export function BlogList() {
           >
             {/* Left panel */}
             <div className="px-7 py-8 md:px-[48px] md:py-[52px] flex flex-col relative z-10">
-              <div className="font-mono text-[9px] tracking-[0.28em] uppercase text-electric-red mb-3.5">
+              <div className="font-mono text-[11px] tracking-[0.28em] uppercase text-electric-red mb-3.5">
                 {featured.category}
               </div>
-              <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-foreground/35 mb-5">
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-foreground/55 mb-5">
                 {featured.date}&nbsp;·&nbsp;{featured.readTime} de leitura
               </div>
               <h2
                 className="font-black text-foreground mb-5"
-                style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', letterSpacing: '-0.04em', lineHeight: 1.1 }}
+                style={{ fontSize: 'clamp(1.6rem, 2.6vw, 2.3rem)', letterSpacing: '-0.04em', lineHeight: 1.1 }}
               >
                 {featured.title}
               </h2>
-              <p className="text-[14px] leading-[1.75] text-foreground/60 mb-9 max-w-[420px] flex-1">
+              <p className="text-[16px] md:text-[17px] leading-[1.8] text-foreground/78 mb-9 max-w-[460px] flex-1">
                 {featured.excerpt}
               </p>
-              <div className="inline-flex items-center gap-2.5 font-mono text-[9px] tracking-[0.22em] uppercase text-electric-red group-hover:gap-4 transition-all duration-200">
+              <div className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase text-electric-red group-hover:gap-4 transition-all duration-200">
                 Ler artigo →
               </div>
             </div>
@@ -188,7 +188,7 @@ export function BlogList() {
         <div className="max-w-[1100px] mx-auto">
           {/* Section label */}
           <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[9px] tracking-[0.28em] uppercase text-foreground/35">
+            <span className="font-mono text-[11px] tracking-[0.28em] uppercase text-foreground/50">
               [ TODOS OS ARTIGOS ]
             </span>
             <div className="flex-1 h-px bg-[var(--border)]" />
@@ -227,7 +227,7 @@ export function BlogList() {
               placeholder="Buscar artigos..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-10 pl-9 pr-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground font-mono text-[10px] tracking-[0.08em] outline-none placeholder:text-foreground/35 focus:border-electric-red/40 transition-colors duration-200"
+              className="w-full h-11 pl-9 pr-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground font-mono text-[12px] tracking-[0.06em] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
             />
           </div>
 
@@ -240,10 +240,10 @@ export function BlogList() {
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`font-mono text-[8px] tracking-[0.22em] uppercase px-3.5 py-1.5 border rounded-full whitespace-nowrap transition-all duration-200 shrink-0 ${
+                className={`font-mono text-[10px] tracking-[0.22em] uppercase px-4 py-2 border rounded-full whitespace-nowrap transition-all duration-200 shrink-0 ${
                   activeFilter === cat
                     ? 'text-electric-red border-electric-red bg-electric-red/[0.06]'
-                    : 'text-foreground/35 border-[var(--border)] hover:text-foreground hover:border-white/20'
+                    : 'text-foreground/55 border-[var(--border)] hover:text-foreground hover:border-white/20'
                 }`}
               >
                 {cat}
@@ -253,7 +253,7 @@ export function BlogList() {
 
           {/* Posts grid */}
           {filtered.length === 0 ? (
-            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-foreground/35 py-10">
+            <p className="font-mono text-[12px] tracking-[0.18em] uppercase text-foreground/55 py-10">
               Nenhum artigo encontrado.
             </p>
           ) : (
@@ -266,7 +266,7 @@ export function BlogList() {
                 >
                   {/* Top row: category + index number */}
                   <div className="flex items-start justify-between mb-[18px]">
-                    <span className="font-mono text-[8px] tracking-[0.25em] uppercase text-electric-red">
+                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-electric-red">
                       {post.category}
                     </span>
                     <span
@@ -279,11 +279,11 @@ export function BlogList() {
 
                   {/* Date + read time */}
                   <div className="flex items-center gap-3 mb-3.5">
-                    <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-foreground/35">
+                    <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-foreground/55">
                       {post.date}
                     </span>
                     <span className="w-[3px] h-[3px] rounded-full bg-white/20" />
-                    <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-foreground/35">
+                    <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-foreground/55">
                       {post.readTime} de leitura
                     </span>
                   </div>
@@ -292,7 +292,7 @@ export function BlogList() {
                   <h3
                     className="font-extrabold text-foreground mb-3 leading-[1.25]"
                     style={{
-                      fontSize: 'clamp(1.1rem, 1.6vw, 1.3rem)',
+                      fontSize: 'clamp(1.2rem, 1.8vw, 1.45rem)',
                       letterSpacing: '-0.03em',
                     }}
                   >
@@ -300,7 +300,7 @@ export function BlogList() {
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-[13px] leading-[1.7] text-foreground/60 mb-6 line-clamp-3">
+                  <p className="text-[15px] md:text-[16px] leading-[1.75] text-foreground/78 mb-6 line-clamp-3">
                     {post.excerpt}
                   </p>
 
@@ -310,13 +310,13 @@ export function BlogList() {
                       {post.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="font-mono text-[7px] tracking-[0.15em] uppercase px-2 py-1 border border-[var(--border)] rounded text-foreground/35"
+                          className="font-mono text-[9px] tracking-[0.15em] uppercase px-2.5 py-1.5 border border-[var(--border)] rounded text-foreground/55"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <span className="font-mono text-[8px] tracking-[0.18em] uppercase text-foreground/35 group-hover:text-electric-red flex items-center gap-1.5 transition-colors duration-200 whitespace-nowrap">
+                    <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-foreground/55 group-hover:text-electric-red flex items-center gap-1.5 transition-colors duration-200 whitespace-nowrap">
                       Ler →
                     </span>
                   </div>
@@ -344,7 +344,7 @@ export function BlogList() {
             />
 
             <div className="relative z-10">
-              <div className="font-mono text-[9px] tracking-[0.28em] uppercase text-foreground/35 mb-4">
+              <div className="font-mono text-[11px] tracking-[0.28em] uppercase text-foreground/50 mb-4">
                 [ INSIGHTS ]
               </div>
               <h3
@@ -359,7 +359,7 @@ export function BlogList() {
                 <br />
                 com o seu digital.
               </h3>
-              <p className="text-[13px] leading-[1.75] text-foreground/60">
+              <p className="text-[15px] md:text-[16px] leading-[1.8] text-foreground/78">
                 Estratégias, bastidores e provocações sobre sites, sistemas,
                 performance e automação.
               </p>
@@ -373,11 +373,11 @@ export function BlogList() {
                 type="email"
                 placeholder="Seu melhor e-mail"
                 required
-                className="h-12 px-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground text-[13px] outline-none placeholder:text-foreground/35 focus:border-electric-red/40 transition-colors duration-200"
+                className="h-12 px-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground text-[15px] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
               />
               <button
                 type="submit"
-                className="h-12 px-6 rounded-lg bg-foreground text-black font-mono font-bold text-[9px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
+                className="h-12 px-6 rounded-lg bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
               >
                 Receber insights
               </button>

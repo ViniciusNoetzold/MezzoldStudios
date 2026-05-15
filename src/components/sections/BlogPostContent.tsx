@@ -69,15 +69,15 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           <div
             key={i}
             id={`s${idx}`}
-            className="mt-14 mb-6 scroll-mt-28"
+            className="mt-16 mb-7 scroll-mt-28"
           >
-            <span className="block font-mono text-[9px] tracking-[0.22em] uppercase text-electric-red mb-1.5">
+            <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-electric-red mb-2">
               [ {String(idx).padStart(2, '0')} ]
             </span>
             <h2
               className="font-black text-foreground leading-[1.15]"
               style={{
-                fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
+                fontSize: 'clamp(1.6rem, 2.6vw, 2.15rem)',
                 letterSpacing: '-0.03em',
               }}
             >
@@ -91,7 +91,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         return (
           <p
             key={i}
-            className="text-[17px] md:text-[18px] leading-[1.82] text-foreground/60 mb-6"
+            className="text-[17px] md:text-[19px] leading-[1.85] text-foreground/78 mb-7"
           >
             {section.text}
           </p>
@@ -102,11 +102,11 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
 
       case 'list':
         return (
-          <ul key={i} className="my-6 space-y-2.5 pl-0">
+          <ul key={i} className="my-7 space-y-3 pl-0">
             {section.items?.map((item, j) => (
               <li
                 key={j}
-                className="relative pl-5 text-[17px] md:text-[18px] leading-[1.75] text-foreground/60"
+                className="relative pl-6 text-[17px] md:text-[19px] leading-[1.8] text-foreground/78"
               >
                 <span className="absolute left-0 top-[0.72em] w-1.5 h-1.5 rounded-full bg-electric-red" />
                 {item}
@@ -119,13 +119,13 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         return (
           <div
             key={i}
-            className="relative bg-[#0b0b0b] border border-[var(--border)] rounded-xl my-8 px-7 py-6"
+            className="relative bg-[#0b0b0b] border border-[var(--border)] rounded-xl my-9 px-7 py-7 md:px-8 md:py-7"
             style={{ borderLeft: '3px solid var(--color-electric-red)' }}
           >
-            <div className="font-mono text-[8px] tracking-[0.25em] uppercase text-electric-red mb-2.5">
+            <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-electric-red mb-3">
               Nota
             </div>
-            <p className="text-[14px] leading-[1.8] text-foreground/60">
+            <p className="text-[16px] md:text-[17px] leading-[1.8] text-foreground/78">
               {section.text}
             </p>
           </div>
@@ -149,7 +149,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
       />
 
       {/* ── ARTICLE HERO ── */}
-      <section className="relative overflow-hidden pt-[140px] pb-20 px-6">
+      <section className="relative overflow-hidden pt-[160px] md:pt-[180px] pb-20 px-6">
         {/* Grid bg */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -186,11 +186,11 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           {String(postNumber).padStart(2, '0')}
         </div>
 
-        <div className="relative z-10 w-full max-w-[800px] mx-auto">
+        <div className="relative z-10 w-full max-w-[820px] mx-auto">
           {/* Back link */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 font-mono text-[9px] tracking-[0.22em] uppercase text-foreground/35 hover:text-foreground/70 transition-colors duration-200 mb-8"
+            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/45 hover:text-foreground/80 transition-colors duration-200 mb-8"
           >
             ← Blog
           </Link>
@@ -198,24 +198,24 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           {/* Meta chips */}
           <div className="flex flex-wrap gap-2 mb-7">
             <span
-              className="font-mono text-[8px] tracking-[0.20em] uppercase px-3 py-1 border rounded text-electric-red"
+              className="font-mono text-[10px] tracking-[0.20em] uppercase px-3 py-1.5 border rounded text-electric-red"
               style={{ borderColor: 'rgba(255,0,51,.25)' }}
             >
               {post.category}
             </span>
-            <span className="font-mono text-[8px] tracking-[0.20em] uppercase px-3 py-1 border border-[var(--border)] rounded text-foreground/35">
+            <span className="font-mono text-[10px] tracking-[0.20em] uppercase px-3 py-1.5 border border-[var(--border)] rounded text-foreground/55">
               {post.date}
             </span>
-            <span className="font-mono text-[8px] tracking-[0.20em] uppercase px-3 py-1 border border-[var(--border)] rounded text-foreground/35">
+            <span className="font-mono text-[10px] tracking-[0.20em] uppercase px-3 py-1.5 border border-[var(--border)] rounded text-foreground/55">
               {post.readTime} de leitura
             </span>
           </div>
 
           {/* Title */}
           <h1
-            className="font-black text-foreground mb-7"
+            className="font-black text-foreground mb-8"
             style={{
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              fontSize: 'clamp(2.1rem, 5vw, 3.5rem)',
               letterSpacing: '-0.04em',
               lineHeight: 1.05,
             }}
@@ -229,24 +229,24 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               className="shrink-0 rounded-sm"
               style={{ width: '3px', background: 'var(--color-electric-red)' }}
             />
-            <p className="text-[16px] leading-[1.75] text-foreground/60">
+            <p className="text-[18px] md:text-[20px] leading-[1.75] text-foreground/80">
               {post.excerpt}
             </p>
           </div>
 
           {/* Byline */}
-          <div className="flex items-center py-4 border-t border-b border-[var(--border)]">
+          <div className="flex items-center flex-wrap py-4 border-t border-b border-[var(--border)]">
             {[
               { label: 'Autor', val: 'Mezzold Studio' },
               { label: 'Categoria', val: post.category },
               { label: 'Leitura', val: post.readTime },
             ].map((item, idx, arr) => (
               <div key={item.label} className="flex items-center shrink-0">
-                <div className={`flex flex-col gap-0.5 ${idx === 0 ? 'pr-6' : 'px-6'}`}>
-                  <span className="font-mono text-[7px] tracking-[0.22em] uppercase text-foreground/35">
+                <div className={`flex flex-col gap-1 ${idx === 0 ? 'pr-6' : 'px-6'}`}>
+                  <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-foreground/45">
                     {item.label}
                   </span>
-                  <span className="font-mono text-[9px] tracking-[0.10em] uppercase text-foreground/60">
+                  <span className="font-mono text-[11px] tracking-[0.10em] uppercase text-foreground/75">
                     {item.val}
                   </span>
                 </div>
@@ -260,11 +260,11 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
       </section>
 
       {/* ── 3-COLUMN LAYOUT ── */}
-      <div className="max-w-[1100px] mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-[200px_1fr_160px] lg:gap-x-12 items-start">
+      <div className="max-w-[1280px] mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-[220px_1fr_190px] lg:gap-x-12 items-start">
 
         {/* TOC — Desktop only */}
         <aside className="hidden lg:block sticky top-28">
-          <div className="font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/35 mb-4 pb-2.5 border-b border-[var(--border)]">
+          <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-4 pb-3 border-b border-[var(--border)]">
             Sumário
           </div>
           <ul className="flex flex-col">
@@ -272,10 +272,10 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               <li key={h.id}>
                 <a
                   href={`#${h.id}`}
-                  className={`block py-1.5 pl-3 font-mono text-[9px] tracking-[0.08em] leading-[1.4] border-l transition-all duration-200 ${
+                  className={`block py-2 pl-3.5 font-mono text-[11px] tracking-[0.06em] leading-[1.5] border-l transition-all duration-200 ${
                     activeSection === h.id
                       ? 'text-electric-red border-electric-red'
-                      : 'text-foreground/35 border-[var(--border)] hover:text-foreground/60 hover:border-white/20'
+                      : 'text-foreground/55 border-[var(--border)] hover:text-foreground/85 hover:border-white/25'
                   }`}
                 >
                   {h.text}
@@ -290,7 +290,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           {/* Mobile TOC toggle */}
           <button
             onClick={() => setTocOpen((v) => !v)}
-            className="lg:hidden flex items-center gap-2.5 font-mono text-[9px] tracking-[0.20em] uppercase text-foreground/35 bg-[#0b0b0b] border border-[var(--border)] rounded-lg px-4 py-2.5 mb-7 w-full"
+            className="lg:hidden flex items-center gap-2.5 font-mono text-[10px] tracking-[0.20em] uppercase text-foreground/55 bg-[#0b0b0b] border border-[var(--border)] rounded-lg px-4 py-3 mb-7 w-full"
           >
             <svg
               width="14"
@@ -317,7 +317,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
                     <a
                       href={`#${h.id}`}
                       onClick={() => setTocOpen(false)}
-                      className="block py-2 pl-3 font-mono text-[11px] tracking-[0.08em] leading-[1.4] text-foreground/35 border-l border-[var(--border)] hover:text-foreground/60"
+                      className="block py-2.5 pl-3.5 font-mono text-[12px] tracking-[0.06em] leading-[1.5] text-foreground/55 border-l border-[var(--border)] hover:text-foreground/85"
                     >
                       {h.text}
                     </a>
@@ -331,11 +331,11 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           {post.content.map((section, i) => renderSection(section, i))}
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-14 pt-8 border-t border-[var(--border)]">
+          <div className="flex flex-wrap gap-2 mt-16 pt-8 border-t border-[var(--border)]">
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-[8px] tracking-[0.20em] uppercase px-3.5 py-1.5 border border-[var(--border)] rounded-full text-foreground/35"
+                className="font-mono text-[10px] tracking-[0.20em] uppercase px-4 py-2 border border-[var(--border)] rounded-full text-foreground/55"
               >
                 {tag}
               </span>
@@ -345,34 +345,34 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
 
         {/* Sidebar — Desktop only */}
         <aside className="hidden lg:flex flex-col gap-5 sticky top-28 pt-0">
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-4">
-            <div className="font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/35 mb-3">
+          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+            <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-3.5">
               Tags
             </div>
             <div className="flex flex-wrap gap-1.5">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-mono text-[7px] tracking-[0.15em] uppercase px-2 py-1 border border-[var(--border)] rounded text-foreground/35"
+                  className="font-mono text-[9px] tracking-[0.15em] uppercase px-2.5 py-1.5 border border-[var(--border)] rounded text-foreground/55"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-4">
-            <div className="font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/35 mb-2">
+          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+            <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-2.5">
               Leitura
             </div>
-            <div className="font-mono text-[10px] tracking-[0.10em] text-foreground/58">
+            <div className="font-mono text-[12px] tracking-[0.10em] text-foreground/80">
               {post.readTime}
             </div>
           </div>
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-4">
-            <div className="font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/35 mb-2">
+          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+            <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-2.5">
               Publicado
             </div>
-            <div className="font-mono text-[10px] tracking-[0.08em] text-foreground/58">
+            <div className="font-mono text-[12px] tracking-[0.08em] text-foreground/80">
               {post.date}
             </div>
           </div>
@@ -380,8 +380,8 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
       </div>
 
       {/* ── NEXT POST ── */}
-      <div className="px-6 pb-16 max-w-[1100px] mx-auto">
-        <div className="font-mono text-[9px] tracking-[0.28em] uppercase text-foreground/35 mb-3">
+      <div className="px-6 pb-16 max-w-[1280px] mx-auto">
+        <div className="font-mono text-[11px] tracking-[0.28em] uppercase text-foreground/50 mb-3.5">
           Próximo artigo
         </div>
         <Link
@@ -390,11 +390,11 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         >
           <span
             className="font-extrabold text-foreground leading-[1.3]"
-            style={{ fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(1.15rem, 1.8vw, 1.5rem)', letterSpacing: '-0.03em' }}
           >
             {nextPost.title}
           </span>
-          <span className="font-mono text-[9px] tracking-[0.20em] uppercase text-foreground/35 group-hover:text-electric-red whitespace-nowrap shrink-0 transition-colors duration-200">
+          <span className="font-mono text-[11px] tracking-[0.20em] uppercase text-foreground/55 group-hover:text-electric-red whitespace-nowrap shrink-0 transition-colors duration-200">
             Ler próximo →
           </span>
         </Link>
@@ -403,7 +403,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
       {/* ── FINAL CTA ── */}
       <section className="px-6 pb-24">
         <div
-          className="relative overflow-hidden max-w-[1100px] mx-auto bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center"
+          className="relative overflow-hidden max-w-[1280px] mx-auto bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center"
           style={{ padding: 'clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px)' }}
         >
           {/* Left glow */}
@@ -418,13 +418,13 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           />
 
           <div className="relative z-10">
-            <div className="font-mono text-[9px] tracking-[0.28em] uppercase text-foreground/35 mb-4">
+            <div className="font-mono text-[11px] tracking-[0.28em] uppercase text-foreground/50 mb-4">
               [ PRÓXIMO PASSO ]
             </div>
             <h2
-              className="font-black text-foreground mb-4"
+              className="font-black text-foreground mb-5"
               style={{
-                fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
+                fontSize: 'clamp(1.9rem, 3vw, 2.8rem)',
                 letterSpacing: '-0.04em',
                 lineHeight: 1.05,
               }}
@@ -433,7 +433,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               <br />
               mais do que parece bonito.
             </h2>
-            <p className="text-[14px] leading-[1.75] text-foreground/60 max-w-[480px]">
+            <p className="text-[16px] md:text-[17px] leading-[1.75] text-foreground/78 max-w-[520px]">
               Performance, design e engenharia pensados juntos desde o início. É
               assim que construímos.
             </p>
@@ -442,13 +442,13 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           <div className="relative z-10 flex flex-row md:flex-col gap-2.5 shrink-0 flex-wrap">
             <Link
               href="/contato"
-              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-black font-mono font-bold text-[9px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
             >
               Iniciar projeto
             </Link>
             <Link
               href="/cases"
-              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-transparent text-foreground font-mono font-bold text-[9px] tracking-[0.22em] uppercase border border-[var(--border)] hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200 whitespace-nowrap"
+              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-transparent text-foreground font-mono font-bold text-[10px] tracking-[0.22em] uppercase border border-[var(--border)] hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200 whitespace-nowrap"
             >
               Ver portfólio
             </Link>
