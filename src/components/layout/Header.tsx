@@ -56,7 +56,7 @@ export function Header() {
 
 	const links = [
 		{ label: 'Blog', href: '/blog' },
-		{ label: 'Portfólio', href: '/cases' },
+		{ label: 'Projetos', href: '/projetos' },
 		{ label: 'Clientes', href: '/clientes' },
 		{ label: 'Contato', href: '/#contact' },
 	];
