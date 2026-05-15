@@ -62,7 +62,7 @@ function MobileScrollTimeline() {
   return (
     <div className="md:hidden flex flex-col gap-10 relative mt-4">
       {/* Continuous vertical line */}
-      <div className="absolute left-7 -translate-x-1/2 top-4 bottom-4 w-px bg-[linear-gradient(to_bottom,transparent,rgba(255,255,255,0.1)_5%,rgba(255,255,255,0.1)_95%,transparent)]" />
+      <div className="timeline-line absolute left-7 -translate-x-1/2 top-4 bottom-4 w-px bg-[linear-gradient(to_bottom,transparent,rgba(255,255,255,0.12)_5%,rgba(255,255,255,0.12)_95%,transparent)]" />
 
       {phases.map((phase, index) => {
         const Icon = phase.icon;
@@ -121,7 +121,7 @@ function MobileScrollTimeline() {
 export function ProcessSection() {
   return (
     <section className="relative bg-surface-secondary py-16 md:py-24 px-4 sm:px-6 lg:px-12">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
+      <div className="section-grid absolute inset-0 pointer-events-none opacity-50" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Header */}

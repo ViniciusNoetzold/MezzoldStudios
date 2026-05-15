@@ -48,7 +48,7 @@ export function SpecialtiesSection() {
   return (
     <section className="py-16 md:py-24 lg:py-32 relative px-4 sm:px-6 overflow-hidden bg-surface-secondary">
       {/* Standard grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
+      <div className="section-grid absolute inset-0 pointer-events-none opacity-50" />
 
       <div className="container mx-auto max-w-6xl relative z-10 w-full flex flex-col items-center">
         <h3 className="font-sans font-black tracking-tighter text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-foreground mb-10 md:mb-16 text-center uppercase leading-tight">

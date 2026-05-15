@@ -69,7 +69,7 @@ export const HoverEffect = ({
             <AnimatePresence>
               {isHovered && (
                 <motion.span
-                  className="absolute inset-0 h-full w-full bg-white/[0.05] block rounded-3xl"
+                  className="absolute inset-0 h-full w-full bg-foreground/[0.04] block rounded-3xl"
                   layoutId="hoverBackground"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -84,7 +84,7 @@ export const HoverEffect = ({
               )}
             </AnimatePresence>
             <Card className={cn(
-               isHovered ? accent.border : 'border-white/10 group-hover:border-white/20'
+               isHovered ? accent.border : 'border-[var(--border)] group-hover:border-[var(--border)]'
             )}>
               <div className={cn('p-2 rounded-lg w-fit mb-4', accent.bg)}>
                 <Icon className={cn('size-5', accent.text)} strokeWidth={1.5} />
@@ -99,7 +99,7 @@ export const HoverEffect = ({
                         'font-mono text-[9px] tracking-widest uppercase border px-2 py-1 rounded transition-colors',
                         isHovered
                           ? [accent.text, 'border-current/30 bg-current/5']
-                          : 'border-white/15 text-white/55 bg-white/[0.04]'
+                          : 'border-[var(--border)] text-foreground/55 bg-foreground/[0.04]'
                       )}
                     >
                       {tag}
@@ -124,7 +124,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-6 overflow-hidden bg-[#141414] border relative z-20 transition-colors duration-300",
+        "rounded-2xl h-full w-full p-6 overflow-hidden bg-card border relative z-20 transition-all duration-300 shadow-[0_1px_6px_rgba(0,0,0,0.08)]",
         className
       )}
     >
@@ -143,7 +143,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("text-white font-bold uppercase tracking-widest leading-snug mt-2 text-sm md:text-base", className)}>
+    <h4 className={cn("text-foreground font-bold uppercase tracking-widest leading-snug mt-2 text-sm md:text-base", className)}>
       {children}
     </h4>
   );
@@ -159,7 +159,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-4 text-white/80 tracking-wide leading-relaxed text-xs md:text-sm flex-1",
+        "mt-4 text-foreground/65 tracking-wide leading-relaxed text-xs md:text-sm flex-1",
         className
       )}
     >

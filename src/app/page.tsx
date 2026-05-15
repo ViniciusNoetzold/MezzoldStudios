@@ -20,10 +20,12 @@ import { ProcessSection } from '@/components/sections/ProcessSection';
 import { PortfolioSection } from '@/components/sections/PortfolioSection';
 import { ContactSection } from '@/components/sections/ContactSection';
 import { AccentProvider } from '@/components/layout/AccentProvider';
+import { HomeThemeProvider } from '@/components/layout/HomeThemeProvider';
 
 export default function Home() {
   return (
     <>
+      <HomeThemeProvider />
       <Header />
       <AccentProvider>
         <main className="flex-1">

@@ -227,7 +227,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="py-16 md:py-24 relative px-4 sm:px-6 overflow-hidden">
       {/* Subtle grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+      <div className="section-grid absolute inset-0 pointer-events-none" />
       <div className="container mx-auto relative z-10">
         <div className="mb-10 md:mb-16">
           <h3 className="font-sans font-black text-[clamp(1.75rem,4.5vw,3.75rem)] tracking-tighter uppercase leading-tight">As Especialidades<br/>Do Nosso Estúdio</h3>

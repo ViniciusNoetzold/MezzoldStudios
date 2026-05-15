@@ -36,8 +36,8 @@ export function ContactSection() {
               0deg,
               transparent,
               transparent 39px,
-              rgba(255,255,255,0.015) 39px,
-              rgba(255,255,255,0.015) 40px
+              var(--grid-line) 39px,
+              var(--grid-line) 40px
             )
           `,
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',

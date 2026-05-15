@@ -75,12 +75,12 @@ const accentMap: Record<string, {
   border: string; glow: string; text: string; bg: string;
   glowRgb: string; borderActive: string; shadowActive: string;
 }> = {
-  emerald: { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '16,185,129', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  cyan:    { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '103,232,249', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  violet:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '139,92,246', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  orange:  { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '249,115,22', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  sky:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '14,165,233', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
-  red:     { border: 'border-white/10', glow: 'shadow-[0_0_24px_rgba(255,255,255,0.03)]', text: 'text-white', bg: 'bg-foreground/[0.02]', glowRgb: '239,68,68', borderActive: 'border-white/20', shadowActive: 'shadow-[0_0_32px_rgba(255,255,255,0.05)]' },
+  emerald: { border: 'border-emerald/20',      glow: 'shadow-[0_0_24px_rgba(16,185,129,0.06)]',  text: 'text-emerald',      bg: 'bg-emerald/[0.07]',      glowRgb: '16,185,129',  borderActive: 'border-emerald/50',      shadowActive: 'shadow-[0_0_32px_rgba(16,185,129,0.12)]'  },
+  cyan:    { border: 'border-cyan/20',         glow: 'shadow-[0_0_24px_rgba(6,182,212,0.06)]',   text: 'text-cyan',         bg: 'bg-cyan/[0.07]',         glowRgb: '6,182,212',   borderActive: 'border-cyan/50',         shadowActive: 'shadow-[0_0_32px_rgba(6,182,212,0.12)]'   },
+  violet:  { border: 'border-violet-500/20',   glow: 'shadow-[0_0_24px_rgba(139,92,246,0.06)]',  text: 'text-violet-400',   bg: 'bg-violet-500/[0.07]',   glowRgb: '139,92,246',  borderActive: 'border-violet-500/50',   shadowActive: 'shadow-[0_0_32px_rgba(139,92,246,0.12)]'  },
+  orange:  { border: 'border-orange-500/20',   glow: 'shadow-[0_0_24px_rgba(249,115,22,0.06)]',  text: 'text-orange-400',   bg: 'bg-orange-500/[0.07]',   glowRgb: '249,115,22',  borderActive: 'border-orange-500/50',   shadowActive: 'shadow-[0_0_32px_rgba(249,115,22,0.12)]'  },
+  sky:     { border: 'border-sky-500/20',      glow: 'shadow-[0_0_24px_rgba(14,165,233,0.06)]',  text: 'text-sky-400',      bg: 'bg-sky-500/[0.07]',      glowRgb: '14,165,233',  borderActive: 'border-sky-500/50',      shadowActive: 'shadow-[0_0_32px_rgba(14,165,233,0.12)]'  },
+  red:     { border: 'border-red-400/20',      glow: 'shadow-[0_0_24px_rgba(239,68,68,0.06)]',   text: 'text-red-400',      bg: 'bg-red-400/[0.07]',      glowRgb: '239,68,68',   borderActive: 'border-red-400/50',      shadowActive: 'shadow-[0_0_32px_rgba(239,68,68,0.12)]'   },
 };
 
 /* ─── Mobile carousel ───────────────────────────────────────── */
@@ -245,8 +245,8 @@ export function PortfolioSection() {
   return (
     <section id="portfolio" className="pt-16 pb-8 md:py-24 relative px-4 sm:px-5 md:px-6 bg-surface-secondary overflow-hidden">
       {/* Background Grid */}
-      <div 
-        className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50 transition-opacity" 
+      <div
+        className="section-grid absolute inset-0 pointer-events-none opacity-60 transition-opacity"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'

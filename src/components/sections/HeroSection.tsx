@@ -24,6 +24,7 @@ const HighlightWord = ({ children, active }: { children: React.ReactNode; active
 
 export function HeroSection() {
   const [activeHighlight, setActiveHighlight] = React.useState(0);
+  const [isLight, setIsLight] = React.useState(false);
   const reducedMotion = typeof window !== 'undefined'
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
@@ -36,17 +37,25 @@ export function HeroSection() {
     return () => clearInterval(interval);
   }, [reducedMotion]);
 
+  React.useEffect(() => {
+    const check = () => setIsLight(document.documentElement.dataset.theme === 'light');
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="relative min-h-[85svh] md:min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-surface touch-pan-y">
 
-      {/* ── Desktop: 3D animated Halide canvas ── */}
-      <div className="absolute inset-0 bottom-[35%] z-0 pointer-events-none hidden md:block overflow-hidden">
+      {/* ── Desktop: 3D animated Halide canvas — hidden in light mode via CSS ── */}
+      <div className="hero-canvas-wrap absolute inset-0 bottom-[35%] z-0 pointer-events-none hidden md:block overflow-hidden">
         <HalideTopoHero />
       </div>
 
       {/* ── Mobile: flat dark code image ── */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none md:hidden"
+        className="hero-mobile-bg absolute inset-0 z-0 pointer-events-none md:hidden"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800')`,
           backgroundSize: 'cover',
@@ -97,7 +106,7 @@ export function HeroSection() {
         {/* Headline */}
         <h1
           className="font-sans font-black text-[clamp(2.75rem,10vw,8.5rem)] tracking-tighter text-foreground mb-3 md:mb-6 leading-[0.88]"
-          style={{ mixBlendMode: 'difference' }}
+          style={{ mixBlendMode: isLight ? 'normal' : 'difference' }}
         >
           MEZZOLD
         </h1>
