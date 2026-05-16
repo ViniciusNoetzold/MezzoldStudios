@@ -336,6 +336,17 @@ html, body {
 }
 /* ─────────────────────────────────────────────────────────────────────────── */
 
+/* ── Blog — ghost decorative numbers & newsletter button ────────────────────
+   Numbers use white opacity in dark, dark opacity in light.
+   Newsletter button has a dark bg in light mode, needs white text.           */
+.blog-ghost-num      { color: rgba(255, 255, 255, 0.018); }
+.blog-ghost-num-card { color: rgba(255, 255, 255, 0.040); }
+[data-theme="light"] .blog-ghost-num      { color: rgba(0, 0, 0, 0.040); }
+[data-theme="light"] .blog-ghost-num-card { color: rgba(0, 0, 0, 0.070); }
+
+[data-theme="light"] .blog-newsletter-btn            { color: #f5f5f3; }
+[data-theme="light"] .blog-newsletter-btn:hover      { background-color: rgba(5, 5, 5, 0.85); }
+
 /* ── Process section cards (CardSpotlight) — light theme override ────────────
    In dark mode the canvas spotlight effect looks great. In light mode the
    dark canvas overlay makes cards illegible, so we replace it with a clean

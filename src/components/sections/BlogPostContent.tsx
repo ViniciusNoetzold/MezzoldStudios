@@ -155,7 +155,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right, rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px)',
+              'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
             backgroundSize: '48px 48px',
             maskImage:
               'linear-gradient(to bottom, transparent 0%, black 20%, black 70%, transparent 100%)',
@@ -175,7 +175,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         />
         {/* Large decorative number */}
         <div
-          className="absolute font-black leading-none pointer-events-none select-none text-white/[0.018]"
+          className="blog-ghost-num absolute font-black leading-none pointer-events-none select-none"
           style={{
             right: '-1vw',
             bottom: '-0.05em',
@@ -310,7 +310,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
 
           {/* Mobile TOC panel */}
           {tocOpen && (
-            <div className="lg:hidden bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5 mb-7">
+            <div className="lg:hidden bg-card border border-[var(--border)] rounded-xl p-5 mb-7">
               <ul className="flex flex-col">
                 {headings.map((h) => (
                   <li key={h.id}>
@@ -345,7 +345,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
 
         {/* Sidebar — Desktop only */}
         <aside className="hidden lg:flex flex-col gap-5 sticky top-28 pt-0">
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+          <div className="bg-card border border-[var(--border)] rounded-xl p-5">
             <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-3.5">
               Tags
             </div>
@@ -360,7 +360,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               ))}
             </div>
           </div>
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+          <div className="bg-card border border-[var(--border)] rounded-xl p-5">
             <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-2.5">
               Leitura
             </div>
@@ -368,7 +368,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               {post.readTime}
             </div>
           </div>
-          <div className="bg-[#0b0b0b] border border-[var(--border)] rounded-xl p-5">
+          <div className="bg-card border border-[var(--border)] rounded-xl p-5">
             <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-foreground/50 mb-2.5">
               Publicado
             </div>

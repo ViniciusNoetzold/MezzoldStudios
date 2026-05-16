@@ -30,7 +30,7 @@ export function BlogList() {
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right, rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px)',
+              'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
             backgroundSize: '48px 48px',
             maskImage:
               'linear-gradient(to bottom, transparent 0%, black 15%, black 75%, transparent 100%)',
@@ -48,7 +48,7 @@ export function BlogList() {
         />
         {/* Decorative large number */}
         <div
-          className="absolute font-black leading-none pointer-events-none select-none text-white/[0.018]"
+          className="blog-ghost-num absolute font-black leading-none pointer-events-none select-none"
           style={{
             right: '-2vw',
             bottom: '-0.1em',
@@ -127,7 +127,7 @@ export function BlogList() {
 
           <Link
             href={`/blog/${featured.slug}`}
-            className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 transition-all duration-300 hover:border-electric-red hover:-translate-y-1 hover:shadow-[0_0_60px_-20px_rgba(255,0,51,.18)]"
+            className="group relative overflow-hidden bg-card border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 transition-all duration-300 hover:border-electric-red hover:-translate-y-1 hover:shadow-[0_0_60px_-20px_rgba(255,0,51,.18)]"
           >
             {/* Left panel */}
             <div className="px-7 py-8 md:px-[48px] md:py-[52px] flex flex-col relative z-10">
@@ -156,7 +156,7 @@ export function BlogList() {
               className="relative hidden md:flex items-center justify-center border-l border-[var(--border)]"
               style={{
                 background:
-                  'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.012) 20px, rgba(255,255,255,.012) 21px)',
+                  'repeating-linear-gradient(45deg, transparent, transparent 20px, var(--grid-line) 20px, var(--grid-line) 21px)',
               }}
             >
               <div
@@ -167,7 +167,7 @@ export function BlogList() {
                 }}
               />
               <span
-                className="font-black leading-none text-white/[0.04] select-none"
+                className="blog-ghost-num-card font-black leading-none select-none"
                 style={{
                   fontSize: 'clamp(8rem, 18vw, 18rem)',
                   letterSpacing: '-0.06em',
@@ -175,7 +175,7 @@ export function BlogList() {
               >
                 01
               </span>
-              <div className="absolute top-5 right-5 font-mono text-[8px] tracking-[0.22em] uppercase text-white/20 px-2 py-1 border border-[var(--border)] rounded">
+              <div className="absolute top-5 right-5 font-mono text-[8px] tracking-[0.22em] uppercase text-foreground/25 px-2 py-1 border border-[var(--border)] rounded">
                 DESTAQUE
               </div>
             </div>
@@ -227,7 +227,7 @@ export function BlogList() {
               placeholder="Buscar artigos..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-11 pl-9 pr-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground font-mono text-[12px] tracking-[0.06em] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
+              className="w-full h-11 pl-9 pr-4 bg-card border border-[var(--border)] rounded-lg text-foreground font-mono text-[12px] tracking-[0.06em] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
             />
           </div>
 
@@ -243,7 +243,7 @@ export function BlogList() {
                 className={`font-mono text-[10px] tracking-[0.22em] uppercase px-4 py-2 border rounded-full whitespace-nowrap transition-all duration-200 shrink-0 ${
                   activeFilter === cat
                     ? 'text-electric-red border-electric-red bg-electric-red/[0.06]'
-                    : 'text-foreground/55 border-[var(--border)] hover:text-foreground hover:border-white/20'
+                    : 'text-foreground/55 border-[var(--border)] hover:text-foreground hover:border-foreground/20'
                 }`}
               >
                 {cat}
@@ -262,7 +262,7 @@ export function BlogList() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[12px] p-8 flex flex-col transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_0_40px_-15px_rgba(255,0,51,.10)]"
+                  className="group relative overflow-hidden bg-card border border-[var(--border)] rounded-[12px] p-8 flex flex-col transition-all duration-300 hover:border-foreground/20 hover:-translate-y-1 hover:shadow-[0_0_40px_-15px_rgba(255,0,51,.10)]"
                 >
                   {/* Top row: category + index number */}
                   <div className="flex items-start justify-between mb-[18px]">
@@ -270,7 +270,7 @@ export function BlogList() {
                       {post.category}
                     </span>
                     <span
-                      className="font-black leading-none text-white/[0.04] select-none"
+                      className="blog-ghost-num-card font-black leading-none select-none"
                       style={{ fontSize: '5rem', letterSpacing: '-0.05em' }}
                     >
                       {String(i + 2).padStart(2, '0')}
@@ -282,7 +282,7 @@ export function BlogList() {
                     <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-foreground/55">
                       {post.date}
                     </span>
-                    <span className="w-[3px] h-[3px] rounded-full bg-white/20" />
+                    <span className="w-[3px] h-[3px] rounded-full bg-foreground/20" />
                     <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-foreground/55">
                       {post.readTime} de leitura
                     </span>
@@ -331,7 +331,7 @@ export function BlogList() {
       <section className="px-6 pb-24">
         <div className="max-w-[1100px] mx-auto">
           <div
-            className="relative overflow-hidden bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+            className="relative overflow-hidden bg-card border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
             style={{ padding: 'clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px)' }}
           >
             {/* Right glow */}
@@ -373,11 +373,11 @@ export function BlogList() {
                 type="email"
                 placeholder="Seu melhor e-mail"
                 required
-                className="h-12 px-4 bg-[#111] border border-[var(--border)] rounded-lg text-foreground text-[15px] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
+                className="h-12 px-4 bg-card border border-[var(--border)] rounded-lg text-foreground text-[15px] outline-none placeholder:text-foreground/45 focus:border-electric-red/40 transition-colors duration-200"
               />
               <button
                 type="submit"
-                className="h-12 px-6 rounded-lg bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
+                className="blog-newsletter-btn h-12 px-6 rounded-lg bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-foreground/85 hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
               >
                 Receber insights
               </button>
