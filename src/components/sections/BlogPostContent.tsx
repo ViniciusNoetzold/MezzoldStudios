@@ -119,7 +119,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         return (
           <div
             key={i}
-            className="relative bg-[#0b0b0b] border border-[var(--border)] rounded-xl my-9 px-7 py-7 md:px-8 md:py-7"
+            className="relative bg-card border border-[var(--border)] rounded-xl my-9 px-7 py-7 md:px-8 md:py-7"
             style={{ borderLeft: '3px solid var(--color-electric-red)' }}
           >
             <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-electric-red mb-3">
@@ -275,7 +275,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
                   className={`block py-2 pl-3.5 font-mono text-[11px] tracking-[0.06em] leading-[1.5] border-l transition-all duration-200 ${
                     activeSection === h.id
                       ? 'text-electric-red border-electric-red'
-                      : 'text-foreground/55 border-[var(--border)] hover:text-foreground/85 hover:border-white/25'
+                      : 'text-foreground/55 border-[var(--border)] hover:text-foreground/85 hover:border-foreground/25'
                   }`}
                 >
                   {h.text}
@@ -290,7 +290,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           {/* Mobile TOC toggle */}
           <button
             onClick={() => setTocOpen((v) => !v)}
-            className="lg:hidden flex items-center gap-2.5 font-mono text-[10px] tracking-[0.20em] uppercase text-foreground/55 bg-[#0b0b0b] border border-[var(--border)] rounded-lg px-4 py-3 mb-7 w-full"
+            className="lg:hidden flex items-center gap-2.5 font-mono text-[10px] tracking-[0.20em] uppercase text-foreground/55 bg-card border border-[var(--border)] rounded-lg px-4 py-3 mb-7 w-full"
           >
             <svg
               width="14"
@@ -386,7 +386,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
         </div>
         <Link
           href={`/blog/${nextPost.slug}`}
-          className="group flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-[#0b0b0b] border border-[var(--border)] rounded-xl px-7 py-7 sm:px-9 sm:py-8 hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
+          className="group flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-card border border-[var(--border)] rounded-xl px-7 py-7 sm:px-9 sm:py-8 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.18)] transition-all duration-300"
         >
           <span
             className="font-extrabold text-foreground leading-[1.3]"
@@ -403,7 +403,7 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
       {/* ── FINAL CTA ── */}
       <section className="px-6 pb-24">
         <div
-          className="relative overflow-hidden max-w-[1280px] mx-auto bg-[#0b0b0b] border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center"
+          className="relative overflow-hidden max-w-[1280px] mx-auto bg-card border border-[var(--border)] rounded-[16px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center"
           style={{ padding: 'clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px)' }}
         >
           {/* Left glow */}
@@ -442,13 +442,13 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
           <div className="relative z-10 flex flex-row md:flex-col gap-2.5 shrink-0 flex-wrap">
             <Link
               href="/contato"
-              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+              className="blog-newsletter-btn inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-black font-mono font-bold text-[10px] tracking-[0.22em] uppercase hover:bg-foreground/85 hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
             >
               Iniciar projeto
             </Link>
             <Link
               href="/cases"
-              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-transparent text-foreground font-mono font-bold text-[10px] tracking-[0.22em] uppercase border border-[var(--border)] hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200 whitespace-nowrap"
+              className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-transparent text-foreground font-mono font-bold text-[10px] tracking-[0.22em] uppercase border border-[var(--border)] hover:border-foreground/25 hover:bg-foreground/[0.05] transition-all duration-200 whitespace-nowrap"
             >
               Ver portfólio
             </Link>
