@@ -336,6 +336,35 @@ html, body {
 }
 /* ─────────────────────────────────────────────────────────────────────────── */
 
+/* ── Clientes page — light theme corrections ────────────────────────────────
+   Card bg, CTA, ghost numbers and browser chrome use hardcoded dark values.
+   These overrides adapt them to the light theme without touching dark mode. */
+
+/* Ghost "01" decorative number in hero */
+.clientes-ghost-num { color: rgba(255, 255, 255, 0.025); }
+[data-theme="light"] .clientes-ghost-num { color: rgba(0, 0, 0, 0.040); }
+
+/* Client cards: dark bg in dark mode, clean white in light */
+[data-theme="light"] .clientes-card {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.09);
+}
+[data-theme="light"] .clientes-card:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10), 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* CTA final card */
+[data-theme="light"] .clientes-cta-card {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.09);
+}
+
+/* Hero primary button: bg-foreground in light = dark bg, needs light text */
+[data-theme="light"] .clientes-primary-btn { color: #f5f5f3; }
+[data-theme="light"] .clientes-primary-btn:hover {
+  box-shadow: 0 0 30px rgba(5, 5, 5, 0.12);
+}
+
 /* ── Blog — ghost decorative numbers & newsletter button ────────────────────
    Numbers use white opacity in dark, dark opacity in light.
    Newsletter button has a dark bg in light mode, needs white text.           */

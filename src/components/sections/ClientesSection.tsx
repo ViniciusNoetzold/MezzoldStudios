@@ -165,7 +165,7 @@ function ClientCard({ client }: { client: Client }) {
       target="_blank"
       rel="noopener noreferrer"
       className={[
-        'group block rounded-3xl border border-[var(--border)] bg-[#0f0f0f] overflow-hidden',
+        'clientes-card group block rounded-3xl border border-[var(--border)] bg-[#0f0f0f] overflow-hidden',
         'cursor-pointer transition-all duration-500',
         isRed
           ? 'hover:border-electric-red/40 hover:shadow-[0_0_60px_-15px_rgba(255,0,51,0.20),0_20px_60px_-20px_rgba(0,0,0,0.6)]'
@@ -173,13 +173,13 @@ function ClientCard({ client }: { client: Client }) {
       ].join(' ')}
     >
       {/* Browser chrome bar */}
-      <div className="flex items-center gap-2.5 px-4 py-2.5 bg-white/[0.03] border-b border-[var(--border)]">
+      <div className="flex items-center gap-2.5 px-4 py-2.5 bg-foreground/[0.03] border-b border-[var(--border)]">
         <div className="flex gap-1.5 shrink-0">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
         </div>
-        <div className="flex-1 h-[26px] rounded-md bg-white/[0.05] border border-white/[0.07] flex items-center px-2.5 gap-1.5 min-w-0">
+        <div className="flex-1 h-[26px] rounded-md bg-foreground/[0.05] border border-foreground/[0.07] flex items-center px-2.5 gap-1.5 min-w-0">
           <svg
             className="opacity-30 shrink-0"
             width="10" height="10"
@@ -218,7 +218,7 @@ function ClientCard({ client }: { client: Client }) {
           {client.tags.map(tag => (
             <span
               key={tag}
-              className="font-mono text-[8px] tracking-[0.12em] uppercase px-2.5 py-1 rounded border border-white/[0.12] text-white/40 bg-white/[0.04]"
+              className="font-mono text-[8px] tracking-[0.12em] uppercase px-2.5 py-1 rounded border border-foreground/[0.12] text-foreground/40 bg-foreground/[0.04]"
             >
               {tag}
             </span>
@@ -258,7 +258,7 @@ export function ClientesSection() {
           className="absolute inset-0 opacity-60 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right,#ffffff04 1px,transparent 1px),linear-gradient(to bottom,#ffffff04 1px,transparent 1px)',
+              'linear-gradient(to right,var(--grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--grid-line) 1px,transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -274,21 +274,20 @@ export function ClientesSection() {
         {/* Vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at center,transparent 20%,rgba(2,2,2,.65) 80%)' }}
+          style={{ background: 'radial-gradient(ellipse at center,transparent 20%,var(--hero-vignette) 80%)' }}
         />
         {/* Bottom fade */}
         <div
           className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom,transparent,rgba(2,2,2,.98))' }}
+          style={{ background: 'linear-gradient(to bottom,transparent,var(--hero-bottom-fade))' }}
         />
         {/* Large background number */}
         <span
           aria-hidden="true"
-          className="absolute bottom-14 right-10 font-black leading-none pointer-events-none select-none"
+          className="clientes-ghost-num absolute bottom-14 right-10 font-black leading-none pointer-events-none select-none"
           style={{
             fontSize: 'clamp(8rem,20vw,18rem)',
             letterSpacing: '-0.06em',
-            color: 'rgba(255,255,255,.025)',
           }}
         >
           01
@@ -314,13 +313,13 @@ export function ClientesSection() {
           <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
             <a
               href="#gallery"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.30)] hover:scale-[1.02] active:scale-[0.97] w-full max-w-[260px] sm:w-auto"
+              className="clientes-primary-btn inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.97] w-full max-w-[260px] sm:w-auto"
             >
               Ver clientes
             </a>
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-white/35 active:scale-[0.97] w-full max-w-[260px] sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-foreground/35 active:scale-[0.97] w-full max-w-[260px] sm:w-auto"
             >
               Solicitar projeto
             </Link>
@@ -335,7 +334,7 @@ export function ClientesSection() {
           className="absolute inset-0 opacity-40 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right,#ffffff03 1px,transparent 1px),linear-gradient(to bottom,#ffffff03 1px,transparent 1px)',
+              'linear-gradient(to right,var(--grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--grid-line) 1px,transparent 1px)',
             backgroundSize: '40px 40px',
             maskImage: 'linear-gradient(to bottom,transparent 0%,black 8%,black 92%,transparent 100%)',
           }}
@@ -369,7 +368,7 @@ export function ClientesSection() {
           className="absolute inset-0 opacity-50 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right,#ffffff03 1px,transparent 1px),linear-gradient(to bottom,#ffffff03 1px,transparent 1px)',
+              'linear-gradient(to right,var(--grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--grid-line) 1px,transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -390,7 +389,7 @@ export function ClientesSection() {
             {BENEFITS.map(b => (
               <div
                 key={b.num}
-                className="border border-[var(--border)] rounded-2xl p-8 bg-foreground/[0.02] transition-all duration-300 hover:bg-foreground/[0.04] hover:border-white/[0.14]"
+                className="border border-[var(--border)] rounded-2xl p-8 bg-foreground/[0.02] transition-all duration-300 hover:bg-foreground/[0.04] hover:border-foreground/[0.14]"
               >
                 <p className="font-mono text-[9px] tracking-[0.25em] text-electric-red/60 mb-5">
                   {b.num}
@@ -417,7 +416,7 @@ export function ClientesSection() {
           }}
         />
         <div className="container mx-auto max-w-6xl px-7 relative z-10">
-          <div className="max-w-[720px] mx-auto text-center border border-[var(--border)] rounded-[28px] px-12 py-[72px] bg-[rgba(17,17,17,0.6)] backdrop-blur-md relative overflow-hidden">
+          <div className="clientes-cta-card max-w-[720px] mx-auto text-center border border-[var(--border)] rounded-[28px] px-12 py-[72px] bg-[rgba(17,17,17,0.6)] backdrop-blur-md relative overflow-hidden">
             {/* Inner glow */}
             <div
               className="absolute inset-0 pointer-events-none rounded-[28px]"
@@ -443,13 +442,13 @@ export function ClientesSection() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-10">
               <Link
                 href="/#contact"
-                className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.30)] hover:scale-[1.02] active:scale-[0.97]"
+                className="clientes-primary-btn inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.30)] hover:scale-[1.02] active:scale-[0.97]"
               >
                 Solicitar proposta
               </Link>
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-white/35 active:scale-[0.97]"
+                className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-foreground/35 active:scale-[0.97]"
               >
                 Ver portfólio
               </Link>
