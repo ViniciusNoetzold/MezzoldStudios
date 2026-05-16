@@ -155,10 +155,10 @@ export function HeroSection() {
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
           </Link>
           <Link
-            href="/cases"
+            href="/projetos"
             className="group flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-foreground/5 backdrop-blur-sm px-7 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground transition-all duration-300 hover:bg-foreground/10 hover:border-foreground/40 active:bg-foreground/10"
           >
-            Ver Portfólio
+            Ver Projetos
           </Link>
         </div>
 

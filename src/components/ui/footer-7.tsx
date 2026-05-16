@@ -34,7 +34,7 @@ const defaultSections = [
   {
     title: "Produto",
     links: [
-      { name: "Portfólio", href: "/cases" },
+      { name: "Projetos", href: "/projetos" },
       { name: "Stack Tech", href: "/stack" },
     ],
   },

@@ -246,8 +246,27 @@ export function CasesGrid() {
   // Scroll lock — compensates scrollbar width to prevent layout shift on Windows
   useLockBodyScroll(!!activeId);
 
+  // Open modal from URL hash (e.g. /cases#performance) — supports deep-linking
+  // from /projetos cards and other navigation.
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = window.location.hash.replace('#', '');
+      if (id && CASES.some(c => c.id === id)) {
+        setActiveId(id);
+      }
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    return () => window.removeEventListener('hashchange', openFromHash);
+  }, []);
+
   // Focus trap + Escape key — cleaned up automatically on unmount
-  const closeModal = useCallback(() => setActiveId(null), []);
+  const closeModal = useCallback(() => {
+    setActiveId(null);
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, []);
   useFocusTrap(modalRef, !!activeId, closeModal);
 
   const filtered = filter === 'TODOS' ? CASES : CASES.filter(c => c.category === filter);

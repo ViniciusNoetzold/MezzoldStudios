@@ -551,7 +551,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Web',
     ano: '2026',
     stack: 'Next.js / TS',
-    href: '/cases',
+    href: '/cases#performance',
     cover: <Cover1 />,
   },
   {
@@ -565,7 +565,7 @@ const PROJECTS: Project[] = [
     tipo: 'Sistema Interno',
     ano: '2026',
     stack: 'React / WS',
-    href: '/cases',
+    href: '/cases#monitoring',
     cover: <Cover2 />,
   },
   {
@@ -579,7 +579,7 @@ const PROJECTS: Project[] = [
     tipo: 'Biblioteca Visual',
     ano: '2025',
     stack: 'React / Storybook',
-    href: '/cases',
+    href: '/cases#ui-playground',
     cover: <Cover3 />,
   },
   {
@@ -593,7 +593,7 @@ const PROJECTS: Project[] = [
     tipo: 'Dados em Tempo Real',
     ano: '2025',
     stack: 'MQTT / React',
-    href: '/cases',
+    href: '/cases#iot-telemetry',
     cover: <Cover4 />,
   },
   {
@@ -607,7 +607,7 @@ const PROJECTS: Project[] = [
     tipo: 'Fluxo Operacional',
     ano: '2026',
     stack: 'Node.js / ReactFlow',
-    href: '/cases',
+    href: '/cases#automation-flow',
     cover: <Cover5 />,
   },
   {
@@ -621,7 +621,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Estratégica',
     ano: '2026',
     stack: 'React / TS',
-    href: '/cases',
+    href: '/cases#stack-configurator',
     cover: <Cover6 />,
   },
   {
@@ -635,7 +635,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Dev',
     ano: '2026',
     stack: 'TS / Next.js',
-    href: '/cases',
+    href: '/cases#code-quality',
     cover: <Cover7 />,
   },
   {
@@ -649,7 +649,7 @@ const PROJECTS: Project[] = [
     tipo: 'Produto Digital',
     ano: '2026',
     stack: 'Node / Analytics',
-    href: '/cases',
+    href: '/cases#mezzlink',
     cover: <Cover8 />,
   },
 ];
@@ -680,7 +680,7 @@ function FilterPill({ label, active, onClick }: FilterPillProps) {
 function FeaturedCard() {
   const accent = ACCENTS.cyan;
   return (
-    <Link href="/cases" className="block">
+    <Link href="/cases#mezzlink" className="block">
       <div className="border border-foreground/15 rounded-[20px] bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,0,51,.12)]">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left: info */}
