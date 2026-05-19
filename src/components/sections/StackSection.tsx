@@ -549,9 +549,9 @@ export function StackSection() {
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-electric-red text-white font-extrabold text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(230,48,48,.35)] hover:scale-[1.02] active:scale-[.97]">
                   Solicitar proposta
                 </Link>
-                <Link href="/cases"
+                <Link href="/projetos"
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-foreground/[0.04] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.08] hover:border-foreground/25 active:scale-[.97]">
-                  Ver portfólio
+                  Ver projetos
                 </Link>
               </div>
               <div className="flex gap-3 justify-center flex-wrap relative z-10">

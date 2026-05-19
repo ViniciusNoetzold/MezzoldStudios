@@ -30,7 +30,7 @@ export default function CasesPage() {
             </div>
 
             <h1 className="font-sans font-black text-[clamp(3.5rem,11vw,6.5rem)] leading-none tracking-tighter text-foreground mb-5">
-              PORTFÓLIO<span className="text-electric-red">.</span>
+              CASES<span className="text-electric-red">.</span>
             </h1>
 
             <p className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 max-w-lg">

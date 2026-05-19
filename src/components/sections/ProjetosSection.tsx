@@ -477,7 +477,7 @@ function Cover7() {
       <text x="32" y="87" fontFamily="monospace" fontSize="6.5" fill="rgba(255,0,51,0.7)">-   for(var i=0; i&lt;arr.length; i++)</text>
       <rect x="28" y="94" width="170" height="8" rx="1" fill="rgba(255,0,51,0.15)"/>
       <text x="32" y="101" fontFamily="monospace" fontSize="6.5" fill="rgba(255,0,51,0.7)">-     result.push(arr[i].value)</text>
-      <text x="32" y="116" fontFamily="monospace" fontSize="6.5" fill="rgba(237,237,237,0.25)">  // sem tratamento</text>
+      <text x="32" y="116" fontFamily="monospace" fontSize="6.5" fill="rgba(237,237,237,0.25)">{'  // sem tratamento'}</text>
       <rect x="28" y="120" width="160" height="8" rx="1" fill="rgba(255,0,51,0.15)"/>
       <text x="32" y="127" fontFamily="monospace" fontSize="6.5" fill="rgba(255,0,51,0.7)">-   return result</text>
       <text x="32" y="142" fontFamily="monospace" fontSize="6.5" fill="rgba(237,237,237,0.25)">{'}'}</text>
@@ -551,7 +551,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Web',
     ano: '2026',
     stack: 'Next.js / TS',
-    href: '/cases#performance',
+    href: '/projetos/performance',
     cover: <Cover1 />,
   },
   {
@@ -565,7 +565,7 @@ const PROJECTS: Project[] = [
     tipo: 'Sistema Interno',
     ano: '2026',
     stack: 'React / WS',
-    href: '/cases#monitoring',
+    href: '/projetos/monitoring',
     cover: <Cover2 />,
   },
   {
@@ -579,7 +579,7 @@ const PROJECTS: Project[] = [
     tipo: 'Biblioteca Visual',
     ano: '2025',
     stack: 'React / Storybook',
-    href: '/cases#ui-playground',
+    href: '/projetos/ui-playground',
     cover: <Cover3 />,
   },
   {
@@ -593,7 +593,7 @@ const PROJECTS: Project[] = [
     tipo: 'Dados em Tempo Real',
     ano: '2025',
     stack: 'MQTT / React',
-    href: '/cases#iot-telemetry',
+    href: '/projetos/iot-telemetry',
     cover: <Cover4 />,
   },
   {
@@ -607,7 +607,7 @@ const PROJECTS: Project[] = [
     tipo: 'Fluxo Operacional',
     ano: '2026',
     stack: 'Node.js / ReactFlow',
-    href: '/cases#automation-flow',
+    href: '/projetos/automation-flow',
     cover: <Cover5 />,
   },
   {
@@ -621,7 +621,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Estratégica',
     ano: '2026',
     stack: 'React / TS',
-    href: '/cases#stack-configurator',
+    href: '/projetos/stack-configurator',
     cover: <Cover6 />,
   },
   {
@@ -635,7 +635,7 @@ const PROJECTS: Project[] = [
     tipo: 'Ferramenta Dev',
     ano: '2026',
     stack: 'TS / Next.js',
-    href: '/cases#code-quality',
+    href: '/projetos/code-quality',
     cover: <Cover7 />,
   },
   {
@@ -649,7 +649,7 @@ const PROJECTS: Project[] = [
     tipo: 'Produto Digital',
     ano: '2026',
     stack: 'Node / Analytics',
-    href: '/cases#mezzlink',
+    href: '/projetos/mezzlink',
     cover: <Cover8 />,
   },
 ];
@@ -668,8 +668,8 @@ function FilterPill({ label, active, onClick }: FilterPillProps) {
       onClick={onClick}
       className={
         active
-          ? 'font-mono text-[9.5px] tracking-[0.18em] uppercase px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap bg-electric-red border border-electric-red text-white shadow-[0_0_18px_rgba(255,0,51,.28)]'
-          : 'font-mono text-[9.5px] tracking-[0.18em] uppercase px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap border border-foreground/20 text-foreground/50 hover:border-foreground/30 hover:text-foreground'
+          ? 'font-mono text-[9.5px] tracking-[0.18em] uppercase px-4 py-2.5 sm:py-2 rounded-full transition-all duration-200 whitespace-nowrap bg-electric-red border border-electric-red text-white shadow-[0_0_18px_rgba(255,0,51,.28)] min-h-[44px] sm:min-h-0 flex items-center'
+          : 'font-mono text-[9.5px] tracking-[0.18em] uppercase px-4 py-2.5 sm:py-2 rounded-full transition-all duration-200 whitespace-nowrap border border-foreground/20 text-foreground/50 hover:border-foreground/30 hover:text-foreground min-h-[44px] sm:min-h-0 flex items-center'
       }
     >
       {label}
@@ -680,11 +680,15 @@ function FilterPill({ label, active, onClick }: FilterPillProps) {
 function FeaturedCard() {
   const accent = ACCENTS.cyan;
   return (
-    <Link href="/cases#mezzlink" className="block">
+    <Link href="/projetos/mezzlink" className="block">
       <div className="border border-foreground/15 rounded-[20px] bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,0,51,.12)]">
+        {/* Mobile-only cover preview */}
+        <div className="md:hidden aspect-[16/9] overflow-hidden bg-surface-secondary">
+          <FeaturedCover />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left: info */}
-          <div className="p-10 md:p-14 flex flex-col justify-center gap-6">
+          <div className="p-6 sm:p-10 md:p-14 flex flex-col justify-center gap-5 md:gap-6">
             <div>
               <p className={`font-mono text-[9px] tracking-[0.28em] uppercase mb-3 ${accent.cat}`}>
                 [ PRODUTO DIGITAL ]
@@ -758,21 +762,21 @@ function ProjectCard({ project }: ProjectCardProps) {
         {/* Top accent line */}
         <div className={`h-px ${accent.borderTop} opacity-60 group-hover:opacity-100 transition-opacity`} />
         {/* Cover */}
-        <div className="h-[260px] overflow-hidden bg-surface-secondary relative">
+        <div className="h-[clamp(160px,45vw,260px)] overflow-hidden bg-surface-secondary relative">
           <div className="w-full h-full group-hover:scale-[1.02] transition-transform duration-500">
             {project.cover}
           </div>
         </div>
         {/* Body */}
-        <div className="p-7 flex flex-col flex-1 gap-4">
+        <div className="p-5 sm:p-7 flex flex-col flex-1 gap-4">
           <div>
             <p className={`font-mono text-[8.5px] tracking-[0.22em] uppercase mb-2 ${accent.cat}`}>
               {project.catLabel}
             </p>
-            <h3 className="font-black text-[18px] tracking-tight leading-[1.2] text-foreground uppercase mb-2">
+            <h3 className="font-black text-[clamp(1rem,4.5vw,1.125rem)] tracking-tight leading-[1.2] text-foreground uppercase mb-2">
               {project.title}
             </h3>
-            <p className="text-sm text-foreground/55 leading-relaxed">
+            <p className="text-[0.8125rem] text-foreground/55 leading-relaxed">
               {project.desc}
             </p>
           </div>
@@ -781,31 +785,31 @@ function ProjectCard({ project }: ProjectCardProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className={`font-mono text-[7.5px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border ${accent.tag}`}
+                className={`font-mono text-[9px] sm:text-[7.5px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border ${accent.tag}`}
               >
                 {tag}
               </span>
             ))}
           </div>
           {/* Meta */}
-          <div className="flex gap-5 flex-wrap border-t border-foreground/[0.07] pt-4 mt-auto">
+          <div className="flex gap-4 sm:gap-5 flex-wrap border-t border-foreground/[0.07] pt-4 mt-auto">
             <div>
-              <p className="font-mono text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Tipo</p>
-              <p className="font-mono text-[9px] text-foreground/55">{project.tipo}</p>
+              <p className="font-mono text-[8px] sm:text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Tipo</p>
+              <p className="font-mono text-[9.5px] sm:text-[9px] text-foreground/55">{project.tipo}</p>
             </div>
             <div>
-              <p className="font-mono text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Ano</p>
-              <p className="font-mono text-[9px] text-foreground/55">{project.ano}</p>
+              <p className="font-mono text-[8px] sm:text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Ano</p>
+              <p className="font-mono text-[9.5px] sm:text-[9px] text-foreground/55">{project.ano}</p>
             </div>
             <div>
-              <p className="font-mono text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Stack</p>
-              <p className="font-mono text-[9px] text-foreground/55">{project.stack}</p>
+              <p className="font-mono text-[8px] sm:text-[7px] tracking-[0.18em] uppercase text-foreground/25 mb-0.5">Stack</p>
+              <p className="font-mono text-[9.5px] sm:text-[9px] text-foreground/55">{project.stack}</p>
             </div>
           </div>
           {/* CTA */}
           <div>
             <span
-              className={`font-mono text-[9px] tracking-[0.18em] uppercase text-foreground/30 transition-colors duration-200 ${accent.cta}`}
+              className={`font-mono text-[10px] sm:text-[9px] tracking-[0.18em] uppercase text-foreground/30 transition-colors duration-200 ${accent.cta}`}
             >
               Ver projeto →
             </span>
@@ -1000,7 +1004,7 @@ export function ProjetosSection() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-5">
             {gridProjects.map((p, i) => (
               <Reveal key={p.id} delay={i * 0.06}>
                 <ProjectCard project={p} />
@@ -1021,12 +1025,12 @@ export function ProjetosSection() {
       <section id="cta-section" className="py-24 pb-0">
         <div className="container mx-auto max-w-[1120px] px-6">
           <Reveal>
-            <div className="relative border border-foreground/15 rounded-[20px] bg-card p-12 md:p-20 overflow-hidden grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center">
+            <div className="relative border border-foreground/15 rounded-[20px] bg-card p-6 sm:p-10 md:p-20 overflow-hidden grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-center">
               {/* Red glow bottom-right */}
               <div className="absolute bottom-0 right-0 w-[480px] h-[320px] bg-electric-red/[0.06] blur-[100px] rounded-full pointer-events-none" />
 
               {/* Left */}
-              <div className="relative z-10 flex flex-col gap-6">
+              <div className="relative z-10 flex flex-col gap-5 md:gap-6">
                 <div>
                   <p className="font-mono text-[9px] tracking-[0.30em] uppercase text-electric-red/80 mb-4">
                     [ PRÓXIMO PASSO ]
@@ -1036,51 +1040,51 @@ export function ProjetosSection() {
                     <br />
                     <span className="text-electric-red">procurava?</span>
                   </h2>
-                  <p className="text-foreground/55 leading-relaxed max-w-[440px]">
+                  <p className="text-foreground/60 leading-relaxed max-w-[440px]">
                     Cada projeto que construímos começa com uma conversa. Conte seu desafio — montamos uma proposta personalizada em menos de 48 horas.
                   </p>
                 </div>
-                <div className="flex gap-4 flex-wrap">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Link
                     href="/#contact"
-                    className="font-mono text-[10px] tracking-[0.2em] uppercase px-6 py-3 rounded-full bg-electric-red text-white hover:bg-electric-red/90 transition-all duration-200 shadow-[0_0_24px_rgba(255,0,51,.20)]"
+                    className="font-mono text-[10px] tracking-[0.2em] uppercase px-6 py-3 rounded-full bg-electric-red text-white hover:bg-electric-red/90 transition-all duration-200 shadow-[0_0_24px_rgba(255,0,51,.20)] min-h-[44px] flex items-center justify-center sm:inline-flex sm:w-auto w-full"
                   >
                     Solicitar proposta
                   </Link>
                   <Link
                     href="/cases"
-                    className="font-mono text-[10px] tracking-[0.2em] uppercase px-6 py-3 rounded-full border border-foreground/20 text-foreground/60 hover:border-foreground/35 hover:text-foreground transition-all duration-200"
+                    className="font-mono text-[10px] tracking-[0.2em] uppercase px-6 py-3 rounded-full border border-foreground/20 text-foreground/60 hover:border-foreground/35 hover:text-foreground transition-all duration-200 min-h-[44px] flex items-center justify-center sm:inline-flex sm:w-auto w-full"
                   >
                     Ver cases →
                   </Link>
                 </div>
               </div>
 
-              {/* Right: metrics */}
-              <div className="relative z-10 flex flex-col gap-6 md:min-w-[200px]">
+              {/* Right: metrics — row on mobile, column on desktop */}
+              <div className="relative z-10 grid grid-cols-3 gap-2 border-t border-foreground/10 pt-6 md:border-t-0 md:pt-0 md:flex md:flex-col md:gap-6 md:min-w-[200px]">
                 <div className="text-center md:text-right">
-                  <p className="font-black text-[clamp(2.5rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
+                  <p className="font-black text-[clamp(1.8rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
                     8<span className="text-electric-red">+</span>
                   </p>
-                  <p className="font-mono text-[8.5px] tracking-[0.2em] uppercase text-foreground/35 mt-1">
+                  <p className="font-mono text-[8px] sm:text-[8.5px] tracking-[0.18em] uppercase text-foreground/35 mt-1">
                     Projetos Digitais
                   </p>
                 </div>
                 <div className="hidden md:block h-px w-full bg-foreground/10" />
-                <div className="text-center md:text-right">
-                  <p className="font-black text-[clamp(2.5rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
+                <div className="text-center md:text-right border-x border-foreground/10 md:border-x-0">
+                  <p className="font-black text-[clamp(1.8rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
                     100<span className="text-cyan">%</span>
                   </p>
-                  <p className="font-mono text-[8.5px] tracking-[0.2em] uppercase text-foreground/35 mt-1">
+                  <p className="font-mono text-[8px] sm:text-[8.5px] tracking-[0.18em] uppercase text-foreground/35 mt-1">
                     Foco em Performance
                   </p>
                 </div>
                 <div className="hidden md:block h-px w-full bg-foreground/10" />
                 <div className="text-center md:text-right">
-                  <p className="font-black text-[clamp(2.5rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
+                  <p className="font-black text-[clamp(1.8rem,6vw,3.5rem)] leading-none tracking-tighter text-foreground">
                     <span className="text-emerald">&lt;</span>48h
                   </p>
-                  <p className="font-mono text-[8.5px] tracking-[0.2em] uppercase text-foreground/35 mt-1">
+                  <p className="font-mono text-[8px] sm:text-[8.5px] tracking-[0.18em] uppercase text-foreground/35 mt-1">
                     Primeiro Diagnóstico
                   </p>
                 </div>

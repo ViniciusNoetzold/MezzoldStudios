@@ -197,7 +197,7 @@ function ClientCard({ client }: { client: Client }) {
       </div>
 
       {/* Scrolling preview */}
-      <div className="h-[420px] overflow-hidden relative bg-[#080808] sm:h-[380px]">
+      <div className="h-[260px] sm:h-[380px] overflow-hidden relative bg-[#080808]">
         <div className="preview-scroll w-full">
           <SiteMockup accent={client.accent} />
         </div>
@@ -328,7 +328,7 @@ export function ClientesSection() {
       </section>
 
       {/* ── Gallery ── */}
-      <section id="gallery" className="py-24 relative">
+      <section id="gallery" className="py-14 sm:py-24 relative">
         {/* Subtle grid */}
         <div
           className="absolute inset-0 opacity-40 pointer-events-none"
@@ -340,7 +340,7 @@ export function ClientesSection() {
           }}
         />
         <div className="container mx-auto max-w-6xl px-7 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <span className="font-mono text-[9px] tracking-[0.30em] uppercase text-electric-red/80 mb-[18px] inline-block">
               [ VITRINE DIGITAL ]
             </span>
@@ -348,9 +348,18 @@ export function ClientesSection() {
               className="font-black text-foreground uppercase"
               style={{ fontSize: 'clamp(2rem,5vw,4rem)', letterSpacing: '-0.04em', lineHeight: 1 }}
             >
-              Passe o mouse.<br />
-              Veja o site ganhar vida.<br />
-              Clique para visitar.
+              {/* mobile */}
+              <span className="sm:hidden">
+                Toque no card.<br />
+                Veja o site ganhar vida.<br />
+                Toque para visitar.
+              </span>
+              {/* desktop */}
+              <span className="hidden sm:inline">
+                Passe o mouse.<br />
+                Veja o site ganhar vida.<br />
+                Clique para visitar.
+              </span>
             </h2>
           </div>
 
@@ -363,7 +372,7 @@ export function ClientesSection() {
       </section>
 
       {/* ── Benefits ── */}
-      <section className="py-24 relative bg-[var(--bg-secondary)]">
+      <section className="py-14 sm:py-24 relative bg-[var(--bg-secondary)]">
         <div
           className="absolute inset-0 opacity-50 pointer-events-none"
           style={{
@@ -373,7 +382,7 @@ export function ClientesSection() {
           }}
         />
         <div className="container mx-auto max-w-6xl px-7 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <span className="font-mono text-[9px] tracking-[0.30em] uppercase text-electric-red/80 mb-[18px] inline-block">
               [ POR QUE ISSO IMPORTA ]
             </span>
@@ -389,7 +398,7 @@ export function ClientesSection() {
             {BENEFITS.map(b => (
               <div
                 key={b.num}
-                className="border border-[var(--border)] rounded-2xl p-8 bg-foreground/[0.02] transition-all duration-300 hover:bg-foreground/[0.04] hover:border-foreground/[0.14]"
+                className="border border-[var(--border)] rounded-2xl p-6 sm:p-8 bg-foreground/[0.02] transition-all duration-300 hover:bg-foreground/[0.04] hover:border-foreground/[0.14]"
               >
                 <p className="font-mono text-[9px] tracking-[0.25em] text-electric-red/60 mb-5">
                   {b.num}
@@ -405,7 +414,7 @@ export function ClientesSection() {
       </section>
 
       {/* ── CTA Final ── */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-14 sm:py-24 relative overflow-hidden">
         {/* Center glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
@@ -416,7 +425,7 @@ export function ClientesSection() {
           }}
         />
         <div className="container mx-auto max-w-6xl px-7 relative z-10">
-          <div className="clientes-cta-card max-w-[720px] mx-auto text-center border border-[var(--border)] rounded-[28px] px-12 py-[72px] bg-[rgba(17,17,17,0.6)] backdrop-blur-md relative overflow-hidden">
+          <div className="clientes-cta-card max-w-[720px] mx-auto text-center border border-[var(--border)] rounded-[28px] px-6 py-10 sm:px-12 sm:py-[72px] bg-[rgba(17,17,17,0.6)] backdrop-blur-md relative overflow-hidden">
             {/* Inner glow */}
             <div
               className="absolute inset-0 pointer-events-none rounded-[28px]"
@@ -442,15 +451,15 @@ export function ClientesSection() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-10">
               <Link
                 href="/#contact"
-                className="clientes-primary-btn inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.30)] hover:scale-[1.02] active:scale-[0.97]"
+                className="clientes-primary-btn inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground text-[#000] font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.30)] hover:scale-[1.02] active:scale-[0.97] w-full sm:w-auto"
               >
                 Solicitar proposta
               </Link>
               <Link
-                href="/cases"
-                className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-foreground/35 active:scale-[0.97]"
+                href="/projetos"
+                className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-foreground/[0.05] text-foreground font-bold text-[10px] tracking-[0.25em] uppercase border border-[var(--border)] backdrop-blur-sm transition-all duration-300 hover:bg-foreground/[0.10] hover:border-foreground/35 active:scale-[0.97] w-full sm:w-auto"
               >
-                Ver portfólio
+                Ver projetos
               </Link>
             </div>
           </div>

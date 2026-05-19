@@ -447,10 +447,10 @@ export function BlogPostContent({ post, nextPost, postNumber }: Props) {
               Iniciar projeto
             </Link>
             <Link
-              href="/cases"
+              href="/projetos"
               className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-transparent text-foreground font-mono font-bold text-[10px] tracking-[0.22em] uppercase border border-[var(--border)] hover:border-foreground/25 hover:bg-foreground/[0.05] transition-all duration-200 whitespace-nowrap"
             >
-              Ver portfólio
+              Ver projetos
             </Link>
           </div>
         </div>
