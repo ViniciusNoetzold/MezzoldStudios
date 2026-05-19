@@ -396,13 +396,15 @@ html, body {
 }
 
 /* ── Clientes page: browser preview scroll animation ────────────────────────
-   The 8s slow scroll can't be expressed with Tailwind utilities alone         */
+   translateY(calc(-100% + Npx)) scrolls the image div up until only the last
+   Npx (= container height) remains visible — works for any image height.
+   min(..., 0px) guards against upward drift when image is shorter than container. */
 .preview-scroll {
   transform: translateY(0);
   transition: transform 8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .group:hover .preview-scroll {
-  transform: translateY(-55%);
+  transform: translateY(min(calc(-100% + 380px), 0px));
 }
 
 @media (hover: none) {
@@ -413,8 +415,8 @@ html, body {
 }
 
 @keyframes clientPreviewScroll {
-  0%, 12%  { transform: translateY(0);    }
-  50%, 62% { transform: translateY(-40%); }
-  100%     { transform: translateY(0);    }
+  0%, 12%  { transform: translateY(0);                              }
+  50%, 62% { transform: translateY(min(calc(-100% + 260px), 0px)); }
+  100%     { transform: translateY(0);                              }
 }
 

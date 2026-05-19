@@ -6,52 +6,36 @@ interface Client {
   name: string;
   category: string;
   description: string;
-  url: string;
+  /** null = site ainda não lançado; preencher quando disponível */
+  url: string | null;
   domain: string;
   tags: string[];
   accent: 'red' | 'cyan';
+  imageSrc: string;
 }
 
 const CLIENTS: Client[] = [
   {
-    name: 'Cliente 01',
+    name: 'UNNA Conexão Mulher',
     category: 'Site Institucional',
     description:
       'Presença digital premium com foco em clareza, velocidade e conversão. Interface limpa que comunica autoridade desde o primeiro scroll.',
-    url: 'https://cliente01.com.br',
-    domain: 'cliente01.com.br',
+    url: 'https://www.unnaconexaomulher.com.br/',
+    domain: 'unnaconexaomulher.com.br',
     tags: ['NEXT.JS', 'SEO', 'PERFORMANCE'],
     accent: 'red',
+    imageSrc: '/clients-pages/unna-conexao-mulher.png',
   },
   {
-    name: 'Cliente 02',
-    category: 'Landing Page',
+    name: 'Criativa Artes',
+    category: 'Site Institucional',
     description:
-      'Página estratégica criada para campanhas, captação e validação de oferta. Copy afiado, CTA direto, estrutura que converte.',
-    url: 'https://cliente02.com.br',
-    domain: 'cliente02.com.br',
-    tags: ['DESIGN', 'COPY', 'CONVERSÃO'],
+      'Identidade visual forte e presença digital criada para destacar o trabalho artístico em um mercado competitivo.',
+    url: null, // TODO: preencher com o URL real quando o site da Criativa Artes for lançado
+    domain: 'criativaartes.com.br', // TODO: confirmar domínio real
+    tags: ['DESIGN', 'BRANDING', 'CRIATIVIDADE'],
     accent: 'cyan',
-  },
-  {
-    name: 'Cliente 03',
-    category: 'Dashboard',
-    description:
-      'Interface visual para organizar dados, métricas e decisões em tempo real. Clareza de leitura mesmo em alto volume de informação.',
-    url: 'https://cliente03.com.br',
-    domain: 'cliente03.com.br',
-    tags: ['DASHBOARD', 'AUTOMAÇÃO', 'UI'],
-    accent: 'red',
-  },
-  {
-    name: 'Cliente 04',
-    category: 'Produto Digital',
-    description:
-      'Experiência web escalável para apresentação, validação e crescimento de produto. Arquitetura pensada para evoluir junto com o negócio.',
-    url: 'https://cliente04.com.br',
-    domain: 'cliente04.com.br',
-    tags: ['SAAS', 'REACT', 'UX'],
-    accent: 'cyan',
+    imageSrc: '/clients-pages/criativa-artes.png',
   },
 ];
 
@@ -73,105 +57,21 @@ const BENEFITS = [
   },
 ];
 
-/* ── Skeleton browser mockup ─────────────────────────────────── */
-function SiteMockup({ accent }: { accent: 'red' | 'cyan' }) {
-  const tagBg  = accent === 'red' ? 'bg-electric-red/40' : 'bg-cyan/40';
-  const sectBg = accent === 'red' ? 'bg-electric-red/[0.35]' : 'bg-emerald/[0.35]';
-  const featBg = accent === 'red' ? 'bg-electric-red/[0.20]' : 'bg-cyan/[0.20]';
-  const btnBg  = accent === 'red' ? 'bg-white/[0.25]' : 'bg-cyan/[0.35]';
-
-  return (
-    <div className="w-full bg-[#0a0a0a]">
-      {/* Nav */}
-      <div className="flex items-center justify-between px-8 py-4 bg-[#050505] border-b border-white/[0.06]">
-        <div className="w-20 h-3 rounded-sm bg-white/[0.25]" />
-        <div className="flex gap-4">
-          {[0, 1, 2].map(i => <div key={i} className="w-9 h-2 rounded-sm bg-white/10" />)}
-        </div>
-      </div>
-
-      {/* Hero */}
-      <div
-        className="px-8 py-14 text-center border-b border-white/[0.05]"
-        style={{ background: 'linear-gradient(180deg,#080808,#0f0f0f)' }}
-      >
-        <div className={`w-20 h-2 rounded-sm ${tagBg} mx-auto mb-4`} />
-        <div className="w-[72%] h-7 rounded-sm bg-white/[0.22] mx-auto mb-2.5" />
-        <div className="w-[52%] h-7 rounded-sm bg-white/[0.22] mx-auto mb-5" />
-        <div className="w-[55%] h-2 rounded-sm bg-white/[0.08] mx-auto mb-2" />
-        <div className="w-[42%] h-2 rounded-sm bg-white/[0.06] mx-auto mb-7" />
-        <div className="flex gap-2.5 justify-center">
-          <div className={`w-24 h-8 rounded-full ${btnBg}`} />
-          <div className="w-24 h-8 rounded-full border border-white/15" />
-        </div>
-      </div>
-
-      {/* Cards row */}
-      <div className="px-8 py-12 border-b border-white/[0.05]">
-        <div className={`w-16 h-2 rounded-sm ${sectBg} mb-3`} />
-        <div className="w-[55%] h-[18px] rounded-sm bg-white/[0.18] mb-5" />
-        <div className="grid grid-cols-3 gap-3">
-          {[0, 1, 2].map(i => (
-            <div key={i} className="rounded-lg border border-white/[0.07] p-4 bg-white/[0.03]">
-              <div className="w-7 h-7 rounded-md bg-white/[0.12] mb-2.5" />
-              <div className="w-[70%] h-[9px] rounded-sm bg-white/[0.15] mb-2" />
-              <div className="w-[90%] h-[7px] rounded-sm bg-white/[0.07] mb-1" />
-              <div className="w-[65%] h-[7px] rounded-sm bg-white/[0.05]" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Stats row */}
-      <div className="px-8 py-12 bg-white/[0.02] border-b border-white/[0.05]">
-        <div className={`w-16 h-2 rounded-sm ${sectBg} mb-3`} />
-        <div className="w-[55%] h-[18px] rounded-sm bg-white/[0.18] mb-5" />
-        <div className="grid grid-cols-3 gap-4">
-          {[0, 1, 2].map(i => (
-            <div key={i} className="text-center p-4 border border-white/[0.06] rounded-lg bg-white/[0.02]">
-              <div className="w-10 h-[18px] rounded-sm bg-white/[0.22] mx-auto mb-2" />
-              <div className="w-[55%] h-[7px] rounded-sm bg-white/[0.08] mx-auto" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Features row */}
-      <div className="px-8 py-12 border-b border-white/[0.05]">
-        <div className={`w-16 h-2 rounded-sm ${sectBg} mb-3`} />
-        <div className="w-[55%] h-[18px] rounded-sm bg-white/[0.18] mb-5" />
-        <div className="grid grid-cols-2 gap-3">
-          {[0, 1, 2, 3].map(i => (
-            <div key={i} className="rounded-lg border border-white/[0.07] p-5 bg-white/[0.03]">
-              <div className={`w-6 h-6 rounded-md ${featBg} mb-3`} />
-              <div className="w-[60%] h-[10px] rounded-sm bg-white/[0.15] mb-2" />
-              <div className="w-[85%] h-[7px] rounded-sm bg-white/[0.07] mb-1" />
-              <div className="w-[70%] h-[7px] rounded-sm bg-white/[0.06]" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ── Single client card ───────────────────────────────────────── */
 function ClientCard({ client }: { client: Client }) {
   const isRed = client.accent === 'red';
 
-  return (
-    <a
-      href={client.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={[
-        'clientes-card group block rounded-3xl border border-[var(--border)] bg-[#0f0f0f] overflow-hidden',
-        'cursor-pointer transition-all duration-500',
-        isRed
-          ? 'hover:border-electric-red/40 hover:shadow-[0_0_60px_-15px_rgba(255,0,51,0.20),0_20px_60px_-20px_rgba(0,0,0,0.6)]'
-          : 'hover:border-cyan/40 hover:shadow-[0_0_60px_-15px_rgba(6,182,212,0.18),0_20px_60px_-20px_rgba(0,0,0,0.6)]',
-      ].join(' ')}
-    >
+  const cardClasses = [
+    'clientes-card group block rounded-3xl border border-[var(--border)] bg-[#0f0f0f] overflow-hidden',
+    'transition-all duration-500',
+    client.url ? 'cursor-pointer' : 'cursor-default',
+    isRed
+      ? 'hover:border-electric-red/40 hover:shadow-[0_0_60px_-15px_rgba(255,0,51,0.20),0_20px_60px_-20px_rgba(0,0,0,0.6)]'
+      : 'hover:border-cyan/40 hover:shadow-[0_0_60px_-15px_rgba(6,182,212,0.18),0_20px_60px_-20px_rgba(0,0,0,0.6)]',
+  ].join(' ');
+
+  const children = (
+    <>
       {/* Browser chrome bar */}
       <div className="flex items-center gap-2.5 px-4 py-2.5 bg-foreground/[0.03] border-b border-[var(--border)]">
         <div className="flex gap-1.5 shrink-0">
@@ -196,10 +96,16 @@ function ClientCard({ client }: { client: Client }) {
         </div>
       </div>
 
-      {/* Scrolling preview */}
+      {/* Scrolling preview — full-page screenshot, scrolls on hover/touch */}
       <div className="h-[260px] sm:h-[380px] overflow-hidden relative bg-[#080808]">
         <div className="preview-scroll w-full">
-          <SiteMockup accent={client.accent} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={client.imageSrc}
+            alt={`Preview do site ${client.name}`}
+            loading="lazy"
+            className="w-full block"
+          />
         </div>
       </div>
 
@@ -231,7 +137,7 @@ function ClientCard({ client }: { client: Client }) {
             isRed ? 'group-hover:text-foreground' : 'group-hover:text-cyan',
           ].join(' ')}
         >
-          Visitar site
+          {client.url ? 'Visitar site' : 'Em breve'}
           <svg
             className="translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
             width="14" height="14"
@@ -243,8 +149,23 @@ function ClientCard({ client }: { client: Client }) {
           </svg>
         </span>
       </div>
-    </a>
+    </>
   );
+
+  if (client.url) {
+    return (
+      <a
+        href={client.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cardClasses}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return <div className={cardClasses}>{children}</div>;
 }
 
 /* ── Main section component ──────────────────────────────────── */
